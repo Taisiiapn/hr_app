@@ -2,11 +2,12 @@ const generator = require('./data')
 
 const data = generator()
 
-console.log('data', data)
+
+console.log('data', JSON.stringify(data, null, 2))
 
 function countAverageSalary (department) {
     
-    return department.employees.reduce(function(a, b){
+    return department.employees.length && department.employees.reduce(function(a, b){
                             return (a + b.salary) 
                             
                         },0
@@ -22,7 +23,7 @@ const averageSalaries = data.map(function (departament) {
     return resultObj
 })
 
-console.log('averageSalaries', averageSalaries)
+console.log('\n\n','averageSalaries', averageSalaries)
 
 ////////////////////////////
 
@@ -43,19 +44,19 @@ const sumSalaries = data.map(function (department) {
     return resultObj
 })
 
-console.log('sumSalary', sumSalaries)
+console.log('\n\n', 'sumSalary', sumSalaries)
 
 
 ////////////////////////////
 
 
 function filterEmployees (department) {
+
+    const reducedResult = countAverageSalary(department)
     
-    return department.employees.filter(person => person.salary < department.employees.reduce(
-        function(a, b) {
-            a + b.salary
-        }
-    ) / department.employees.length, 0)
+    return department.employees.filter(function (person) {
+         return person.salary < reducedResult
+    })
 }
 
 const filterDepartmentsEmployees = data.map(function (department) {
@@ -67,7 +68,7 @@ const filterDepartmentsEmployees = data.map(function (department) {
     return resultObj
 })
 
-console.log('Filter Employees', filterDepartmentsEmployees)
+console.log('\n\n','Filter Employees', JSON.stringify(filterDepartmentsEmployees,null, 2))
 
 
 ////////////////////////////
@@ -96,4 +97,4 @@ function objectDepartments (departments) {
     return employees
 }
 
-console.log('New object departments', objectDepartments(data))
+console.log('\n\n','New object departments', JSON.stringify(objectDepartments(data), null, 2))
