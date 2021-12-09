@@ -4,70 +4,89 @@ const data = generator()
 
 console.log('data', data)
 
-function countAverageSalary (data) {
+function countAverageSalary (department) {
     
-    const resultAverage = data.map(department => department.employee
-                    .reduce((a, b) => (a + b.salary) 
-                    / department.employee.length, 0)
-                )
-
-    return resultAverage
+    return department.employees.reduce(function(a, b){
+                            return (a + b.salary) 
+                            
+                        },0
+                    )/ department.employees.length    
 }   
 
-const averageSalary = countAverageSalary(data)
-// const averageSalaries = data.map(item => countAverageSalary(item))
-console.log('averageSalary', averageSalary)
-// console.log('averageSalaries', averageSalaries)
+const averageSalaries = data.map(function (departament) {
+    const resultObj = {
+        name: departament.name,
+        avgSalary: countAverageSalary(departament)
+    }
+
+    return resultObj
+})
+
+console.log('averageSalaries', averageSalaries)
 
 ////////////////////////////
 
 
-function sumSalary (data) {
+function countSumSalary (department) {
 
-    const resultSum = data.map(department => department.employee
-            .reduce((a, b) => a + b.salary, 0)
-    )
-
-    return resultSum
+    return department.employees.reduce(function(a, b) {
+                            return a + b.salary
+                        }, 0)
 }
 
-console.log('sumSalary', sumSalary(data))
-
-
-////////////////////////////
-
-
-function toFilterArr (data) {
+const sumSalaries = data.map(function (department) {
+    const resultObj = {
+        name: department.name,
+        sumSalary: countSumSalary(department)
+    }
     
-    const filteredArr = data.map(department => department.employee
-            .filter(person => person.salary < department.employee.reduce(
-                (a, b) => (a + b.salary) / department.employee.length, 0
-            ))
-    )
+    return resultObj
+})
 
-    return filteredArr
-}
-
-console.log('toFilterArr', toFilterArr(data))
+console.log('sumSalary', sumSalaries)
 
 
 ////////////////////////////
 
 
-function objectDepartments () {
+function filterEmployees (department) {
+    
+    return department.employees.filter(person => person.salary < department.employees.reduce(
+        function(a, b) {
+            a + b.salary
+        }
+    ) / department.employees.length, 0)
+}
+
+const filterDepartmentsEmployees = data.map(function (department) {
+    const resultObj = {
+        name: department.name,
+        person: filterEmployees(department)
+    }
+
+    return resultObj
+})
+
+console.log('Filter Employees', filterDepartmentsEmployees)
+
+
+////////////////////////////
+
+
+function objectDepartments (departments) {
     const employees = []
 
-    data.forEach(department => {
+    departments.forEach(department => {
         
 
-        for (let k = 0; k < department.employee.length; k++) {
+        for (let k = 0; k < department.employees.length; k++) {
             employees.push({
                 name: department.name,
-                employeeName: department.employee.length !== 0 
-                            && department.employee[k].name,
-                employeeDifSalary: department.employee.length !== 0 
-                            && (department.employee[k].salary - department.employee.reduce((a, b) => (a + b.salary) 
-                                                                            / department.employee.length, 0))                       
+                employeesName: department.employees.length !== 0 
+                            && department.employees[k].name,
+                employeesDiffSalary: department.employees.length !== 0 
+                            && (department.employees[k].salary - department.employees.reduce((a, b) => (a + b.salary) 
+                                                                            / department.employees.length, 0))                       
             })
         }
         

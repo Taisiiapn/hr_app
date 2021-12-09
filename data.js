@@ -6,31 +6,32 @@ const generator = () => {
 
 
     const amountDepartments = Math.floor(Math.random() * 10) + 1
-    const amountEmployee = Math.floor(Math.random() * 6)
+    const amountEmployee = () => Math.floor(Math.random() * 6)
     const randomSalary = () => Math.floor(Math.random() * 10000) + 1000
 
 
     for (let i = 0; i < amountDepartments; i++) {
 
-        departments.push({
+        const department = {
             id: uuidv4(),
             name: `Department${i++}`,
-            employee: []
-        })
+            employees: []
+        }
+       
+        for (let j = 0; j < amountEmployee(); j++) {
 
-    }
-    
-    for (let k = 0; k < departments.length; k++) {
-
-        for (let j = 0; j < amountEmployee; j++) {
-            departments[k].employee.push({
+            const employee = {
                 id: uuidv4(),
                 name: `Person${uuidv4()}`,
                 salary: randomSalary()
-            })
-        }
-    }
+            }
 
+            department.employees.push(employee)
+        }
+
+        departments.push(department)
+    }
+    
 
     return departments
 }
