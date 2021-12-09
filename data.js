@@ -1,53 +1,39 @@
-const departments = [
-    {
-        id: 1,
-        name: 'Department 1',
-        employee: [
-            {
-                id: 1,
-                name: 'employee 1',
-                salary: 1000
-            },
-            {
-                id: 2,
-                name: 'employee 2',
-                salary: 2000
-            },
-            {
-                id: 3,
-                name: 'employee 3',
-                salary: 3500
-            },
-        ] 
-    },
-    {
-        id: 2,
-        name: 'Department 2',
-        employee: [
-            {
-                id: 4,
-                name: 'employee 4',
-                salary: 3000
-            },
-            {
-                id: 5,
-                name: 'employee 5',
-                salary: 4500
-            },
-            {
-                id: 6,
-                name: 'employee 6',
-                salary: 9000
-            },
-        ] 
-    },
-    {
-        id: 3,
-        name: 'Department 3',
-        employee: [
-            
-        ] 
-    },
-]
+const { v4: uuidv4 } = require('uuid');
 
-export default departments
+const generator = () => {
+
+    const departments = []
+
+
+    const amountDepartments = Math.floor(Math.random() * 10) + 1
+    const amountEmployee = Math.floor(Math.random() * 6)
+    const randomSalary = () => Math.floor(Math.random() * 10000) + 1000
+
+
+    for (let i = 0; i < amountDepartments; i++) {
+
+        departments.push({
+            id: uuidv4(),
+            name: `Department${i++}`,
+            employee: []
+        })
+
+    }
+    
+    for (let k = 0; k < departments.length; k++) {
+
+        for (let j = 0; j < amountEmployee; j++) {
+            departments[k].employee.push({
+                id: uuidv4(),
+                name: `Person${uuidv4()}`,
+                salary: randomSalary()
+            })
+        }
+    }
+
+
+    return departments
+}
+
+
+module.exports = generator

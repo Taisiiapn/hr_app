@@ -1,92 +1,80 @@
-const departments = [
-    {
-        id: 1,
-        name: 'Department 1',
-        employee: [
-            {
-                id: 1,
-                name: 'employee 1',
-                salary: 1000
-            },
-            {
-                id: 2,
-                name: 'employee 2',
-                salary: 2000
-            },
-            {
-                id: 3,
-                name: 'employee 3',
-                salary: 3500
-            },
-        ] 
-    },
-    {
-        id: 2,
-        name: 'Department 2',
-        employee: [
-            {
-                id: 4,
-                name: 'employee 4',
-                salary: 3000
-            },
-            {
-                id: 5,
-                name: 'employee 5',
-                salary: 4500
-            },
-            {
-                id: 6,
-                name: 'employee 6',
-                salary: 6000
-            },
-        ] 
-    },
-    {
-        id: 3,
-        name: 'Department 3',
-        employee: [
-            
-        ] 
-    },
-]
+const generator = require('./data')
 
+const data = generator()
 
-const averageSalary = data => data.map(department =>
-    department.employee.reduce((a, b) => (a + b.salary) / department.employee.length, 0)
-)
+console.log('data', data)
 
-console.log('averageSalary', averageSalary(departments))
+function countAverageSalary (data) {
+    
+    const resultAverage = data.map(department => department.employee
+                    .reduce((a, b) => (a + b.salary) 
+                    / department.employee.length, 0)
+                )
 
+    return resultAverage
+}   
+
+const averageSalary = countAverageSalary(data)
+// const averageSalaries = data.map(item => countAverageSalary(item))
+console.log('averageSalary', averageSalary)
+// console.log('averageSalaries', averageSalaries)
 
 ////////////////////////////
 
 
-const sumSalary = data => data.map(department => 
-    department.employee.reduce((a, b) => a + b.salary, 0)
-)
+function sumSalary (data) {
 
-console.log('sumSalary for each department', sumSalary(departments))
+    const resultSum = data.map(department => department.employee
+            .reduce((a, b) => a + b.salary, 0)
+    )
 
-
-////////////////////////////
-
-
-const filteredArr = data => data.map(department => department.employee
-        .filter(person => person.salary 
-            < department.employee.reduce(
-                (a, b) => (a + b.salary) / department.employee.length, 0
-            ))
-        ) 
-
-console.log('People with salary less than average', filteredArr(departments))
-
-
-////////////////////////////
-
-
-function objectDepartments (data) {
-    const newDepartments = Object.assign({}, data)
-    return newDepartments
+    return resultSum
 }
 
-console.log('New object departments', objectDepartments(departments))
+console.log('sumSalary', sumSalary(data))
+
+
+////////////////////////////
+
+
+function toFilterArr (data) {
+    
+    const filteredArr = data.map(department => department.employee
+            .filter(person => person.salary < department.employee.reduce(
+                (a, b) => (a + b.salary) / department.employee.length, 0
+            ))
+    )
+
+    return filteredArr
+}
+
+console.log('toFilterArr', toFilterArr(data))
+
+
+////////////////////////////
+
+
+function objectDepartments () {
+    const employees = []
+
+    data.forEach(department => {
+        
+
+        for (let k = 0; k < department.employee.length; k++) {
+            employees.push({
+                name: department.name,
+                employeeName: department.employee.length !== 0 
+                            && department.employee[k].name,
+                employeeDifSalary: department.employee.length !== 0 
+                            && (department.employee[k].salary - department.employee.reduce((a, b) => (a + b.salary) 
+                                                                            / department.employee.length, 0))                       
+            })
+        }
+        
+    })
+    
+    
+    return employees
+}
+
+console.log('New object departments', objectDepartments(data))
