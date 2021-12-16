@@ -1,0 +1,12 @@
+<ul>
+  <% departments.forEach(function(department){ %>
+      <li> <%= department.name %> 
+        <nav>
+          <button><a href="/departments/add">ADD</a></button>
+          <button><a href="/departments/edit">EDIT</a></button>
+          <button>DELETE</button>
+          <button><a href="/departments/employees">SHOW EMPLOYEES</a></button>
+        </nav>
+      </li>
+  <% }); %>
+</ul>

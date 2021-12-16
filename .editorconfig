@@ -1,0 +1,19 @@
+var editorconfig = require('editorconfig');
+var path = require('path');
+var filePath = path.join(__dirname, '/sample.js');
+var promise = editorconfig.parse(filePath);
+promise.then(function onFulfilled(result) {
+  console.log(result);
+});
+ 
+/*
+  {
+    indent_style: 'space',
+    indent_size: 2,
+    end_of_line: 'lf',
+    charset: 'utf-8',
+    trim_trailing_whitespace: true,
+    insert_final_newline: true,
+    tab_width: 2
+  };
+*/

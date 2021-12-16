@@ -1,9 +1,10 @@
 const generator = require('./data')
 
 const data = generator()
+module.exports = data
 
 
-console.log('data', JSON.stringify(data, null, 2))
+// console.log('data', JSON.stringify(data, null, 2))
 
 function countAverageSalary (department) {
     
@@ -23,7 +24,8 @@ const averageSalaries = data.map(function (departament) {
     return resultObj
 })
 
-console.log('\n\n','averageSalaries', averageSalaries)
+// console.log('\n\n','averageSalaries', averageSalaries)
+
 
 ////////////////////////////
 
@@ -44,7 +46,7 @@ const sumSalaries = data.map(function (department) {
     return resultObj
 })
 
-console.log('\n\n', 'sumSalary', sumSalaries)
+// console.log('\n\n', 'sumSalary', sumSalaries)
 
 
 ////////////////////////////
@@ -68,7 +70,7 @@ const filterDepartmentsEmployees = data.map(function (department) {
     return resultObj
 })
 
-console.log('\n\n','Filter Employees', JSON.stringify(filterDepartmentsEmployees,null, 2))
+// console.log('\n\n','Filter Employees', JSON.stringify(filterDepartmentsEmployees,null, 2))
 
 
 ////////////////////////////
@@ -97,4 +99,4 @@ function objectDepartments (departments) {
     return employees
 }
 
-console.log('\n\n','New object departments', JSON.stringify(objectDepartments(data), null, 2))
+// console.log('\n\n','New object departments', JSON.stringify(objectDepartments(data), null, 2))
