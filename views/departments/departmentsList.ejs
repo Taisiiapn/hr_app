@@ -1,0 +1,27 @@
+<ul>
+    <% data.forEach(function(item){ %>
+
+        <li> <%= item.name %> </li>
+        <li> <%= item.id %> </li>
+
+        <%- include('../buttonsSkeleton.ejs', { item }); %>
+
+        <script>
+            const btn = document.getElementById(`delete-${item.id}`)
+
+            // btn.addEventListener('click', e => {
+            //     const id = item.id
+
+            //     fetch(id, {
+            //         method: 'DELETE'
+            //     })
+            //     .then(res => res.json)
+            //     .catch(err => console.log(err))
+            // })
+            //todo create form with delete method and id property
+            // todo listen btn click event and send form
+        
+        </script>
+
+    <% }); %>
+</ul>

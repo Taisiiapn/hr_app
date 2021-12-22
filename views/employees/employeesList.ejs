@@ -1,0 +1,13 @@
+<p><%= data.name %></p>
+
+<ul>
+
+    <% data.employees.forEach(function(item){ %>
+
+        <p><%= item.name %></p>
+
+        <%- include('../buttonsSkeleton.ejs', { item }); %>
+
+    <% }); %>
+
+</ul>
