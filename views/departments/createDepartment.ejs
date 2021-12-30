@@ -1,3 +1,29 @@
-<form method="post">
-    <input type="text">
+<form method="post" id="form" action="/departments/create">
+    <p>
+        <input type="text" maxlength="12" 
+            name="department"
+            placeholder="Enter department's name"
+            required >
+    </p>
+    <p>
+        <input type="submit" value="SEND">
+    </p>
 </form>
+
+
+<!-- <script src="https://unpkg.com/axios/dist/axios.min.js">
+OPTONAL WAY WITH AXIOS
+    const form = document.querySelector('form').elements
+        axios
+            .post('/departments/create', {
+                data: form
+            })
+            .then(res => {
+                console.log(`statusCode: ${res.status}`)
+                console.log(res)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+
+</script> -->

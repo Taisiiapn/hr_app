@@ -31,12 +31,16 @@ http.createServer((req, res) => {
         // route to /departments/:id
         if (departmentIdRegexp.test(req.url)) {
             employeesController.employeesRouteRedirect(req, res)
-            console.log("parsedUrlEMPLOYEES", parsedUrl)
         }
 
         // route to /departments/create
         if (addingRegexp.test(req.url)) {
             departmentsController.addDepartmentRoute(req, res)
+        }
+
+        // route to /departments/id/update
+        if (updatingRegexp.test(req.url)) {
+            departmentsController.editDepartmentRoute(req, res)
         }
 
         // route to /departments/:id for showing every employee
@@ -63,12 +67,12 @@ http.createServer((req, res) => {
 
         // route to /departments/create
         if (addingRegexp.test(req.url)) {
-            departmentsController.addDepartmentRoute(req, res)
+            departmentsController.addDepartmentAction(req, res)
         }
 
         // route to /departments/:id/update
         if (updatingRegexp.test(req.url)) {
-            
+            departmentsController.editDepartmentAction(req, res)
         }
     } else {
 

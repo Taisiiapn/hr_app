@@ -2,12 +2,14 @@
 
 <ul>
 
-    <% data.employees.forEach(function(item){ %>
+    <% if (data.employees.length !== 0) {data.employees.forEach(function(item){ %>
 
         <p><%= item.name %></p>
 
         <%- include('../buttonsSkeleton.ejs', { item }); %>
 
-    <% }); %>
+    <% })} else { %>
+        <p>No employees</p>
+    <% } %>
 
 </ul>

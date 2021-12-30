@@ -1,5 +1,7 @@
 const departments = require('../../index.js')
 const ejs = require('ejs')
+const { v4: uuidv4 } = require('uuid');
+
 
 module.exports = {
     renderDepartments: (cb) => {
@@ -44,26 +46,44 @@ module.exports = {
 
     },
 
-    // todo renderEditDepartment
-
-    addDepartment: () => {
-        // const newDepartment  = {
-        //     id: uuidv4(),
-        //     name: `Department`,
-        //     employees: []
-        //     }
-
-        // departments.push(newDepartment) 
+    renderEditDepartment: (cb) => {
+        ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
+                {},
+                function (err, html) {
+                    if (err) {
+                        cb(err)
+                        console.log('err debugging', err);
+                    } else {
+                        cb( null, html)
+                    }
+                }
+        )
     },
 
-    editDepartment: (id, values, cb) => {
+    addDepartment: (value) => {
+        const newDepartment  = {
+            id: uuidv4(),
+            name: value,
+            employees: []
+            }
 
-        const { name } = values
-
-        // todo edit dep by id and values
-        // todo return this.renderDepartments  with updated data
+        departments.push(newDepartment) 
     },
 
-    // todo deleteDepartment
+    editDepartment: (id, value) => {
+
+        departments.map(department => {
+            if (department.id === id) {
+                department.name = value
+            }
+        })
+
+    },
+
+    deleteDepartment: (id) => {
+        return departments.filter(department => {
+            department.id !== id
+        })
+    }
 
 }
