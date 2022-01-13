@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 
 const generator = () => {
 
-    const departments = []
+    let departments = []
 
 
     const amountDepartments = Math.floor(Math.random() * 3) + 1
@@ -12,7 +12,7 @@ const generator = () => {
 
     for (let i = 0; i < amountDepartments; i++) {
 
-        const department = {
+        let department = {
             id: uuidv4(),
             name: `Department${i+1}`,
             employees: []
@@ -22,7 +22,7 @@ const generator = () => {
 
             for (let j = 0; j < amountEmployee(); j++) {
 
-                const employee = {
+                let employee = {
                     id: uuidv4(),
                     name: `Person${uuidv4()}`,
                     salary: randomSalary()

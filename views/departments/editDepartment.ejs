@@ -1,10 +1,28 @@
-<form method="post" id="form" action="/departments/update">
+<form method="post" id="formEditDepartment" action="/departments/<%= id %>/update">
     <p>
-        <input type="text" maxlength="12" 
-            name="department"
-            placeholder="Enter department's name"
-            required >
+        <% if (parameters.values && parameters.values.name) { %>
+
+            <input type="text" maxlength="12" 
+                name="name"
+                placeholder="Enter department's name"
+                value="<%= parameters.values.name %>"
+            >
+
+        <% } else { %>
+
+            <input type="text" maxlength="12" 
+                name="name"
+                placeholder="Enter department's name"
+            >
+
+        <% } %>
+
     </p>
+
+    <% if (parameters.error) { %>
+        <span><%= parameters.error %></span>
+    <% } %>
+
     <p>
         <input type="submit" value="SEND">
     </p>

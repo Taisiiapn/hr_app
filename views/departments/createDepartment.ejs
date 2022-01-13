@@ -1,29 +1,19 @@
-<form method="post" id="form" action="/departments/create">
+<form method="post" action="/departments/create">
     <p>
         <input type="text" maxlength="12" 
-            name="department"
-            placeholder="Enter department's name"
-            required >
+            name="name"
+            placeholder="Enter department's name" 
+            <% if (parameters.values) { %>
+                value="<%= parameters.values.name %>"
+            <% } %>
+        >
     </p>
+
+    <% if (parameters.error) { %>
+        <span><%= parameters.error %></span>
+    <% } %>
+
     <p>
         <input type="submit" value="SEND">
     </p>
 </form>
-
-
-<!-- <script src="https://unpkg.com/axios/dist/axios.min.js">
-OPTONAL WAY WITH AXIOS
-    const form = document.querySelector('form').elements
-        axios
-            .post('/departments/create', {
-                data: form
-            })
-            .then(res => {
-                console.log(`statusCode: ${res.status}`)
-                console.log(res)
-            })
-            .catch(error => {
-                console.error(error)
-            })
-
-</script> -->
