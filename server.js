@@ -45,11 +45,11 @@ http.createServer((req, res) => {
         } else
 
         // route to /departments/:id for showing every employee
-        // if (departmentIdRegexp.test(parsedUrl)) {
-        //     employeesRouter.addEmployeeRoute(req, res)
-        // } 
+        if (departmentIdRegexp.test(parsedUrl)) {
+            employeesRouter.addEmployeeRoute(req, res)
+        } 
         
-        // else 
+        else 
         {
             commonController.routeNotFound(req, res)
         }
@@ -64,8 +64,7 @@ http.createServer((req, res) => {
 
 
         // route to /departments/:id for deleting department
-        if (deletingRegexp.test(parsedUrl 
-            && req.method.toLowerCase() === 'delete')) {
+        if (deletingRegexp.test(parsedUrl)) {
             departmentsRouter.deleteDepartmentAction(req, res)
         } else
 

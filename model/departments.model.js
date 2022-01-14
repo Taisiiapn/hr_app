@@ -16,13 +16,14 @@ module.exports = {
 
         
         client.query('SELECT * FROM department;', 
+        
             (err, res) => {
                 if (err) {
-                    console.error('err', err.message)
-                    cb(new Error('internal server error'))
-                } else {
-                    console.log('getAllDepartments', res.rows)
                     
+                    cb(new Error('internal server error'))
+
+                } else {
+
                     cb(null, res.rows)
                 }
         })
@@ -33,11 +34,16 @@ module.exports = {
         client.query(`SELECT *
                     FROM department
                     WHERE id='${id}';`, 
+
             (err, res) => {
                 if (err) {
+
                     cb(err)
+
                 } else {
-                    cb(null, res.rows);
+
+                    cb(null, res.rows)
+
                 }
         })
     },
@@ -52,9 +58,13 @@ module.exports = {
                     WHERE d.id = '${id}';`, 
             (err, res) => {
                 if (err) {
+
                     cb(err)
+
                 } else {
-                    cb(null, res.rows);
+
+                    cb(null, res.rows)
+
                 }
         })
     },
@@ -68,10 +78,13 @@ module.exports = {
                         WHERE id = '${id}';`, 
             (err, res) => {
                 if (err) {
-                    console.error('err', err.message)
+
                     cb(new Error('internal server error'))
+
                 } else {
-                    cb(null);
+
+                    cb(null)
+
                 }
         })
         
@@ -82,32 +95,37 @@ module.exports = {
         const { name } = values
   
         client.query(`INSERT INTO department(name) VALUES ('${name}');`,     
-        (err, res) => {
-                if (err) {
-                    console.error('err', err.message)
-                    cb(new Error('internal server error'))
-                } else {
-                    cb(null);
-                }
-        })
+            (err, res) => {
+                    if (err) {
+
+                        cb(new Error('internal server error'))
+
+                    } else {
+
+                        cb(null)
+
+                    }
+            })
     },
 
     deleteDepartment: (id, cb) => {
+
         client.query(`DELETE FROM department 
-                        WHERE id = '${id}';`, 
+                        WHERE id='${id}';`, 
             (err, res) => {
                 if (err) {
-                    console.error('deleteDepartment', err.message)
+
                     cb(new Error('internal server error'))
+
                 } else {
-                    console.log('deleteDepartment', res.rows)
-                    
+
                     cb(null);
                 }
         })
     },
 
     isTheSameDepartmentNameExists: (values, cb) => {
+
         const { name } = values
 
         client.query(`SELECT name
@@ -116,7 +134,7 @@ module.exports = {
             
         (err, res) => {
             if (err) {
-                console.error('err', err.message)
+
                 cb(new Error('internal server error'))
 
             } else {

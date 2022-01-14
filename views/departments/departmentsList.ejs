@@ -8,18 +8,15 @@
 
         <script>
 
-            document.getElementById(`delete-${item.id}`).addEventListener('click', e => {
-                const id = item.id
+            document.getElementById(`delete-${'<%= item.id %>'}`).addEventListener('click', e => {
 
-                fetch(`http://localhost:3000/departments/${item.id}/delete`, {
+                fetch(`http://localhost:3000/departments/${'<%= item.id %>'}/delete`, {
                     method: 'post'
                 })
                 .then(res => res.json)
                 .catch(err => console.log(err))
             })
-            // todo create form with delete method and id property
-            // todo listen btn click event and send form
-        
+
         </script>
 
     <% }); %>

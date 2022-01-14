@@ -64,7 +64,7 @@ module.exports = {
 
     deleteDepartmentAction: (req, res) => {
         const parsedUrl = req.url.split('/');
-        const id = parsedUrl[parsedUrl.length - 1]
+        const id = parsedUrl[parsedUrl.length - 2]
 
         controller.deleteDepartment(id, (error) => {
             if (error) {
@@ -72,6 +72,7 @@ module.exports = {
                 res.end(error.message)
             } else {
                 res.writeHead(301, { 'Location':  '/departments' });
+                // res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end();
             }
         }) 

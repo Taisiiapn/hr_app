@@ -57,20 +57,19 @@ module.exports = {
 
         function setUpParameters(id, query, paramsCB) {
 
-            const { body, error } = query;
-            const values = JSON.parse(body)
-
             const resultParameters = {}
-
+            const { body, error } = query;
+            
             if (error) {
                 
+                const values = JSON.parse(body)
                 resultParameters['values'] = values,
                 resultParameters['error'] = error
                 
                 paramsCB(null, resultParameters)
 
             } else {
-                
+
                 // todo get actual dep name and pass to result params
                 departmentsModel.getDepartmentById(id, (error, rows) => {
                     if (error) {
@@ -149,7 +148,6 @@ module.exports = {
     editDepartment: (id, body, cb) => {
 
         const values = parseBodyStringToObj(body)
-        // const values = JSON.parse(body)
         const { name } = values
 
         if (!name || !name.trim()) {

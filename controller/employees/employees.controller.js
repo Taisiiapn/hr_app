@@ -1,23 +1,29 @@
-const departments = require('../../index')
 const ejs = require('ejs')
+const employeesModel = require('../../model/employees.model')
 
 module.exports = {
     renderEmployees: (id, cb) => {
 
-        let filteredDepartmentsById = departments
-            .filter(departments => departments.id == id)[0]
+        employeesModel.getEmployeesById((error, employees) => {
+            if (error) {
+                cb(error)
+            } else {
 
-        ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
-                {data: filteredDepartmentsById}, 
-                function (err, html) {
-                    if (err) {
-                        cb(err)
-                        console.log('err debugging', err);
-                    } else {
-                        cb( null, html)
+                const employeesForEachDepartment = employees.map(employee => employee.departmentid === id)
+                
+                ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
+                    {data: employeesForEachDepartment}, 
+                    function (err, html) {
+                        if (err) {
+                            cb(err)
+                            console.log('err debugging employees', err);
+                        } else {
+                            cb( null, html)
+                        }
                     }
-                }
-        )
+                )
+            }
+        })
     },
 
     renderCreateEmployee: (cb) => {
