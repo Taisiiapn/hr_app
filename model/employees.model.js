@@ -1,4 +1,5 @@
 const { Client } = require('pg')
+const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 
 const client = new Client({
     user: 'postgres',
@@ -12,81 +13,57 @@ client.connect()
 
 module.exports = {
 
-    getEmployeesById: (cb) => {
+    getEmployeesByDepartmentId: (depId, cb) => {
 
         
         client.query(`SELECT *
                         FROM employee
-                        WHERE departmentid='${id}';`, 
+                        WHERE departmentid='${depId}';`, 
             (err, res) => {
                 if (err) {
                     console.error('err', err.message)
                     cb(new Error('internal server error'))
                 } else {
-                    console.log('getAllEmployees', res.rows)
-                    
                     cb(null, res.rows)
                 }
         })
     },
 
-    getDepartmentById: (id, cb) => {
+    getEmployeeById: (id, cb) => {
 
-        client.query(`SELECT *
-                    FROM department
-                    WHERE id='${id}';`, 
-            (err, res) => {
-                if (err) {
-                    cb(err)
-                } else {
-                    cb(null, res.rows);
-                }
-        })
-    },
-
-    getDepartmentByIdWithEmployees: (id, cb) => {
-
-        client.query(`SELECT 
-                        d.id, d.name, e.id as e_id, e.name as e_name, e.salary as e_salary 
-                    FROM department d 
-                    LEFT JOIN employee e 
-                    ON e.departmentid = d.id 
-                    WHERE d.id = '${id}';`, 
-            (err, res) => {
-                if (err) {
-                    cb(err)
-                } else {
-                    cb(null, res.rows);
-                }
-        })
-    },
-
-    editDepartment: (id, values, cb) => {
-
-        const { name } = values
         
-        client.query(`UPDATE department 
-                        SET name = '${name}' 
-                        WHERE id = '${id}';`, 
+        client.query(`SELECT name, salary, birthday, email
+                        FROM employee
+                        WHERE id='${id}';`, 
             (err, res) => {
                 if (err) {
                     console.error('err', err.message)
                     cb(new Error('internal server error'))
                 } else {
-                    cb(null);
+                    console.log('getEmployeeById', res.rows)
+                    
+                    if (res.rows.length === 0) {
+                        cb(new Error(`Employee with id - ${id}, nothing found!`))
+                    } else {
+                        cb(null, res.rows)
+                    }
+
                 }
         })
-        
     },
 
-    addDepartment: (values, cb) => {
+    addEmployee: (values, cb) => {
 
-        const { name } = values
-  
-        client.query(`INSERT INTO department(name) VALUES ('${name}');`,     
+        const { name, salary, departmentid, birthday, email } = values
+
+        const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
+        const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+       
+        client.query(`INSERT INTO employee(name, salary, departmentid, birthday, email) 
+                        VALUES ('${name}', ${salaryParsed}, '${departmentid}', ${birthdayParsed}, '${email}');`,     
         (err, res) => {
                 if (err) {
-                    console.error('err', err.message)
+                    console.error('err addEmployee model' , err.message)
                     cb(new Error('internal server error'))
                 } else {
                     cb(null);
@@ -94,31 +71,78 @@ module.exports = {
         })
     },
 
-    deleteDepartment: (id, cb) => {
-        client.query(`DELETE FROM department 
+    editEmployee: (id, values, cb) => {
+
+        const { name, salary, birthday, email } = values
+
+        const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
+        const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+        
+        client.query(`UPDATE employee 
+                        SET name = '${name}',
+                            salary = ${salaryParsed},
+                            birthday = ${birthdayParsed},
+                            email = '${email}'
                         WHERE id = '${id}';`, 
             (err, res) => {
                 if (err) {
-                    console.error('deleteDepartment', err.message)
                     cb(new Error('internal server error'))
                 } else {
-                    console.log('deleteDepartment', res.rows)
-                    
+                    cb(null);
+                }
+        })
+        
+    },
+
+    deleteEmployee: (employeeId, cb) => {
+        client.query(`DELETE FROM employee 
+                        WHERE id = '${employeeId}';`, 
+            (err, res) => {
+                if (err) {
+                    cb(new Error('internal server error'))
+                } else {
                     cb(null);
                 }
         })
     },
 
-    isTheSameDepartmentNameExists: (values, cb) => {
-        const { name } = values
+    isTheSameEmailExists: (values, cb) => {
 
-        client.query(`SELECT name
-                        FROM department
-                        WHERE name ILIKE '${name}';`, 
+        const { email } = values
+
+        client.query(`SELECT email
+                        FROM employee
+                        WHERE email ILIKE '${email}';`, 
             
         (err, res) => {
             if (err) {
-                console.error('err', err.message)
+
+                cb(new Error('internal server error'))
+
+            } else {
+
+                if(res.rows.length !== 0) {
+                    cb(null, true)
+                } else {
+                    cb(null, false)
+                }
+                
+            }
+        })
+    },
+
+    isTheSameEmailExistsWithDifferentId: (employeeId, values, cb) => {
+
+        const { email } = values
+
+        client.query(`SELECT *
+                        FROM employee
+                        WHERE email ILIKE '${email}'
+                        AND id != '${employeeId}';`, 
+            
+        (err, res) => {
+            if (err) {
+
                 cb(new Error('internal server error'))
 
             } else {

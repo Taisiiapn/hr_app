@@ -18,8 +18,6 @@ module.exports = {
     },
 
     addDepartmentRoute: (req, res) => {
-        
-        //  todo parse possible validation failed parameters from req.url to fill view form
 
         let parseObj = url.parse(req.url, true)
         let parsedQuery = parseObj.query
@@ -63,6 +61,7 @@ module.exports = {
     },
 
     deleteDepartmentAction: (req, res) => {
+
         const parsedUrl = req.url.split('/');
         const id = parsedUrl[parsedUrl.length - 2]
 
@@ -72,7 +71,6 @@ module.exports = {
                 res.end(error.message)
             } else {
                 res.writeHead(301, { 'Location':  '/departments' });
-                // res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end();
             }
         }) 
@@ -89,22 +87,21 @@ module.exports = {
 
             controller.addDepartment(body, (error, validationError) => {
                 if (error) {
-                    res.writeHead(500, { 'Content-Type': 'text/plain'});
+                    res.writeHead(500, { 'Content-Type': 'text/plain' });
                     return res.end(error.message);
                 } 
                 if (validationError) {
-                    // bad validation case 
                     
-                    // todo parse body to json string
                     const bodyObj = parseBodyStringToObj(body)
                     const bodyObjJSON = JSON.stringify(bodyObj)
 
                     const redirectUrl = `create?body=${bodyObjJSON}&error=${validationError.message}`
                     res.writeHead(301, { 'Location':  redirectUrl });
                     return res.end();
-                } 
-                    res.writeHead(301, { 'Location':  '/departments' });
-                    res.end();
+                }
+                
+                res.writeHead(301, { 'Location':  '/departments' });
+                res.end();
                 
             })
             

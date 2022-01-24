@@ -24,7 +24,11 @@ module.exports = {
 
                 } else {
 
-                    cb(null, res.rows)
+                    if (res.rows.length === 0) {
+                        cb(new Error(`Departments not found!`))
+                    } else {
+                        cb(null, res.rows)
+                    }
                 }
         })
     },
@@ -42,7 +46,11 @@ module.exports = {
 
                 } else {
 
-                    cb(null, res.rows)
+                    if (res.rows.length === 0) {
+                        cb(new Error(`Department with id - ${id}, nothing found!`))
+                    } else {
+                        cb(null, res.rows)
+                    }
 
                 }
         })
@@ -110,16 +118,25 @@ module.exports = {
 
     deleteDepartment: (id, cb) => {
 
-        client.query(`DELETE FROM department 
-                        WHERE id='${id}';`, 
-            (err, res) => {
-                if (err) {
+        client.query(`DELETE FROM employee
+                        WHERE departmentid='${id}';`,
+        
+            (deleteEmployeesError, res) => {
+                if (deleteEmployeesError) {
 
                     cb(new Error('internal server error'))
 
                 } else {
-
-                    cb(null);
+                    client.query(`DELETE FROM department
+                            WHERE id='${id}';`,
+                    (deleteDepError, res) => {
+                        if (deleteDepError) {
+                            cb(new Error('internal server error'))
+                        } else {
+                            cb(null);
+                        }
+                    })
+                    
                 }
         })
     },

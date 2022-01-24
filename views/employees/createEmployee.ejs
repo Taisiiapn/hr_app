@@ -1,15 +1,48 @@
-<form method="post" id="form" action="/employee/create">
+<form method="post" action="/departments/<%= departmentId %>/employees/create">
     <p>
         <input type="text" maxlength="12" 
             name="name"
             placeholder="Enter employee's name"
-             >
+            <% if (parameters.values) { %>
+                value="<%= parameters.values.name %>"
+            <% } %>
+        >
+    </p>
 
+    <p>
         <input type="text" maxlength="6" 
             name="salary"
             placeholder="Enter employee's salary"
-             >
+            <% if (parameters.values) { %>
+                value="<%= parameters.values.salary %>"
+            <% } %>
+        >
     </p>
+
+    <p>
+        <input type="text" maxlength="11" 
+            name="birthday"
+            placeholder="Employee's birthday (mm/dd/yy)"
+            <% if (parameters.values) { %>
+                value="<%= parameters.values.birthday %>"
+            <% } %>
+        >
+    </p>
+
+    <p>
+        <input type="text" maxlength="20" 
+            name="email"
+            placeholder="Enter email"
+            <% if (parameters.values) { %>
+                value="<%= parameters.values.email %>"
+            <% } %>
+        >
+    </p>
+
+    <% if (parameters.error) { %>
+        <span><%= parameters.error %></span>
+    <% } %>
+
     <p>
         <input type="submit" value="SEND">
     </p>

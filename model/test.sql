@@ -1,0 +1,5 @@
+DELETE FROM employee
+WHERE id = '3cb73a59-61e9-4da5-bc99-f13f239a1628';
+
+ALTER TABLE employee
+ADD COLUMN email VARCHAR;

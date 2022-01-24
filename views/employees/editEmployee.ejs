@@ -1,0 +1,79 @@
+<form method="post" action="/departments/<%= departmentId %>/employees/<%= employeeId %>/update">
+    
+    <% if (parameters.values) { %>
+
+            <p>
+                <input type="text" maxlength="12" 
+                    name="name"
+                    placeholder="Enter name"
+                    value="<%= parameters.values.name %>"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="6" 
+                    name="salary"
+                    placeholder="Enter salary"
+                    value="<%= parameters.values.salary %>"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="11" 
+                    name="birthday"
+                    placeholder="Enter birthday"
+                    value="<%= parameters.values.birthday %>"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="20" 
+                    name="email"
+                    placeholder="Enter email"
+                    value="<%= parameters.values.email %>"
+                >
+            </p>
+
+    <% } else { %>
+
+            <p>
+                <input type="text" maxlength="12" 
+                    name="name"
+                    placeholder="Enter name"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="6" 
+                    name="salary"
+                    placeholder="Enter salary"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="11" 
+                    name="birthday"
+                    placeholder="Enter birthday"
+                >
+            </p>
+
+            <p>
+                <input type="text" maxlength="20" 
+                    name="email"
+                    placeholder="Enter email"
+                >
+            </p>
+
+    <% } %>
+
+    
+
+    <% if (parameters.error) { %>
+        <span><%= parameters.error %></span>
+    <% } %>
+
+    <p>
+        <input type="submit" value="SEND">
+    </p>
+
+</form>
