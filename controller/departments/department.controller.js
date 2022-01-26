@@ -27,7 +27,7 @@ module.exports = {
                         function (err, html) {
                             if (err) {
                                 cb(err)
-                                console.log('err debugging', err);
+                                console.log('err renderDepartments', err);
                             } else {
                                 cb( null, html)
                             }
@@ -61,7 +61,7 @@ module.exports = {
         }
     },
 
-    renderEditDepartment: (id, parsedQuery, cb) => {
+    renderEditDepartment: (departmentId, query, cb) => {
 
         try {
     
@@ -94,7 +94,7 @@ module.exports = {
                 }
             }
 
-            setUpParameters(id, parsedQuery, (setUpError, parameters) => {
+            setUpParameters(departmentId, query, (setUpError, parameters) => {
                 
                 if (setUpError) {
                     cb(setUpError)
@@ -102,13 +102,13 @@ module.exports = {
 
                     ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
                     {
-                        id,
+                        id: departmentId,
                         parameters
                     },
                     function (err, html) {
                         if (err) {
                             cb(err)
-                            console.log('err debugging', err);
+                            console.log('err renderEditDepartment', err);
                         } else {
                             cb(null, html)
                         }
@@ -164,7 +164,7 @@ module.exports = {
         }
     },
 
-    editDepartment: (id, body, cb) => {
+    editDepartment: (departmentId, body, cb) => {
 
 
         try {
@@ -184,7 +184,7 @@ module.exports = {
                         cb(null, new Error(`Department name "${values.name}" is used`))
                     } else {
                         // if validation pass
-                        departmentsModel.editDepartment(id, values, (error) => {
+                        departmentsModel.editDepartment(departmentId, values, (error) => {
                             if (error) {
                                 cb(error)
                             } else {
@@ -202,11 +202,11 @@ module.exports = {
 
     },
 
-    deleteDepartment: (id, cb) => {
+    deleteDepartment: (departmentId, cb) => {
 
         try {
 
-            departmentsModel.deleteDepartment(id, (error) => {
+            departmentsModel.deleteDepartment(departmentId, (error) => {
                 if (error) {
                     cb(error)
                 } else {

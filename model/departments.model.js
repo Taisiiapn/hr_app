@@ -77,13 +77,13 @@ module.exports = {
         })
     },
 
-    editDepartment: (id, values, cb) => {
+    editDepartment: (departmentId, values, cb) => {
 
         const { name } = values
         
         client.query(`UPDATE department 
                         SET name = '${name}' 
-                        WHERE id = '${id}';`, 
+                        WHERE id = '${departmentId}';`, 
             (err, res) => {
                 if (err) {
 
@@ -116,10 +116,10 @@ module.exports = {
             })
     },
 
-    deleteDepartment: (id, cb) => {
+    deleteDepartment: (departmentId, cb) => {
 
         client.query(`DELETE FROM employee
-                        WHERE departmentid='${id}';`,
+                        WHERE departmentid='${departmentId}';`,
         
             (deleteEmployeesError, res) => {
                 if (deleteEmployeesError) {
@@ -128,7 +128,7 @@ module.exports = {
 
                 } else {
                     client.query(`DELETE FROM department
-                            WHERE id='${id}';`,
+                            WHERE id='${departmentId}';`,
                     (deleteDepError, res) => {
                         if (deleteDepError) {
                             cb(new Error('internal server error'))

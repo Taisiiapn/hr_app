@@ -32,7 +32,7 @@ module.exports = {
                         function (err, html) {
                             if (err) {
                                 cb(err)
-                                console.log('err debugging employees', err);
+                                console.log('err renderEmployees', err);
                             } else {
                                 cb( null, html)
                             }
@@ -70,7 +70,7 @@ module.exports = {
 
     },
 
-    renderEditEmployee: (employeeId, departmentId, parsedQuery, cb) => {
+    renderEditEmployee: (employeeId, departmentId, query, cb) => {
 
         try {
     
@@ -107,7 +107,7 @@ module.exports = {
                 }
             }
 
-            setUpParameters(employeeId, parsedQuery, (setUpError, parameters) => {
+            setUpParameters(employeeId, query, (setUpError, parameters) => {
                 
                 if (setUpError) {
                     cb(setUpError)

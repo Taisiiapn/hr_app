@@ -19,16 +19,15 @@ module.exports = {
 
     addDepartmentRoute: (req, res) => {
 
-        let parseObj = url.parse(req.url, true)
-        let parsedQuery = parseObj.query
+        let query = req.query
 
         const parameters = Object.assign({});
 
-        if(parsedQuery.error) {
-            parameters.error = parsedQuery.error;
+        if(query.error) {
+            parameters.error = query.error;
         }
-        if(parsedQuery.body) {
-            parameters.values = JSON.parse(parsedQuery.body);
+        if(query.body) {
+            parameters.values = JSON.parse(query.body);
         }
 
         controller.renderCreateDepartment(parameters, (error, html) => {
@@ -43,14 +42,11 @@ module.exports = {
 
     editDepartmentRoute: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        const id = parsedUrl[parsedUrl.length - 2]
-
-        let parseObj = url.parse(req.url, true)
-        let parsedQuery = parseObj.query
+        const { departmentId } = req.params
+        const { query } = req.query
 
 
-        controller.renderEditDepartment(id, parsedQuery, (error, html) => {
+        controller.renderEditDepartment(departmentId, query, (error, html) => {
             if (error) {
                 res.writeHead(500, { 'Content-Type': 'text/html' });
             } else {
@@ -62,10 +58,9 @@ module.exports = {
 
     deleteDepartmentAction: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        const id = parsedUrl[parsedUrl.length - 2]
+        const { departmentId } = req.params
 
-        controller.deleteDepartment(id, (error) => {
+        controller.deleteDepartment(departmentId, (error) => {
             if (error) {
                 res.writeHead(500, { 'Content-Type': 'text/plain'});
                 res.end(error.message)
@@ -110,10 +105,7 @@ module.exports = {
 
     editDepartmentAction: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        //todo get id from string through the regex.exec (expression has to has /\?.*/ at the end)
-        const id = parsedUrl[parsedUrl.length - 2]
-
+        const { departmentId } = req.params
         let body = ''
 
         req.on('data', (chunk) => {
@@ -122,7 +114,7 @@ module.exports = {
 
         req.on('end', () => {
 
-            controller.editDepartment(id, body, (error, validationError) => {
+            controller.editDepartment(departmentId, body, (error, validationError) => {
                 if (error) {
                     res.writeHead(500, { 'Content-Type': 'text/plain'});
                     return res.end(error.message)
@@ -131,7 +123,6 @@ module.exports = {
                 if (validationError) {
                     // bad validation case 
                     
-                    // todo parse body to json string
                     const bodyObj = parseBodyStringToObj(body)
                     const bodyObjJSON = JSON.stringify(bodyObj)
 

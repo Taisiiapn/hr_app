@@ -8,8 +8,7 @@ module.exports = {
     employeesRoute: (req, res) => {
         res.writeHead(200, { 'Content-Type': 'text/html' });
 
-        const parsedUrl = req.url.split('/');
-        const departmentid = parsedUrl[parsedUrl.length - 1]
+        const departmentid = req.params.departmentId
 
         controller.renderEmployees(departmentid, (error, html) => {
             if (error) {
@@ -21,20 +20,17 @@ module.exports = {
     },
 
     addEmployeeRoute: (req, res) => {
-        
-        let parseObj = url.parse(req.url, true)
-        let parsedQuery = parseObj.query
-
-        const parsedUrl = req.url.split('/');
-        const departmentId = parsedUrl[parsedUrl.length - 3]
+    
+        const { departmentId } = req.params
+        const query = req.query
 
         const parameters = Object.assign({})
 
-        if(parsedQuery.error) {
-            parameters.error = parsedQuery.error;
+        if(query.error) {
+            parameters.error = query.error;
         }
-        if(parsedQuery.body) {
-            parameters.values = JSON.parse(parsedQuery.body);
+        if(query.body) {
+            parameters.values = JSON.parse(query.body);
         }
 
         controller.renderCreateEmployee(parameters, departmentId, (error, html) => {
@@ -49,15 +45,12 @@ module.exports = {
 
     editEmployeeRoute: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        const employeeId = parsedUrl[parsedUrl.length - 2]
-        const departmentId = parsedUrl[parsedUrl.length - 4]
-
-        let parseObj = url.parse(req.url, true)
-        let parsedQuery = parseObj.query
+        const { departmentId } = req.params
+        const { employeeId } = req.params
+        const query = req.query
 
 
-        controller.renderEditEmployee(employeeId, departmentId, parsedQuery, (error, html) => {
+        controller.renderEditEmployee(employeeId, departmentId, query, (error, html) => {
             if (error) {
                 res.writeHead(500, { 'Content-Type': 'text/html' });
             } else {
@@ -69,8 +62,7 @@ module.exports = {
 
     addEmployeeAction: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        const departmentId = parsedUrl[parsedUrl.length - 3]
+        const { departmentId } = req.params
 
         let body = ''
 
@@ -105,9 +97,8 @@ module.exports = {
 
     editEmployeeAction: (req, res) => {
 
-        const parsedUrl = req.url.split('/');
-        const employeeId = parsedUrl[parsedUrl.length - 2]
-        const departmentId = parsedUrl[parsedUrl.length - 4]
+        const { departmentId } = req.params
+        const { employeeId } = req.params
 
         let body = ''
 
@@ -141,9 +132,9 @@ module.exports = {
     },
 
     deleteEmployeeAction: (req, res) => {
-        const parsedUrl = req.url.split('/');
-        const departmentId = parsedUrl[parsedUrl.length - 4]
-        const employeeId = parsedUrl[parsedUrl.length - 2]
+        
+        const { departmentId } = req.params
+        const { employeeId } = req.params
 
         controller.deleteEmployee(employeeId, (error) => {
             if (error) {
