@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-// todo const dotenv = require('dotenv') 
 const departmentsRouter = require('./controller/departments/department.router')
 const commonController = require('./controller/common');
 const employeesRouter = require('./controller/employees/employees.router')

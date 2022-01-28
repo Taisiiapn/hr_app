@@ -1,11 +1,14 @@
 const { Client } = require('pg')
+const environment = require('../config/environment')
+
+const { port, host, user, password, database } = environment.db
 
 const client = new Client({
-    user: 'postgres',
-    password: 'qwertyuiop',
-    host: 'localhost',
-    port: 5432,
-    database: 'js_test'
+    user: user,
+    password: password,
+    host: host,
+    port: +port,
+    database: database
 })
 
 client.connect()
