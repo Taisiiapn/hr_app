@@ -1,6 +1,25 @@
 const ejs = require('ejs')
+const Joi = require('joi')
 const departmentsModel = require('../../model/departments.model');
-const { parseBodyStringToObj } = require('../utils');
+const { parseBodyStringToObj } = require('../utils')
+
+
+const addDepartmentSchema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(16)
+        .required()
+})
+
+const editDepartmentSchema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(16)
+        .required()
+})
+
 
 module.exports = {
     
@@ -127,27 +146,29 @@ module.exports = {
 
         try {
 
-            const values = parseBodyStringToObj(body)
+            const rawValues = parseBodyStringToObj(body)
 
             // validation:
 
             // - dep name required
-            const { name } = values
-            if (!name || !name.trim()) {
-                cb(null, new Error('Department name is required'))
+
+            const { value, error } = addDepartmentSchema.validate(rawValues)
+
+            if (error) {
+                cb(null, new Error(`${error}`))
             } else {
             // - unique dep name (async)
 
-                departmentsModel.isTheSameDepartmentNameExists(values, (isTheSame_error, isExists) => {
+                departmentsModel.isTheSameDepartmentNameExists(value, (isTheSame_error, isExists) => {
                     if (isTheSame_error) {
                         cb(isTheSame_error)
                     } else {
                         if (isExists) {
                             // if validation failed
-                            cb(null, new Error(`Department name "${values.name}" is used`))
+                            cb(null, new Error(`Department name "${value.name}" is used`))
                         } else {
                             // if validation pass
-                            departmentsModel.addDepartment(values, (error) => {
+                            departmentsModel.addDepartment(value, (error) => {
                                 if (error) {
                                     cb(error)
                                 } else {
@@ -166,34 +187,35 @@ module.exports = {
 
     editDepartment: (departmentId, body, cb) => {
 
-
         try {
-            const values = parseBodyStringToObj(body)
-            const { name } = values
+            const rawValues = parseBodyStringToObj(body)
 
-            if (!name || !name.trim()) {
-                return cb(null, new Error('Department name is required'));
-            }
+            const { value, error } = editDepartmentSchema.validate(rawValues)
 
-            departmentsModel.isTheSameDepartmentNameExists(values, (isTheSame_error, isExists) => {
-                if (isTheSame_error) {
-                    cb(isTheSame_error)
-                } else {
-                    if (isExists) {
-                        // if validation failed
-                        cb(null, new Error(`Department name "${values.name}" is used`))
+            if (error) {
+                cb(null, new Error(`${error}`))
+            } else {
+
+                departmentsModel.isTheSameDepartmentNameExists(value, (isTheSame_error, isExists) => {
+                    if (isTheSame_error) {
+                        cb(isTheSame_error)
                     } else {
-                        // if validation pass
-                        departmentsModel.editDepartment(departmentId, values, (error) => {
-                            if (error) {
-                                cb(error)
-                            } else {
-                                cb(null)
-                            }
-                        })
+                        if (isExists) {
+                            // if validation failed
+                            cb(null, new Error(`Department name "${value.name}" is used`))
+                        } else {
+                            // if validation pass
+                            departmentsModel.editDepartment(departmentId, value, (error) => {
+                                if (error) {
+                                    cb(error)
+                                } else {
+                                    cb(null)
+                                }
+                            })
+                        }
                     }
-                }
-            })
+                })
+            }
 
         } catch(error) {
             console.error(error)

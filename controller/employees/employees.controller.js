@@ -1,8 +1,55 @@
 const ejs = require('ejs')
+const Joi = require('joi');
 const employeesModel = require('../../model/employees.model')
-const { parseBodyStringToObj, validateEmailFormat, 
-    validateDateStrFormat, validateDate, 
-    validateSalaryFormat, validateBirthday } = require('../utils')
+const { parseBodyStringToObj, dateStrRegExp,
+    ageRequirementCheck, validDateCheck } = require('../utils')
+
+const addEmployeeSchema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(16)
+        .required(),
+
+    salary: Joi.number(),
+
+    birthday: Joi.string()
+        .pattern(new RegExp(dateStrRegExp), 'dd.mm.yyyy')
+        .custom( validDateCheck)
+        .message('Invalid date')
+        .custom( ageRequirementCheck)
+        .message('Age required to be 18 - 75 years range'),
+    
+    email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required(),
+
+    // todo departmentid: Joi uuid
+    
+}).unknown()
+
+const editEmployeeSchema = Joi.object({
+    name: Joi.string()
+        .alphanum()
+        .min(3)
+        .max(16)
+        .required(),
+
+    salary: Joi.number(),
+
+    birthday: Joi.string()
+        .pattern(new RegExp(dateStrRegExp), 'dd.mm.yyyy')
+        .custom( validDateCheck, 'Valid date check')
+        .message('Invalid date')
+        .custom( ageRequirementCheck, 'Age requirement')
+        .message('Age required to be 18 - 75 years range'),
+    
+    email: Joi.string()
+        .email({ tlds: { allow: false } })
+        .required()
+    
+}).unknown()
+
 
 module.exports = {
 
@@ -140,73 +187,37 @@ module.exports = {
 
         try {
 
-            const values = parseBodyStringToObj(body)
-            const { name, salary, birthday, email } = values
-            values.departmentid = id
+            const rawValues = parseBodyStringToObj(body)
+            rawValues.departmentid = id
 
-            const isValidEmailFormat = validateEmailFormat(email)
-            const isValidateSalaryFormat = validateSalaryFormat(salary)
+            const { value, error } = addEmployeeSchema.validate(rawValues)
 
-            if (!name || !email) {
+            if (error) {
 
-                return cb(null, new Error('Name and Email are required'))
-            }
+                return cb(null, new Error(`${error}`))
+
+            } else {
             
-            if (!isValidEmailFormat) {
-
-                return cb(null, new Error('Email is not valid'))
-
-            }
-
-            if (!isValidateSalaryFormat) {
-
-                return cb(null, new Error('Salary is not valid'))
-
-            }
-
-            if (birthday !== null) {
-
-                const isValidDateFormat = validateDateStrFormat(birthday)
-            
-                if (!isValidDateFormat) {
-
-                    return cb(null, new Error('Date is not valid, dd.mm.yyyy format expected'))
-
-                } else {
-                    const isValidDate = validateDate(birthday) 
-                    const isValidBirtday = validateBirthday(birthday) 
-
-                    if (!isValidDate) {
-                        return cb(null, new Error('Date is not valid'))
-                    } 
-
-                    if (!isValidBirtday) {
-                        return cb(null, new Error('Age must be in 18-75 years range'))
-                    }
-                }
-            }
-
-            employeesModel.isTheSameEmailExists(values, (isExistEmailError, isExist) => {
-                if (isExistEmailError) {
-                    cb(isExistEmailError)
-                } else {
-                    if (isExist) {
-                        // if validation failed
-                        cb(null, new Error(`Employee's email "${values.email} is used"`))
+                employeesModel.isTheSameEmailExists(value, (isExistEmailError, isExist) => {
+                    if (isExistEmailError) {
+                        cb(isExistEmailError)
                     } else {
-                        // if validation pass
-                        employeesModel.addEmployee(values, (error) => {
-                            if (error) {
-                                cb(error)
-                            } else {
-                                cb(null)
-                            }
-                        })
+                        if (isExist) {
+                            // if validation failed
+                            cb(null, new Error(`Employee's email "${value.email} is used"`))
+                        } else {
+                            // if validation pass
+                            employeesModel.addEmployee(value, (error) => {
+                                if (error) {
+                                    cb(error)
+                                } else {
+                                    cb(null)
+                                }
+                            })
+                        }
                     }
-                }
-            })
-
-            
+                })
+            }
 
         } catch(error) {
             console.error(error)
@@ -218,69 +229,34 @@ module.exports = {
 
         try {
 
-            const values = parseBodyStringToObj(body)
-            const { name, salary, email, birthday } = values
+            const rawValues = parseBodyStringToObj(body)
 
-            const isValidateEmailFormat = validateEmailFormat(email)
-            const isValidateSalaryFormat = validateSalaryFormat(salary)
+            const { value, error } = editEmployeeSchema.validate(rawValues)
 
-            if (!name || !email) {
-                return cb(null, new Error('Name and Email are required'));
-            }
+            if (error) {
+                return cb(null, new Error(`${error}`));
+            } else {
 
-            if (!isValidateEmailFormat) {
-
-                return cb(null, new Error('Email is not valid'))
-
-            }
-
-            if (!isValidateSalaryFormat) {
-
-                return cb(null, new Error('Salary is not valid'))
-
-            }
-
-            if (birthday !== null) {
-
-                const isValidDateFormat = validateDateStrFormat(birthday)
-            
-                if (!isValidDateFormat) {
-
-                    return cb(null, new Error('Date is not valid, dd.mm.yyyy format expected'))
-
-                } else {
-                    const isValidDate = validateDate(birthday) 
-                    const isValidBirtday = validateBirthday(birthday) 
-
-                    if (!isValidDate) {
-                        return cb(null, new Error('Date is not valid'))
-                    } 
-
-                    if (!isValidBirtday) {
-                        return cb(null, new Error('Age must be in 18-75 years range'))
-                    }
-                }
-            }
-
-            employeesModel.isTheSameEmailExistsWithDifferentId(employeeId, values, (isExistEmailError, isExist) => {
-                if (isExistEmailError) {
-                    cb(isExistEmailError)
-                } else {
-                    if (isExist) {
-                        // if validation failed
-                        cb(null, new Error(`Employee's email "${values.email} is used"`))
+                employeesModel.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
+                    if (isExistEmailError) {
+                        cb(isExistEmailError)
                     } else {
-                        // if validation pass
-                        employeesModel.editEmployee(employeeId, values, (error) => {
-                            if (error) {
-                                cb(error)
-                            } else {
-                                cb(null)
-                            }
-                        })
+                        if (isExist) {
+                            // if validation failed
+                            cb(null, new Error(`Employee's email "${value.email} is used"`))
+                        } else {
+                            // if validation pass
+                            employeesModel.editEmployee(employeeId, value, (error) => {
+                                if (error) {
+                                    cb(error)
+                                } else {
+                                    cb(null)
+                                }
+                            })
+                        }
                     }
-                }
-            })
+                })
+            }
 
             
         } catch(error) {

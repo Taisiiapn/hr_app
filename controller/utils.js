@@ -1,4 +1,3 @@
-const emailRegExp = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/
 const dateStrRegExp = /^(0?[1-9]|[12]\d|30|31)\.(0?[1-9]|1[0-2])\.(\d{4}|\d{2})$/
 
 
@@ -14,6 +13,8 @@ function dateStrToDate(validDateStr) {
 
 
 module.exports = {
+
+    dateStrRegExp,
     
     parseBodyStringToObj: (bodyStr) => {
         const values = {}
@@ -27,19 +28,10 @@ module.exports = {
         return values;
     },
 
-    validateEmailFormat: (email) => {
-        return emailRegExp.test(email)
-    },
+    validDateCheck: (dateStr) => {
 
-    validateDateStrFormat: (dateStr) => {
-        return dateStrRegExp.test(dateStr)
-    },
-
-    validateDate: (validDateStr) => {
-
-
-        const newDate = dateStrToDate(validDateStr)
-        const parsedStr = dateStrRegExp.exec(validDateStr)
+        const newDate = dateStrToDate(dateStr)
+        const parsedStr = dateStrRegExp.exec(dateStr)
 
         const strDay = parsedStr[1]
         const strMonth = parsedStr[2]
@@ -54,16 +46,18 @@ module.exports = {
             || dateMonth !== +strMonth
             || dateYear !== +strYear
         ) {
-                return false
-        } else {
-                return true
+            throw new Error('Invalid date');
         }
+
+        return dateStr
 
     },
 
-    validateBirthday: (validateStr) => {
+    ageRequirementCheck: (birthdayStr) => {
 
         const now = new Date()
+
+        
 
         const minAgeDate = new Date().setFullYear(now.getFullYear() - 18)
         const maxAgeDate = new Date().setFullYear(now.getFullYear() - 75)
@@ -71,25 +65,15 @@ module.exports = {
         const minAgeMiliseconds = new Date(minAgeDate).getTime()
         const maxAgeMiliseconds = new Date(maxAgeDate).getTime()
 
-        const validationMiliseconds = dateStrToDate(validateStr).getTime()
+        const validationMiliseconds = dateStrToDate(birthdayStr).getTime()
 
-        if (validationMiliseconds >= maxAgeMiliseconds 
-            && validationMiliseconds <= minAgeMiliseconds) {
-                return true
-        } else {
-            return false
+        if (validationMiliseconds <= maxAgeMiliseconds 
+            || validationMiliseconds >= minAgeMiliseconds) {
+                throw new Error('');
+
         }
-        
-    },
 
-    validateSalaryFormat: (salary) => {
+        return birthdayStr
 
-        if (salary === null) {
-            return true
-        } else {
-           return !isNaN(salary) 
-        }
-        
     }
-
 }

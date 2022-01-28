@@ -1,6 +1,5 @@
 const { parseBodyStringToObj } = require('../utils');
 const controller = require('./department.controller')
-const url = require('url');
 
 
 module.exports = {
@@ -43,7 +42,7 @@ module.exports = {
     editDepartmentRoute: (req, res) => {
 
         const { departmentId } = req.params
-        const { query } = req.query
+        const query = req.query
 
 
         controller.renderEditDepartment(departmentId, query, (error, html) => {

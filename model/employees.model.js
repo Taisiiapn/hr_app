@@ -40,7 +40,6 @@ module.exports = {
                     console.error('err', err.message)
                     cb(new Error('internal server error'))
                 } else {
-                    console.log('getEmployeeById', res.rows)
                     
                     if (res.rows.length === 0) {
                         cb(new Error(`Employee with id - ${id}, nothing found!`))
@@ -63,7 +62,6 @@ module.exports = {
                         VALUES ('${name}', ${salaryParsed}, '${departmentid}', ${birthdayParsed}, '${email}');`,     
         (err, res) => {
                 if (err) {
-                    console.error('err addEmployee model' , err.message)
                     cb(new Error('internal server error'))
                 } else {
                     cb(null);
