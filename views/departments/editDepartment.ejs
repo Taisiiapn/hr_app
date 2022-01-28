@@ -1,3 +1,5 @@
+<%- include('../homeButton.ejs') %>
+
 <form method="post" id="formEditDepartment" action="/departments/<%= id %>/update">
     <p>
         <% if (parameters.values && parameters.values.name) { %>
