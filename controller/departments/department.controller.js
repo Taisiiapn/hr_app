@@ -1,8 +1,6 @@
 const ejs = require('ejs')
 const Joi = require('joi')
-const departmentsModel = require('../../model/departments.model');
-const { parseBodyStringToObj } = require('../utils')
-
+const departmentsModel = require('../../model/departments.model')
 
 const addDepartmentSchema = Joi.object({
     name: Joi.string()
@@ -142,11 +140,9 @@ module.exports = {
         }
     },
 
-    addDepartment: (body, cb) => {
+    addDepartment: (rawValues, cb) => {
 
         try {
-
-            const rawValues = parseBodyStringToObj(body)
 
             // validation:
 
@@ -185,10 +181,9 @@ module.exports = {
         }
     },
 
-    editDepartment: (departmentId, body, cb) => {
+    editDepartment: (departmentId, rawValues, cb) => {
 
         try {
-            const rawValues = parseBodyStringToObj(body)
 
             const { value, error } = editDepartmentSchema.validate(rawValues)
 

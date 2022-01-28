@@ -1,10 +1,14 @@
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+// todo const dotenv = require('dotenv') 
 const departmentsRouter = require('./controller/departments/department.router')
 const commonController = require('./controller/common');
 const employeesRouter = require('./controller/employees/employees.router')
 
 
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 app.get('/', commonController.rootRouteRedirect)
 app.get('/departments', (req, res) => departmentsRouter.departmentsRootRoute(req, res))
 app.get('/departments/create', (req, res) => departmentsRouter.addDepartmentRoute(req, res))

@@ -1,8 +1,7 @@
 const ejs = require('ejs')
 const Joi = require('joi');
 const employeesModel = require('../../model/employees.model')
-const { parseBodyStringToObj, dateStrRegExp,
-    ageRequirementCheck, validDateCheck } = require('../utils')
+const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
 
 const addEmployeeSchema = Joi.object({
     name: Joi.string()
@@ -24,7 +23,12 @@ const addEmployeeSchema = Joi.object({
         .email({ tlds: { allow: false } })
         .required(),
 
-    // todo departmentid: Joi uuid
+    departmentid: Joi.string().guid({
+        version: [
+            'uuidv4',
+            'uuidv5'
+        ]
+    })
     
 }).unknown()
 
@@ -183,11 +187,10 @@ module.exports = {
         }
     },
 
-    addEmployee: (id, body, cb) => {
+    addEmployee: (id, rawValues, cb) => {
 
         try {
 
-            const rawValues = parseBodyStringToObj(body)
             rawValues.departmentid = id
 
             const { value, error } = addEmployeeSchema.validate(rawValues)
@@ -225,11 +228,9 @@ module.exports = {
         }
     },
 
-    editEmployee: (employeeId, body, cb) => {
+    editEmployee: (employeeId, rawValues, cb) => {
 
         try {
-
-            const rawValues = parseBodyStringToObj(body)
 
             const { value, error } = editEmployeeSchema.validate(rawValues)
 

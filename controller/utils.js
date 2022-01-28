@@ -15,18 +15,6 @@ function dateStrToDate(validDateStr) {
 module.exports = {
 
     dateStrRegExp,
-    
-    parseBodyStringToObj: (bodyStr) => {
-        const values = {}
-        const decodedbodyStr = decodeURIComponent(bodyStr).replace( /\+/g, ' ' )
-
-        decodedbodyStr.split('&').forEach(keyValue => {
-            
-            const [ key, value ] = keyValue.split('=')
-            values[key] = value.trim() ? value.trim() : null
-        })
-        return values;
-    },
 
     validDateCheck: (dateStr) => {
 

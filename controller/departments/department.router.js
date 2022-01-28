@@ -1,4 +1,3 @@
-const { parseBodyStringToObj } = require('../utils');
 const controller = require('./department.controller')
 
 
@@ -71,13 +70,8 @@ module.exports = {
     },
 
     addDepartmentAction: (req, res) => {
-        let body = ''
 
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
-
-        req.on('end', () => {
+        const body = req.body
 
             controller.addDepartment(body, (error, validationError) => {
                 if (error) {
@@ -86,10 +80,9 @@ module.exports = {
                 } 
                 if (validationError) {
                     
-                    const bodyObj = parseBodyStringToObj(body)
-                    const bodyObjJSON = JSON.stringify(bodyObj)
+                    const bodyJSON = JSON.stringify(body)
 
-                    const redirectUrl = `create?body=${bodyObjJSON}&error=${validationError.message}`
+                    const redirectUrl = `create?body=${bodyJSON}&error=${validationError.message}`
                     res.writeHead(301, { 'Location':  redirectUrl });
                     return res.end();
                 }
@@ -98,20 +91,13 @@ module.exports = {
                 res.end();
                 
             })
-            
-        });
     },
 
     editDepartmentAction: (req, res) => {
 
         const { departmentId } = req.params
-        let body = ''
-
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
-
-        req.on('end', () => {
+        
+        const body = req.body
 
             controller.editDepartment(departmentId, body, (error, validationError) => {
                 if (error) {
@@ -122,10 +108,9 @@ module.exports = {
                 if (validationError) {
                     // bad validation case 
                     
-                    const bodyObj = parseBodyStringToObj(body)
-                    const bodyObjJSON = JSON.stringify(bodyObj)
+                    const bodyJSON = JSON.stringify(body)
 
-                    const redirectUrl = `update?body=${bodyObjJSON}&error=${validationError.message}`
+                    const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
                     res.writeHead(301, { 'Location':  redirectUrl });
                     return res.end();
                 }
@@ -133,8 +118,6 @@ module.exports = {
                 res.writeHead(301, { 'Location':  '/departments' });
                 res.end();
             })
-  
-        });
     }
 
 }

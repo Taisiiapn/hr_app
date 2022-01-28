@@ -1,4 +1,3 @@
-const { parseBodyStringToObj } = require('../utils');
 const controller = require('./employees.controller')
 
 
@@ -63,13 +62,7 @@ module.exports = {
 
         const { departmentId } = req.params
 
-        let body = ''
-
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
-
-        req.on('end', () => {
+        const body = req.body
 
             controller.addEmployee(departmentId, body, (error, validationError) => {
                 if (error) {
@@ -79,10 +72,9 @@ module.exports = {
 
                 if (validationError) {
 
-                    const bodyObj = parseBodyStringToObj(body)
-                    const bodyObjJSON = JSON.stringify(bodyObj)
+                    const bodyJSON = JSON.stringify(body)
 
-                    const redirectUrl = `/departments/${departmentId}/employees/create?body=${bodyObjJSON}&error=${validationError}`
+                    const redirectUrl = `/departments/${departmentId}/employees/create?body=${bodyJSON}&error=${validationError}`
                     res.writeHead(301, { 'Location':  redirectUrl });
                     return res.end();
                 }
@@ -90,8 +82,6 @@ module.exports = {
                 res.writeHead(301, { 'Location':  `/departments/${departmentId}` });
                 res.end();
             })
-
-        });
     },
 
     editEmployeeAction: (req, res) => {
@@ -99,13 +89,7 @@ module.exports = {
         const { departmentId } = req.params
         const { employeeId } = req.params
 
-        let body = ''
-
-        req.on('data', (chunk) => {
-            body += chunk;
-        });
-
-        req.on('end', () => {
+        const body = req.body
 
             controller.editEmployee(employeeId, body, (error, validationError) => {
                 if (error) {
@@ -115,10 +99,9 @@ module.exports = {
 
                 if (validationError) {
 
-                    const bodyObj = parseBodyStringToObj(body)
-                    const bodyObjJSON = JSON.stringify(bodyObj)
+                    const bodyJSON = JSON.stringify(body)
 
-                    const redirectUrl = `update?body=${bodyObjJSON}&error=${validationError.message}`
+                    const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
                     res.writeHead(301, { 'Location':  redirectUrl });
                     return res.end();
                 }
@@ -126,8 +109,6 @@ module.exports = {
                 res.writeHead(301, { 'Location':  `/departments/${departmentId}` });
                 res.end();
             })
-  
-        });
     },
 
     deleteEmployeeAction: (req, res) => {
