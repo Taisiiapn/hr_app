@@ -1,6 +1,8 @@
 const ejs = require('ejs')
 const Joi = require('joi')
+const logger = require('../../config/logger')
 const departmentsModel = require('../../model/departments.model')
+const { emitDepartmentFailedValidation } = require('../../model/eventEmitter.model')
 
 const addDepartmentSchema = Joi.object({
     name: Joi.string()
@@ -53,7 +55,7 @@ module.exports = {
                 }
             })
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
         
@@ -73,7 +75,7 @@ module.exports = {
                     }
             )
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -135,7 +137,7 @@ module.exports = {
             })
 
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -151,7 +153,10 @@ module.exports = {
             const { value, error } = addDepartmentSchema.validate(rawValues)
 
             if (error) {
+
                 cb(null, new Error(`${error}`))
+                emitDepartmentFailedValidation(error.details[0].message)
+            
             } else {
             // - unique dep name (async)
 
@@ -162,6 +167,7 @@ module.exports = {
                         if (isExists) {
                             // if validation failed
                             cb(null, new Error(`Department name "${value.name}" is used`))
+                            emitDepartmentFailedValidation('Add department: name is used')
                         } else {
                             // if validation pass
                             departmentsModel.addDepartment(value, (error) => {
@@ -176,7 +182,7 @@ module.exports = {
                 })
             }
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -188,7 +194,10 @@ module.exports = {
             const { value, error } = editDepartmentSchema.validate(rawValues)
 
             if (error) {
+
                 cb(null, new Error(`${error}`))
+                emitDepartmentFailedValidation(error.details[0].message)
+            
             } else {
 
                 departmentsModel.isTheSameDepartmentNameExists(value, (isTheSame_error, isExists) => {
@@ -198,6 +207,7 @@ module.exports = {
                         if (isExists) {
                             // if validation failed
                             cb(null, new Error(`Department name "${value.name}" is used`))
+                            emitDepartmentFailedValidation('Edit department: name is used')
                         } else {
                             // if validation pass
                             departmentsModel.editDepartment(departmentId, value, (error) => {
@@ -213,7 +223,7 @@ module.exports = {
             }
 
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
 
@@ -232,7 +242,7 @@ module.exports = {
             })
 
         } catch(error) {
-            console.error(error)
+            logger.error(error)
             cb(new Error('Internal server Error'))
         }
     }

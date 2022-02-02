@@ -24,7 +24,7 @@ module.exports = {
                         WHERE departmentid='${depId}';`, 
             (err, res) => {
                 if (err) {
-                    console.error('err', err.message)
+                    logger.error('getEmployeesByDepartmentId', err.message)
                     cb(new Error('internal server error'))
                 } else {
                     cb(null, res.rows)
@@ -40,7 +40,7 @@ module.exports = {
                         WHERE id='${id}';`, 
             (err, res) => {
                 if (err) {
-                    console.error('err', err.message)
+                    logger.error('getEmployeeById', err.message)
                     cb(new Error('internal server error'))
                 } else {
                     

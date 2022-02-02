@@ -1,6 +1,7 @@
 const ejs = require('ejs')
 const Joi = require('joi');
-const employeesModel = require('../../model/employees.model')
+const employeesModel = require('../../model/employees.model');
+const { emitEmployeeFailedValidation } = require('../../model/eventEmitter.model');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
 
 const addEmployeeSchema = Joi.object({
@@ -93,7 +94,6 @@ module.exports = {
             })
 
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -107,7 +107,6 @@ module.exports = {
                     function (err, html) {
                         if (err) {
                             cb(err)
-                            console.error('err debugging', err);
                         } else {
                             cb(null, html)
                         }
@@ -115,7 +114,6 @@ module.exports = {
             )
 
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
 
@@ -182,7 +180,6 @@ module.exports = {
             })
 
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -197,8 +194,10 @@ module.exports = {
 
             if (error) {
 
-                return cb(null, new Error(`${error}`))
+                emitEmployeeFailedValidation(error.details[0].message)
 
+                cb(null, new Error(`${error}`));
+                
             } else {
             
                 employeesModel.isTheSameEmailExists(value, (isExistEmailError, isExist) => {
@@ -208,6 +207,7 @@ module.exports = {
                         if (isExist) {
                             // if validation failed
                             cb(null, new Error(`Employee's email "${value.email} is used"`))
+                            emitEmployeeFailedValidation('Add employee: email is used')
                         } else {
                             // if validation pass
                             employeesModel.addEmployee(value, (error) => {
@@ -220,10 +220,9 @@ module.exports = {
                         }
                     }
                 })
+            
             }
-
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
     },
@@ -235,7 +234,10 @@ module.exports = {
             const { value, error } = editEmployeeSchema.validate(rawValues)
 
             if (error) {
-                return cb(null, new Error(`${error}`));
+
+                cb(null, new Error(`${error}`))
+                emitEmployeeFailedValidation(error.details[0].message)
+
             } else {
 
                 employeesModel.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
@@ -245,6 +247,7 @@ module.exports = {
                         if (isExist) {
                             // if validation failed
                             cb(null, new Error(`Employee's email "${value.email} is used"`))
+                            emitEmployeeFailedValidation('Edit employee: email is used')
                         } else {
                             // if validation pass
                             employeesModel.editEmployee(employeeId, value, (error) => {
@@ -261,7 +264,6 @@ module.exports = {
 
             
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
 
@@ -281,8 +283,8 @@ module.exports = {
 
 
         } catch(error) {
-            console.error(error)
             cb(new Error('Internal server Error'))
         }
     }
+
 }

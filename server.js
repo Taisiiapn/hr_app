@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const logger = require('./config/logger')
 const departmentsRouter = require('./controller/departments/department.router')
 const commonController = require('./controller/common');
 const employeesRouter = require('./controller/employees/employees.router')
@@ -25,4 +26,4 @@ app.use('*', (req, res) => commonController.routeNotFound(req, res))
 
 
 const port = process.env.PORT || 3000
-app.listen(port, () => console.log(`Listening on port ${port}...`))
+app.listen(port, () => logger.info(`Listening on port ${port}...`))

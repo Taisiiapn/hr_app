@@ -1,3 +1,4 @@
+const logger = require('../../config/logger');
 const controller = require('./employees.controller')
 
 
@@ -10,7 +11,8 @@ module.exports = {
 
         controller.renderEmployees(departmentid, (error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.end(html)
             }
@@ -33,7 +35,8 @@ module.exports = {
 
         controller.renderCreateEmployee(parameters, departmentId, (error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(html)
@@ -50,7 +53,8 @@ module.exports = {
 
         controller.renderEditEmployee(employeeId, departmentId, query, (error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(html)
@@ -66,8 +70,9 @@ module.exports = {
 
             controller.addEmployee(departmentId, body, (error, validationError) => {
                 if (error) {
-                    res.writeHead(500, { 'Content-Type': 'text/plain' });
-                    return res.end(error.message)
+                    res.writeHead(500, { 'Content-Type': 'text/plain' }) 
+                    res.end(error.message)
+                    return logger.error(error)
                 }
 
                 if (validationError) {
@@ -94,7 +99,8 @@ module.exports = {
             controller.editEmployee(employeeId, body, (error, validationError) => {
                 if (error) {
                     res.writeHead(500, { 'Content-Type': 'text/plain'});
-                    return res.end(error.message)
+                    res.end(error.message)
+                    return logger.error(error)
                 }
 
                 if (validationError) {
@@ -120,6 +126,7 @@ module.exports = {
             if (error) {
                 res.writeHead(500, { 'Content-Type': 'text/plain'});
                 res.end(error.message)
+                logger.error(error)
             } else {
                 res.writeHead(301, { 'Location':  `/departments/${departmentId}` });
                 res.end();
