@@ -1,7 +1,8 @@
 const ejs = require('ejs')
 const Joi = require('joi');
-const employeesModel = require('../../model/employees.model');
-const { emitEmployeeFailedValidation } = require('../../model/eventEmitter.model');
+const logger = require('../../config/logger');
+const employeesModel = require('../../services/employees.service');
+const { emitEmployeeFailedValidation } = require('../../services/eventEmitter.service');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
 
 const addEmployeeSchema = Joi.object({
@@ -65,6 +66,7 @@ module.exports = {
             employeesModel.getEmployeesByDepartmentId(departmentid, (error, employees) => {
                 if (error) {
                     cb(error)
+                    logger.error(error)
                 } else {
 
                     const mutatedEmployeesForEachDepartment = employees.map(employee => {
@@ -81,10 +83,10 @@ module.exports = {
 
                     ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
                         {data: mutatedEmployeesForEachDepartment, departmentid}, 
-                        function (err, html) {
-                            if (err) {
-                                cb(err)
-                                console.log('err renderEmployees', err);
+                        function (error, html) {
+                            if (error) {
+                                cb(error)
+                                logger.error('err renderEmployees', error);
                             } else {
                                 cb( null, html)
                             }
@@ -95,6 +97,7 @@ module.exports = {
 
         } catch(error) {
             cb(new Error('Internal server Error'))
+            logger.error(error)
         }
     },
 
@@ -104,9 +107,10 @@ module.exports = {
 
             ejs.renderFile(__dirname + '/../../views/employees/createEmployee.ejs',
                     {parameters, departmentId},
-                    function (err, html) {
-                        if (err) {
-                            cb(err)
+                    function (error, html) {
+                        if (error) {
+                            cb(error)
+                            logger.error(error)
                         } else {
                             cb(null, html)
                         }
@@ -137,6 +141,8 @@ module.exports = {
                     
                     paramsCB(null, resultParameters)
 
+                    logger.info(error)
+
                 } else {
 
                     employeesModel.getEmployeeById(id, (error, rows) => {
@@ -160,6 +166,7 @@ module.exports = {
                 
                 if (setUpError) {
                     cb(setUpError)
+                    logger.info(setUpError)
                 } else {
 
                     ejs.renderFile(__dirname + '/../../views/employees/editEmployee.ejs',
@@ -168,9 +175,10 @@ module.exports = {
                         departmentId,
                         parameters
                     },
-                    function (err, html) {
-                        if (err) {
-                            cb(err)
+                    function (error, html) {
+                        if (error) {
+                            cb(error)
+                            logger.error(error)
                         } else {
                             cb(null, html)
                         }
@@ -181,6 +189,7 @@ module.exports = {
 
         } catch(error) {
             cb(new Error('Internal server Error'))
+            logger.error(error)
         }
     },
 
@@ -197,6 +206,8 @@ module.exports = {
                 emitEmployeeFailedValidation(error.details[0].message)
 
                 cb(null, new Error(`${error}`));
+
+                logger.error(error)
                 
             } else {
             
@@ -208,11 +219,13 @@ module.exports = {
                             // if validation failed
                             cb(null, new Error(`Employee's email "${value.email} is used"`))
                             emitEmployeeFailedValidation('Add employee: email is used')
+                            logger.info('Add employee: email is used')
                         } else {
                             // if validation pass
                             employeesModel.addEmployee(value, (error) => {
                                 if (error) {
                                     cb(error)
+                                    logger.error(error)
                                 } else {
                                     cb(null)
                                 }
@@ -224,6 +237,7 @@ module.exports = {
             }
         } catch(error) {
             cb(new Error('Internal server Error'))
+            logger.error(error)
         }
     },
 
@@ -235,10 +249,11 @@ module.exports = {
 
             if (error) {
 
-                cb(null, new Error(`${error}`))
                 emitEmployeeFailedValidation(error.details[0].message)
+                logger.info(error)
+                return cb(null, new Error(`${error}`))
 
-            } else {
+            }  else {
 
                 employeesModel.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
                     if (isExistEmailError) {
@@ -246,13 +261,16 @@ module.exports = {
                     } else {
                         if (isExist) {
                             // if validation failed
+                           
                             cb(null, new Error(`Employee's email "${value.email} is used"`))
                             emitEmployeeFailedValidation('Edit employee: email is used')
+                            logger.info('Edit employee: email is used')
                         } else {
                             // if validation pass
                             employeesModel.editEmployee(employeeId, value, (error) => {
                                 if (error) {
                                     cb(error)
+                                    logger.error('editEmployee controller', error)
                                 } else {
                                     cb(null)
                                 }
@@ -265,6 +283,7 @@ module.exports = {
             
         } catch(error) {
             cb(new Error('Internal server Error'))
+            logger.error('editEmployee controller (catch)', error)
         }
 
     },
@@ -276,6 +295,7 @@ module.exports = {
             employeesModel.deleteEmployee(employeeId, (error) => {
                 if (error) {
                     cb(error)
+                    logger.error(error)
                 } else {
                     cb(null)
                 }

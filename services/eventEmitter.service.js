@@ -16,6 +16,17 @@ const client = new Client({
 
 client.connect()
 
+function departmentToSQL_DTO (values) {
+    // todo from js object to sql query values
+
+    values
+} 
+
+function emoployeeToSQL_DTO (values) {
+    values
+} 
+
+
 const events = {
 
     DEPARTMENT_VALIDATION_FAIL: 'DEPARTMENT_VALIDATION_FAIL',
@@ -48,14 +59,11 @@ module.exports = {
         )
     },
 
-    emitEmployeeFailedValidation: () => {
+    emitEmployeeFailedValidation: (error) => {
         myEmitter.emit(
             events.EMPLOYEE_VALIDATION_FAIL,
             error
         )
     }
-
-    // todo module is a group of functions that emits 
-    //   specific events to myEmitter
 
 }

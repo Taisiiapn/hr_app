@@ -1,3 +1,4 @@
+const logger = require('../../config/logger');
 const controller = require('./department.controller')
 
 
@@ -8,7 +9,8 @@ module.exports = {
 
         controller.renderDepartments((error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.end(html)
             }
@@ -30,7 +32,8 @@ module.exports = {
 
         controller.renderCreateDepartment(parameters, (error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(html)
@@ -46,7 +49,8 @@ module.exports = {
 
         controller.renderEditDepartment(departmentId, query, (error, html) => {
             if (error) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
+                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error(error)
             } else {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(html)
@@ -62,6 +66,7 @@ module.exports = {
             if (error) {
                 res.writeHead(500, { 'Content-Type': 'text/plain'});
                 res.end(error.message)
+                logger.error(error)
             } else {
                 res.writeHead(301, { 'Location':  '/departments' });
                 res.end();
@@ -75,8 +80,9 @@ module.exports = {
 
             controller.addDepartment(body, (error, validationError) => {
                 if (error) {
-                    res.writeHead(500, { 'Content-Type': 'text/plain' });
-                    return res.end(error.message);
+                    res.writeHead(500, { 'Content-Type': 'text/plain' }); 
+                    res.end(error.message);
+                    return logger.error(error)
                 } 
                 if (validationError) {
                     
@@ -102,7 +108,8 @@ module.exports = {
             controller.editDepartment(departmentId, body, (error, validationError) => {
                 if (error) {
                     res.writeHead(500, { 'Content-Type': 'text/plain'});
-                    return res.end(error.message)
+                    res.end(error.message)
+                    return logger.error(error);
                 }
 
                 if (validationError) {

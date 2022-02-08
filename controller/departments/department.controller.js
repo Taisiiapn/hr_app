@@ -1,8 +1,8 @@
 const ejs = require('ejs')
 const Joi = require('joi')
 const logger = require('../../config/logger')
-const departmentsModel = require('../../model/departments.model')
-const { emitDepartmentFailedValidation } = require('../../model/eventEmitter.model')
+const departmentsModel = require('../../services/departments.service')
+const { emitDepartmentFailedValidation } = require('../../services/eventEmitter.service')
 
 const addDepartmentSchema = Joi.object({
     name: Joi.string()
@@ -28,12 +28,12 @@ module.exports = {
         try {
             departmentsModel.getAllDepartments((error, departments) => {
                 if (error) {
-                    cb(error)
+                    return cb(error)
                 } else {
                     const mutatedDepartments = departments.map(department => {
 
                         return {
-                            ...department,
+                            ...department.dataValues,
                             addLink: '/departments/create',
                             updateLink: `/departments/${department.id}/update`,
                             showLink: `/departments/${department.id}`,
@@ -43,12 +43,12 @@ module.exports = {
 
                     ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
                         {data: mutatedDepartments}, 
-                        function (err, html) {
-                            if (err) {
-                                cb(err)
-                                console.log('err renderDepartments', err);
+                        function (error, html) {
+                            if (error) {
+                                logger.error('err renderDepartments', error)
+                                return cb(error)
                             } else {
-                                cb( null, html)
+                                return cb( null, html)
                             }
                         }
                     )
@@ -56,7 +56,7 @@ module.exports = {
             })
         } catch(error) {
             logger.error(error)
-            cb(new Error('Internal server Error'))
+            return cb(new Error('Internal server Error'))
         }
         
     },
@@ -66,9 +66,10 @@ module.exports = {
         try {
             ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
                     {parameters},
-                    function (err, html) {
-                        if (err) {
-                            cb(err)
+                    function (error, html) {
+                        if (error) {
+                            cb(error)
+                            logger.error(error)
                         } else {
                             cb(null, html)
                         }
@@ -97,11 +98,16 @@ module.exports = {
                     
                     paramsCB(null, resultParameters)
 
+                    logger.info(error)
+
                 } else {
 
                     departmentsModel.getDepartmentById(id, (error, rows) => {
                         if (error) {
+
                             paramsCB(error)
+                            logger.info(error)
+
                         } else {
                             const resultValues = {
                                 name: rows[0]['name']
@@ -124,10 +130,10 @@ module.exports = {
                         id: departmentId,
                         parameters
                     },
-                    function (err, html) {
-                        if (err) {
-                            cb(err)
-                            console.log('err renderEditDepartment', err);
+                    function (error, html) {
+                        if (error) {
+                            cb(error)
+                            logger.error('err renderEditDepartment', error);
                         } else {
                             cb(null, html)
                         }
@@ -155,6 +161,7 @@ module.exports = {
             if (error) {
 
                 cb(null, new Error(`${error}`))
+                logger.info(error)
                 emitDepartmentFailedValidation(error.details[0].message)
             
             } else {
@@ -167,12 +174,14 @@ module.exports = {
                         if (isExists) {
                             // if validation failed
                             cb(null, new Error(`Department name "${value.name}" is used`))
+                            logger.info(`Department name "${value.name}" is used`)
                             emitDepartmentFailedValidation('Add department: name is used')
                         } else {
                             // if validation pass
                             departmentsModel.addDepartment(value, (error) => {
                                 if (error) {
                                     cb(error)
+                                    logger.error(error)
                                 } else {
                                     cb(null)
                                 }
@@ -196,6 +205,7 @@ module.exports = {
             if (error) {
 
                 cb(null, new Error(`${error}`))
+                logger.info(error.details[0].message)
                 emitDepartmentFailedValidation(error.details[0].message)
             
             } else {
@@ -207,12 +217,14 @@ module.exports = {
                         if (isExists) {
                             // if validation failed
                             cb(null, new Error(`Department name "${value.name}" is used`))
+                            logger.info(`Department name "${value.name}" is used`)
                             emitDepartmentFailedValidation('Edit department: name is used')
                         } else {
                             // if validation pass
                             departmentsModel.editDepartment(departmentId, value, (error) => {
                                 if (error) {
                                     cb(error)
+                                    logger.info(error)
                                 } else {
                                     cb(null)
                                 }
@@ -236,6 +248,7 @@ module.exports = {
             departmentsModel.deleteDepartment(departmentId, (error) => {
                 if (error) {
                     cb(error)
+                    logger.error(error)
                 } else {
                     cb(null)
                 }

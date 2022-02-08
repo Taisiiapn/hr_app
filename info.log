@@ -92,3 +92,520 @@
 {"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T12:18:03.306Z"}
 {"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T12:18:52.754Z"}
 {"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T12:19:53.560Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T13:41:09.284Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T14:01:51.284Z"}
+{"level":"info","message":"ValidationError: \"salary\" must be a number","timestamp":"2022-02-02T14:02:19.759Z"}
+{"level":"info","message":"ValidationError: \"salary\" must be a number","timestamp":"2022-02-02T14:02:46.165Z"}
+{"_original":{"name":"??????"},"details":[{"context":{"key":"name","label":"name","value":"??????"},"message":"\"name\" must only contain alpha-numeric characters","path":["name"],"type":"string.alphanum"}],"level":"info","timestamp":"2022-02-02T14:03:04.056Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-02T15:17:38.390Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T07:50:14.968Z"}
+{"level":"info","message":"Department name \"test333\" is used","timestamp":"2022-02-03T07:51:00.788Z"}
+{"level":"info","message":"Department name \"test333\" is used","timestamp":"2022-02-03T07:51:00.805Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T07:55:25.862Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T07:58:26.245Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T08:01:36.691Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T08:01:51.587Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T08:05:44.964Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T08:08:22.977Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T08:09:27.768Z"}
+{"level":"info","message":"Add employee: email is used","timestamp":"2022-02-03T08:09:33.920Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T12:40:52.448Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T12:46:22.697Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T13:43:08.075Z"}
+{"level":"error","message":"Невозможно выполнить подключение к БД:  password authentication failed for user \"taisiia.pomazan\"","name":"SequelizeConnectionError","original":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"parent":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"stack":"SequelizeConnectionError: password authentication failed for user \"taisiia.pomazan\"\n    at Client.connection2.connect [as _connectionCallback] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/connection-manager.js:142:24)\n    at Client._handleErrorWhileConnecting (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:305:19)\n    at Client._handleErrorMessage (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:325:19)\n    at Connection.emit (events.js:198:13)\n    at parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/connection.js:114:12)\n    at Parser.parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/parser.js:40:17)\n    at Socket.stream.on (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/index.js:11:42)\n    at Socket.emit (events.js:198:13)\n    at addChunk (_stream_readable.js:288:12)\n    at readableAddChunk (_stream_readable.js:269:11)","timestamp":"2022-02-03T13:43:08.084Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T14:21:04.082Z"}
+{"level":"error","message":"Невозможно выполнить подключение к БД:  password authentication failed for user \"taisiia.pomazan\"","name":"SequelizeConnectionError","original":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"parent":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"stack":"SequelizeConnectionError: password authentication failed for user \"taisiia.pomazan\"\n    at Client.connection2.connect [as _connectionCallback] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/connection-manager.js:142:24)\n    at Client._handleErrorWhileConnecting (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:305:19)\n    at Client._handleErrorMessage (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:325:19)\n    at Connection.emit (events.js:198:13)\n    at parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/connection.js:114:12)\n    at Parser.parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/parser.js:40:17)\n    at Socket.stream.on (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/index.js:11:42)\n    at Socket.emit (events.js:198:13)\n    at addChunk (_stream_readable.js:288:12)\n    at readableAddChunk (_stream_readable.js:269:11)","timestamp":"2022-02-03T14:21:04.091Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T14:22:02.063Z"}
+{"level":"error","message":"Невозможно выполнить подключение к БД:  password authentication failed for user \"taisiia.pomazan\"","name":"SequelizeConnectionError","original":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"parent":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"stack":"SequelizeConnectionError: password authentication failed for user \"taisiia.pomazan\"\n    at Client.connection2.connect [as _connectionCallback] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/connection-manager.js:142:24)\n    at Client._handleErrorWhileConnecting (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:305:19)\n    at Client._handleErrorMessage (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:325:19)\n    at Connection.emit (events.js:198:13)\n    at parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/connection.js:114:12)\n    at Parser.parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/parser.js:40:17)\n    at Socket.stream.on (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/index.js:11:42)\n    at Socket.emit (events.js:198:13)\n    at addChunk (_stream_readable.js:288:12)\n    at readableAddChunk (_stream_readable.js:269:11)","timestamp":"2022-02-03T14:22:02.071Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T14:34:55.125Z"}
+{"level":"error","message":"Невозможно выполнить подключение к БД:  password authentication failed for user \"taisiia.pomazan\"","name":"SequelizeConnectionError","original":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"parent":{"code":"28P01","file":"auth.c","length":111,"line":"330","name":"error","routine":"auth_failed","severity":"FATAL"},"stack":"SequelizeConnectionError: password authentication failed for user \"taisiia.pomazan\"\n    at Client.connection2.connect [as _connectionCallback] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/connection-manager.js:142:24)\n    at Client._handleErrorWhileConnecting (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:305:19)\n    at Client._handleErrorMessage (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/client.js:325:19)\n    at Connection.emit (events.js:198:13)\n    at parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg/lib/connection.js:114:12)\n    at Parser.parse (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/parser.js:40:17)\n    at Socket.stream.on (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/pg-protocol/dist/index.js:11:42)\n    at Socket.emit (events.js:198:13)\n    at addChunk (_stream_readable.js:288:12)\n    at readableAddChunk (_stream_readable.js:269:11)","timestamp":"2022-02-03T14:35:46.618Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T15:53:15.609Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-03T15:53:15.693Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-03T15:53:59.322Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-03T15:53:59.356Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T09:20:57.933Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T09:20:57.957Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T09:51:34.668Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T09:51:34.704Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:08.310Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:08.328Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:08.332Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:09.384Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:09.386Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:09.388Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:14.402Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:14.405Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:14.407Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:44.444Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:44.450Z"}
+{"level":"error","timestamp":"2022-02-04T09:52:44.453Z"}
+{"level":"error","timestamp":"2022-02-04T09:53:44.477Z"}
+{"level":"error","timestamp":"2022-02-04T09:53:44.479Z"}
+{"level":"error","timestamp":"2022-02-04T09:53:44.482Z"}
+{"level":"error","timestamp":"2022-02-04T09:58:44.500Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T10:18:42.095Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T10:18:42.129Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:46.314Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:46.324Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:46.332Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:47.680Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:47.684Z"}
+{"level":"error","timestamp":"2022-02-04T10:18:47.687Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T10:21:52.786Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T10:21:52.825Z"}
+{"level":"error","timestamp":"2022-02-04T10:22:42.042Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T10:49:32.293Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T10:49:32.345Z"}
+{"level":"error","timestamp":"2022-02-04T10:50:43.011Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T10:53:30.520Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T10:53:30.546Z"}
+{"level":"error","timestamp":"2022-02-04T10:54:53.203Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T10:57:54.376Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T10:57:54.418Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:03:50.158Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:03:50.194Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:04:49.485Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:04:49.512Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:09:49.947Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:09:49.974Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:14:36.813Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:14:36.841Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:15:20.468Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:15:20.494Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:19:13.793Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:19:13.822Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:19:21.264Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:19:21.289Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:19:46.960Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:19:46.986Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:33:23.816Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:33:23.842Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:38:14.124Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:38:14.155Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:39:28.172Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:39:28.201Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:39:58.123Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:39:58.155Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T11:57:30.506Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T11:57:30.538Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T12:42:08.120Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T12:42:08.148Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T12:42:43.719Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T12:42:51.669Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T12:45:24.974Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T12:45:26.929Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T12:50:28.931Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T12:50:35.851Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T12:53:18.728Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T12:53:20.598Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T13:46:21.822Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T13:46:21.853Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T13:49:59.252Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T13:50:00.710Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T13:52:54.188Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T13:52:54.215Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T13:53:28.191Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T13:53:28.220Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T13:54:06.899Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T13:54:06.924Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T14:09:37.200Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T14:09:38.723Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T14:09:57.703Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T14:09:57.762Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T14:26:53.309Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T14:26:53.351Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T14:28:05.155Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T14:28:05.183Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T15:44:11.425Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T15:44:11.453Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T15:47:27.020Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T15:47:27.046Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T15:50:41.918Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T15:50:41.949Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:02:32.568Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:02:32.608Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:03:24.533Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:03:24.564Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:05:25.895Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:05:25.922Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:06:12.361Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:06:13.417Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:25:13.282Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:25:13.334Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:30:00.399Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:30:00.436Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:36:31.344Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:36:31.370Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:38:46.339Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:38:46.382Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:38:58.327Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:38:58.353Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:42:01.060Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:42:01.088Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:43:43.254Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:43:43.296Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-04T16:45:13.706Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-04T16:45:13.735Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T08:54:57.796Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T08:54:57.839Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T08:57:48.359Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T08:57:48.384Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:05:53.856Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:05:53.883Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:18:37.594Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:18:37.632Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:20:56.508Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:20:56.549Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:26:07.123Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:26:07.152Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:34:45.028Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:34:45.057Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:37:52.106Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:37:52.130Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:41:21.183Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:41:21.209Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T09:47:39.424Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T09:47:39.451Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:29:06.280Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:29:06.309Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:33:18.145Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:33:18.184Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:39:43.747Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:39:43.779Z"}
+{"level":"error","timestamp":"2022-02-07T10:39:51.361Z"}
+{"level":"error","timestamp":"2022-02-07T10:41:53.423Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:47:12.373Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:47:12.397Z"}
+{"level":"error","timestamp":"2022-02-07T10:47:25.602Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:55:52.707Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:55:52.730Z"}
+{"level":"error","timestamp":"2022-02-07T10:56:01.845Z"}
+{"level":"error","timestamp":"2022-02-07T10:56:14.456Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T10:56:27.727Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T10:56:27.751Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:02:02.158Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:02:02.199Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:15:58.640Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:15:58.666Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:51:52.101Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:51:52.127Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:53:28.196Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:53:28.219Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:53:55.485Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:53:55.511Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:56:29.174Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:56:29.198Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T11:58:21.110Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T11:58:21.138Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T12:00:00.423Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T12:00:00.446Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T12:00:36.315Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T12:00:36.354Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T12:03:29.729Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T12:03:29.755Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T12:03:42.842Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T12:03:42.865Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T13:24:25.669Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T13:24:25.694Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T15:22:35.307Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T15:22:35.331Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T15:24:37.806Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T15:24:37.831Z"}
+{"level":"info","message":"Department name \"test33\" is used","timestamp":"2022-02-07T15:25:00.234Z"}
+{"level":"info","message":"Department name \"test33\" is used","timestamp":"2022-02-07T15:25:00.238Z"}
+{"level":"info","message":"Department name \"test333\" is used","timestamp":"2022-02-07T15:25:03.631Z"}
+{"level":"info","message":"Department name \"test333\" is used","timestamp":"2022-02-07T15:25:03.635Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:22:58.414Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:22:58.439Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:24.147Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:24.147Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:24.154Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:27.830Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:27.830Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:27.830Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:40.262Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:40.262Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:40.266Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:41.585Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:41.585Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:41.588Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:44.315Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:44.315Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:44.316Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:45.104Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:45.104Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:45.110Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:45.583Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:45.583Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:45.586Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:46.160Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:46.160Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:46.162Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:46.663Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:46.663Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:46.665Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:47.231Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:47.231Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:47.233Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:47.817Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:47.817Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:47.820Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:48.385Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:48.385Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:48.387Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:48.999Z"}
+{"level":"error","timestamp":"2022-02-07T16:23:48.999Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:23:49.002Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:24:52.572Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:24:52.597Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:25:02.103Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:25:02.129Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:07.564Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:07.564Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:25:07.568Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:08.706Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:08.706Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:25:08.707Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:09.265Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:09.265Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:25:09.268Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:09.679Z"}
+{"level":"error","timestamp":"2022-02-07T16:25:09.679Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:25:09.681Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:26:20.627Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:26:20.651Z"}
+{"level":"error","timestamp":"2022-02-07T16:26:25.224Z"}
+{"level":"error","timestamp":"2022-02-07T16:26:25.224Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:26:25.226Z"}
+{"level":"error","timestamp":"2022-02-07T16:26:26.169Z"}
+{"level":"error","timestamp":"2022-02-07T16:26:26.169Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"parameters":{},"parent":{"code":"SQLITE_ERROR","errno":1,"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'"},"sql":"DELETE FROM `employee` WHERE `departmentid` = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","timestamp":"2022-02-07T16:26:26.171Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:29:55.770Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:29:55.795Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:30:48.045Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:30:48.069Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:53.267Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:53.267Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:30:53.269Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.054Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.054Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:30:54.055Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.530Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.530Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:30:54.532Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.996Z"}
+{"level":"error","timestamp":"2022-02-07T16:30:54.996Z"}
+{"fields":null,"index":"fk_departmentid","level":"error","name":"SequelizeForeignKeyConstraintError","original":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"parameters":{},"parent":{"code":"23503","constraint":"fk_departmentid","detail":"Key (id)=(108ae7c0-51dc-4be1-a556-480c3e7e6d67) is still referenced from table \"employee\".","file":"ri_triggers.c","length":304,"line":"2476","name":"error","routine":"ri_ReportViolation","schema":"public","severity":"ERROR","sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"employee"},"sql":"DELETE FROM \"department\" WHERE \"id\" = '108ae7c0-51dc-4be1-a556-480c3e7e6d67'","table":"department","timestamp":"2022-02-07T16:30:54.998Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:32:50.485Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:32:50.509Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:47:19.762Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:47:19.784Z"}
+{"level":"info","message":"Department name \"Helli\" is used","timestamp":"2022-02-07T16:47:37.176Z"}
+{"level":"info","message":"Department name \"Helli\" is used","timestamp":"2022-02-07T16:47:39.264Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:52:23.768Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:52:23.793Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:52:29.905Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:52:29.929Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T16:53:06.412Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T16:53:06.440Z"}
+{"level":"info","message":"Department name \"Hellii\" is used","timestamp":"2022-02-07T16:53:16.142Z"}
+{"level":"info","message":"Department name \"Hellii\" is used","timestamp":"2022-02-07T16:53:16.146Z"}
+{"level":"info","message":"Department name \"Helli\" is used","timestamp":"2022-02-07T16:53:18.705Z"}
+{"level":"info","message":"Department name \"Helli\" is used","timestamp":"2022-02-07T16:53:18.710Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:02:02.893Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:02:02.917Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:02:08.740Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:02:08.769Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:02:50.014Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:02:50.040Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:03:20.653Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:03:20.678Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:09:17.760Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:09:17.786Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:12:46.130Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:12:46.154Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:17:17.543Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:17:17.565Z"}
+{"level":"error","timestamp":"2022-02-07T17:17:33.866Z"}
+{"level":"error","timestamp":"2022-02-07T17:17:33.866Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["f30aff6d-f9f3-44ae-8d73-e7f3d041f3ec","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"parameters":["f30aff6d-f9f3-44ae-8d73-e7f3d041f3ec","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["f30aff6d-f9f3-44ae-8d73-e7f3d041f3ec","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";","timestamp":"2022-02-07T17:17:33.867Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:22:53.659Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:22:53.684Z"}
+{"level":"error","timestamp":"2022-02-07T17:23:00.056Z"}
+{"level":"error","timestamp":"2022-02-07T17:23:00.056Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["35def464-c512-4279-8d03-3aa7de55a14a","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"parameters":["35def464-c512-4279-8d03-3aa7de55a14a","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["35def464-c512-4279-8d03-3aa7de55a14a","test","'8000'","a9d80e78-1b69-4862-bc69-016e7e6095e1","'29.06.1993'","tarddiszan@aimp.dss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";","timestamp":"2022-02-07T17:23:00.058Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-07T17:31:11.446Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-07T17:31:11.475Z"}
+{"level":"error","timestamp":"2022-02-07T17:31:44.828Z"}
+{"level":"error","timestamp":"2022-02-07T17:31:44.828Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["bd1ce2d3-fb8f-4386-b615-e36d7b11b6b5","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarn@aimp.shs"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"parameters":["bd1ce2d3-fb8f-4386-b615-e36d7b11b6b5","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarn@aimp.shs"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["bd1ce2d3-fb8f-4386-b615-e36d7b11b6b5","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarn@aimp.shs"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";","timestamp":"2022-02-07T17:31:44.830Z"}
+{"level":"error","timestamp":"2022-02-07T17:32:33.914Z"}
+{"level":"error","timestamp":"2022-02-07T17:32:33.914Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":109,"line":"256","name":"error","parameters":["test","'465457'","'20.02.2000'","tarszan@aimp.s","73517f62-3670-4905-928c-b686137a2a9e"],"routine":"pg_strtoint32","severity":"ERROR","sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5"},"parameters":["test","'465457'","'20.02.2000'","tarszan@aimp.s","73517f62-3670-4905-928c-b686137a2a9e"],"parent":{"code":"22P02","file":"numutils.c","length":109,"line":"256","name":"error","parameters":["test","'465457'","'20.02.2000'","tarszan@aimp.s","73517f62-3670-4905-928c-b686137a2a9e"],"routine":"pg_strtoint32","severity":"ERROR","sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5"},"sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5","timestamp":"2022-02-07T17:32:33.916Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T08:38:40.399Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T08:38:40.442Z"}
+{"level":"info","message":"Add employee: email is used","timestamp":"2022-02-08T08:39:25.290Z"}
+{"level":"error","timestamp":"2022-02-08T08:39:30.036Z"}
+{"level":"error","timestamp":"2022-02-08T08:39:30.036Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["71c9c8bb-172a-429c-9c4f-87320d0958c8","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarszan@aimp.ss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"parameters":["71c9c8bb-172a-429c-9c4f-87320d0958c8","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarszan@aimp.ss"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["71c9c8bb-172a-429c-9c4f-87320d0958c8","test","'8000'","7f17af83-2ecd-48a4-87e4-03bce6415039","'29.06.1993'","tarszan@aimp.ss"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";","timestamp":"2022-02-08T08:39:30.038Z"}
+{"level":"info","message":"Department name \"Hellirfrf\" is used","timestamp":"2022-02-08T08:39:52.313Z"}
+{"level":"info","message":"Department name \"Hellirfrf\" is used","timestamp":"2022-02-08T08:39:52.316Z"}
+{"level":"error","timestamp":"2022-02-08T08:40:02.668Z"}
+{"level":"error","timestamp":"2022-02-08T08:40:02.672Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T08:41:23.048Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T08:41:23.070Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T08:43:29.043Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T08:43:29.067Z"}
+{"level":"error","timestamp":"2022-02-08T08:45:57.876Z"}
+{"level":"error","timestamp":"2022-02-08T08:45:57.878Z"}
+{"level":"error","timestamp":"2022-02-08T08:47:33.308Z"}
+{"level":"error","timestamp":"2022-02-08T08:47:33.309Z"}
+{"level":"error","timestamp":"2022-02-08T08:55:55.316Z"}
+{"level":"error","timestamp":"2022-02-08T08:55:55.319Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T09:11:27.328Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T09:11:27.377Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T09:12:01.418Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T09:12:01.460Z"}
+{"level":"error","timestamp":"2022-02-08T09:12:28.031Z"}
+{"level":"error","timestamp":"2022-02-08T09:12:28.039Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T11:23:48.611Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T11:23:48.639Z"}
+{"level":"error","timestamp":"2022-02-08T11:25:34.206Z"}
+{"level":"error","timestamp":"2022-02-08T11:25:34.214Z"}
+{"level":"error","timestamp":"2022-02-08T11:27:23.583Z"}
+{"level":"error","timestamp":"2022-02-08T11:27:23.586Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T11:30:45.059Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T11:30:45.087Z"}
+{"level":"error","timestamp":"2022-02-08T11:31:04.756Z"}
+{"level":"error","timestamp":"2022-02-08T11:31:04.764Z"}
+{"level":"error","timestamp":"2022-02-08T11:31:43.095Z"}
+{"level":"error","timestamp":"2022-02-08T11:31:43.099Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T11:53:47.150Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T11:53:47.176Z"}
+{"level":"error","timestamp":"2022-02-08T11:54:36.629Z"}
+{"level":"error","timestamp":"2022-02-08T11:54:36.638Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T11:55:28.623Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T11:55:28.652Z"}
+{"level":"error","timestamp":"2022-02-08T11:58:25.919Z"}
+{"level":"error","timestamp":"2022-02-08T11:58:25.928Z"}
+{"level":"error","timestamp":"2022-02-08T11:58:55.790Z"}
+{"level":"error","timestamp":"2022-02-08T11:58:55.792Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T12:04:26.734Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T12:04:26.761Z"}
+{"level":"error","timestamp":"2022-02-08T12:04:51.517Z"}
+{"level":"error","timestamp":"2022-02-08T12:04:51.528Z"}
+{"level":"error","timestamp":"2022-02-08T12:05:14.609Z"}
+{"level":"error","timestamp":"2022-02-08T12:05:14.612Z"}
+{"level":"error","timestamp":"2022-02-08T12:10:19.869Z"}
+{"level":"error","timestamp":"2022-02-08T12:10:19.878Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T12:10:35.099Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T12:10:35.124Z"}
+{"level":"error","timestamp":"2022-02-08T12:13:04.840Z"}
+{"level":"error","timestamp":"2022-02-08T12:13:04.849Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T12:14:07.931Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T12:14:07.957Z"}
+{"level":"error","timestamp":"2022-02-08T12:15:16.272Z"}
+{"level":"error","timestamp":"2022-02-08T12:15:16.290Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T12:58:57.238Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T12:58:57.268Z"}
+{"level":"error","timestamp":"2022-02-08T12:59:56.012Z"}
+{"level":"error","timestamp":"2022-02-08T12:59:56.021Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:01:41.100Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:01:41.125Z"}
+{"level":"error","timestamp":"2022-02-08T13:02:12.217Z"}
+{"level":"error","timestamp":"2022-02-08T13:02:12.217Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["test","'8000'","'29.06.1993'","example@aimp.d","53c14e41-36ce-4bbd-9c54-012bce3f23f0"],"routine":"pg_strtoint32","severity":"ERROR","sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5"},"parameters":["test","'8000'","'29.06.1993'","example@aimp.d","53c14e41-36ce-4bbd-9c54-012bce3f23f0"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["test","'8000'","'29.06.1993'","example@aimp.d","53c14e41-36ce-4bbd-9c54-012bce3f23f0"],"routine":"pg_strtoint32","severity":"ERROR","sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5"},"sql":"UPDATE \"employee\" SET \"name\"=$1,\"salary\"=$2,\"birthday\"=$3,\"email\"=$4 WHERE \"id\" = $5","timestamp":"2022-02-08T13:02:12.225Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:14:11.535Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:14:11.564Z"}
+{"level":"error","timestamp":"2022-02-08T13:15:12.953Z"}
+{"level":"error","timestamp":"2022-02-08T13:15:12.953Z"}
+{"level":"error","name":"SequelizeDatabaseError","original":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["91376ef7-fe54-4457-8cdf-09a545cc9691","test","'8000'","a0a6541a-f3fb-4244-a1f8-35e783144a68","'29.06.1993'","example@aimp.d"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"parameters":["91376ef7-fe54-4457-8cdf-09a545cc9691","test","'8000'","a0a6541a-f3fb-4244-a1f8-35e783144a68","'29.06.1993'","example@aimp.d"],"parent":{"code":"22P02","file":"numutils.c","length":107,"line":"256","name":"error","parameters":["91376ef7-fe54-4457-8cdf-09a545cc9691","test","'8000'","a0a6541a-f3fb-4244-a1f8-35e783144a68","'29.06.1993'","example@aimp.d"],"routine":"pg_strtoint32","severity":"ERROR","sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";"},"sql":"INSERT INTO \"employee\" (\"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\") VALUES ($1,$2,$3,$4,$5,$6) RETURNING \"id\",\"name\",\"salary\",\"departmentid\",\"birthday\",\"email\";","timestamp":"2022-02-08T13:15:12.958Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:17:53.747Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:17:53.774Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:21:41.266Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:21:41.293Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:23:08.051Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:23:08.077Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:24:59.733Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:24:59.788Z"}
+{"level":"error","timestamp":"2022-02-08T13:25:16.744Z"}
+{"level":"error","timestamp":"2022-02-08T13:25:16.753Z"}
+{"level":"error","timestamp":"2022-02-08T13:27:50.836Z"}
+{"level":"error","timestamp":"2022-02-08T13:27:50.839Z"}
+{"_original":{"birthday":"30.02.2010","departmentid":"a0a6541a-f3fb-4244-a1f8-35e783144a68","email":"example@aimp.d","name":"Sara","salary":"62"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"30.02.2010"},"message":"Invalid date","path":["birthday"],"type":"any.custom"}],"level":"error","timestamp":"2022-02-08T13:29:40.734Z"}
+{"_original":{"birthday":"29.02.2010","departmentid":"a0a6541a-f3fb-4244-a1f8-35e783144a68","email":"example@aimp.d","name":"Sara","salary":"62"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"29.02.2010"},"message":"Invalid date","path":["birthday"],"type":"any.custom"}],"level":"error","timestamp":"2022-02-08T13:29:51.014Z"}
+{"_original":{"birthday":"21.02.2010","departmentid":"a0a6541a-f3fb-4244-a1f8-35e783144a68","email":"example@aimp.d","name":"Sara","salary":"62"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"21.02.2010"},"message":"Age required to be 18 - 75 years range","path":["birthday"],"type":"any.custom"}],"level":"error","timestamp":"2022-02-08T13:29:58.798Z"}
+{"_original":{"birthday":"21.02.2006","departmentid":"a0a6541a-f3fb-4244-a1f8-35e783144a68","email":"example@aimp.d","name":"Sara","salary":"62"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"21.02.2006"},"message":"Age required to be 18 - 75 years range","path":["birthday"],"type":"any.custom"}],"level":"error","timestamp":"2022-02-08T13:30:07.464Z"}
+{"level":"info","message":"Add employee: email is used","timestamp":"2022-02-08T13:30:39.415Z"}
+{"level":"error","timestamp":"2022-02-08T13:32:16.506Z"}
+{"level":"error","timestamp":"2022-02-08T13:32:16.507Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:34:16.518Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:34:16.546Z"}
+{"level":"error","timestamp":"2022-02-08T13:34:35.854Z"}
+{"level":"error","timestamp":"2022-02-08T13:34:35.865Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:35:03.336Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:35:03.359Z"}
+{"level":"error","timestamp":"2022-02-08T13:35:15.589Z"}
+{"level":"error","timestamp":"2022-02-08T13:35:15.599Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:35:40.427Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:35:40.452Z"}
+{"level":"error","timestamp":"2022-02-08T13:36:04.013Z"}
+{"level":"error","timestamp":"2022-02-08T13:36:04.021Z"}
+{"level":"error","timestamp":"2022-02-08T13:36:45.029Z"}
+{"level":"error","timestamp":"2022-02-08T13:36:45.033Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:42:27.006Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:42:27.036Z"}
+{"level":"error","timestamp":"2022-02-08T13:42:52.343Z"}
+{"level":"error","timestamp":"2022-02-08T13:42:52.352Z"}
+{"level":"error","timestamp":"2022-02-08T13:44:13.351Z"}
+{"level":"error","timestamp":"2022-02-08T13:44:13.352Z"}
+{"level":"error","timestamp":"2022-02-08T13:45:20.748Z"}
+{"level":"error","timestamp":"2022-02-08T13:45:20.749Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-08T13:50:26.087Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-08T13:50:26.102Z"}
+{"level":"info","message":"Add employee: email is used","timestamp":"2022-02-08T13:51:22.430Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:53:00.408Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:53:00.433Z"}
+{"level":"error","timestamp":"2022-02-08T13:53:35.083Z"}
+{"level":"error","timestamp":"2022-02-08T13:53:35.089Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T13:55:10.872Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T13:55:10.897Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:16:15.761Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:16:15.785Z"}
+{"level":"error","timestamp":"2022-02-08T14:16:36.693Z"}
+{"level":"error","timestamp":"2022-02-08T14:16:36.700Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:16:58.046Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:16:58.072Z"}
+{"level":"error","timestamp":"2022-02-08T14:17:07.886Z"}
+{"level":"error","timestamp":"2022-02-08T14:17:07.888Z"}
+{"level":"error","timestamp":"2022-02-08T14:18:28.518Z"}
+{"level":"error","timestamp":"2022-02-08T14:18:28.520Z"}
+{"level":"error","timestamp":"2022-02-08T14:19:08.827Z"}
+{"level":"error","timestamp":"2022-02-08T14:19:08.828Z"}
+{"level":"error","timestamp":"2022-02-08T14:20:46.623Z"}
+{"level":"error","timestamp":"2022-02-08T14:20:46.624Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:20:55.899Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:20:55.924Z"}
+{"level":"error","timestamp":"2022-02-08T14:21:01.254Z"}
+{"level":"error","message":"editEmployee controller (catch) Sequelize is not defined","stack":"ReferenceError: Sequelize is not defined\n    at Object.isTheSameEmailExistsWithDifferentId (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/services/employees.service.js:159:24)\n    at Object.editEmployee (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/controller/employees/employees.controller.js:258:32)\n    at Object.editEmployeeAction (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/controller/employees/employees.router.js:99:24)\n    at app.post (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/server.js:26:99)\n    at Layer.handle [as handle_request] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/layer.js:95:5)\n    at next (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/route.js:112:3)\n    at Layer.handle [as handle_request] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/layer.js:95:5)\n    at /home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/index.js:281:22\n    at param (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/index.js:360:14)","timestamp":"2022-02-08T14:21:01.255Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:22:24.343Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:22:24.375Z"}
+{"level":"error","timestamp":"2022-02-08T14:22:28.172Z"}
+{"level":"error","message":"isTheSameEmailExistsWithDifferentId operator does not exist: uuid !~~ unknown","name":"SequelizeDatabaseError","original":{"code":"42883","file":"parse_oper.c","hint":"No operator matches the given name and argument types. You might need to add explicit type casts.","length":202,"line":"722","name":"error","position":"168","routine":"op_error","severity":"ERROR","sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT LIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';"},"parameters":{},"parent":{"code":"42883","file":"parse_oper.c","hint":"No operator matches the given name and argument types. You might need to add explicit type casts.","length":202,"line":"722","name":"error","position":"168","routine":"op_error","severity":"ERROR","sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT LIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';"},"sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT LIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';","stack":"Error\n    at Query.run (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/query.js:50:25)\n    at retry (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/sequelize.js:313:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-08T14:22:28.173Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:24:43.590Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:24:43.627Z"}
+{"level":"error","timestamp":"2022-02-08T14:24:46.737Z"}
+{"level":"error","message":"isTheSameEmailExistsWithDifferentId operator does not exist: uuid !~~* unknown","name":"SequelizeDatabaseError","original":{"code":"42883","file":"parse_oper.c","hint":"No operator matches the given name and argument types. You might need to add explicit type casts.","length":203,"line":"722","name":"error","position":"168","routine":"op_error","severity":"ERROR","sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT ILIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';"},"parameters":{},"parent":{"code":"42883","file":"parse_oper.c","hint":"No operator matches the given name and argument types. You might need to add explicit type casts.","length":203,"line":"722","name":"error","position":"168","routine":"op_error","severity":"ERROR","sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT ILIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';"},"sql":"SELECT \"id\", \"name\", \"salary\", \"departmentid\", \"birthday\", \"email\" FROM \"employee\" AS \"Employee\" WHERE \"Employee\".\"email\" = 'tarddiszan@aimp.dolk' AND \"Employee\".\"id\" NOT ILIKE '53c14e41-36ce-4bbd-9c54-012bce3f23f0';","stack":"Error\n    at Query.run (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/dialects/postgres/query.js:50:25)\n    at retry (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/sequelize/dist/lib/sequelize.js:313:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-08T14:24:46.739Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:25:38.484Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:25:38.515Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:27:09.573Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:27:09.598Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:40:46.241Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:40:46.266Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:49:17.645Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:49:17.672Z"}
+{"_original":{"birthday":"29.06.1993","departmentid":"50cb9a3c-f163-42e2-bd29-10c2f94f4069","email":"tarddiszan@aimp.;jlg","name":"test","salary":"8000"},"details":[{"context":{"invalids":["tarddiszan@aimp.;jlg"],"key":"email","label":"email","value":"tarddiszan@aimp.;jlg"},"message":"\"email\" must be a valid email","path":["email"],"type":"string.email"}],"level":"error","timestamp":"2022-02-08T14:49:31.391Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:51:55.779Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:51:55.802Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-08T14:56:01.051Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-08T14:56:01.078Z"}
