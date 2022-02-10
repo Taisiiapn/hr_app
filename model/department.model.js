@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const Employee = require('./employee.model');
+const { Employee } = require('./employee.model');
 const postgres = require('../config/sequelize')
 const sequelize = new Sequelize(postgres.options)
 

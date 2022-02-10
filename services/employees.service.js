@@ -2,7 +2,7 @@ const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
 const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
-const Employee = require('../model/employee.model')
+const { Employee, employeeWithViewValuesDTO, employeeDTO } = require('../model/employee.model')
 const logger = require('../config/logger')
 
 const { port, host, user, password, database } = environment.db
@@ -19,7 +19,7 @@ client.connect()
 
 module.exports = {
 
-    getEmployeesByDepartmentId: (depId, cb) => {
+    getEmployeesWithViewValues: (depId, cb) => {
 
         Employee.findAll({
             where: {
@@ -27,7 +27,8 @@ module.exports = {
             }
         })
         .then(allEmployees => {
-            cb(null, allEmployees)
+            cb(null, allEmployees
+                .map(employeeInstance => employeeWithViewValuesDTO(depId, employeeInstance)))
         })
         .catch(error => {
             cb(new Error('internal server error'))
@@ -38,17 +39,14 @@ module.exports = {
 
     getEmployeeById: (id, cb) => {
 
-        Employee.findAll({
-            where: {
-                id: id
-            }
-        })
-        .then(allEmployees => {
+        Employee.findByPk(id)
+        .then(employeeInstance => {
 
-            if (allEmployees.length === 0) {
+            if (employeeInstance.length === 0) {
                 cb(new Error(`Employee with id - ${id}, nothing found!`))
             } else {
-                cb(null, allEmployees)
+                const resultEmployeeValues = employeeDTO(employeeInstance)
+                cb(null, resultEmployeeValues)
             }
         })
         .catch(error => {

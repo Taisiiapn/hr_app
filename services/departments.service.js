@@ -26,7 +26,12 @@ module.exports = {
             if (allDepartments.length === 0) {
                 cb(new Error(`Departments not found!`))
             } else {
-                cb(null, allDepartments.map(departmentInstance => departmentWithViewValuesDTO(departmentInstance)))
+                cb(null, allDepartments
+                    .map(
+                        departmentInstance => 
+                            departmentWithViewValuesDTO(departmentInstance)
+                    )
+                )
             }
             
         })

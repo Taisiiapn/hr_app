@@ -1,7 +1,7 @@
 const ejs = require('ejs')
 const Joi = require('joi');
 const logger = require('../../config/logger');
-const employeesModel = require('../../services/employees.service');
+const employeesService = require('../../services/employees.service');
 const { emitEmployeeFailedValidation } = require('../../services/eventEmitter.service');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
 
@@ -63,26 +63,26 @@ module.exports = {
 
         try {
 
-            employeesModel.getEmployeesByDepartmentId(departmentid, (error, employees) => {
+            employeesService.getEmployeesWithViewValues(departmentid, (error, employees) => {
                 if (error) {
                     cb(error)
                     logger.error(error)
                 } else {
 
-                    const mutatedEmployeesForEachDepartment = employees.map(employee => {
-                        return {
-                            name: employee.name,
-                            salary: employee.salary,
-                            birthday: employee.birthday,
-                            email: employee.email,
-                            id: employee.id,
-                            updateLink: `/departments/${employee.departmentid}/employees/${employee.id}/update`,
-                            deleteLink: `/departments/${employee.departmentid}/employees/${employee.id}/delete`
-                        }
-                    })
+                    // const mutatedEmployeesForEachDepartment = employees.map(employee => {
+                    //     return {
+                    //         name: employee.name,
+                    //         salary: employee.salary,
+                    //         birthday: employee.birthday,
+                    //         email: employee.email,
+                    //         id: employee.id,
+                    //         updateLink: `/departments/${employee.departmentid}/employees/${employee.id}/update`,
+                    //         deleteLink: `/departments/${employee.departmentid}/employees/${employee.id}/delete`
+                    //     }
+                    // })
 
                     ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
-                        {data: mutatedEmployeesForEachDepartment, departmentid}, 
+                        {data: employees, departmentid}, 
                         function (error, html) {
                             if (error) {
                                 cb(error)
@@ -145,17 +145,12 @@ module.exports = {
 
                 } else {
 
-                    employeesModel.getEmployeeById(id, (error, rows) => {
+                    employeesService.getEmployeeById(id, (error, employeeValues) => {
                         if (error) {
                             paramsCB(error)
+                            logger.info(error)
                         } else {
-                            const resultValues = {
-                                name: rows[0]['name'],
-                                salary: rows[0]['salary'],
-                                birthday: rows[0]['birthday'],
-                                email: rows[0]['email']
-                            }
-                            resultParameters['values'] = resultValues
+                            resultParameters['values'] = employeeValues
                             paramsCB(null, resultParameters)
                         }
                     })
@@ -211,7 +206,7 @@ module.exports = {
                 
             } else {
             
-                employeesModel.isTheSameEmailExists(value, (isExistEmailError, isExist) => {
+                employeesService.isTheSameEmailExists(value, (isExistEmailError, isExist) => {
                     if (isExistEmailError) {
                         cb(isExistEmailError)
                     } else {
@@ -222,7 +217,7 @@ module.exports = {
                             logger.info('Add employee: email is used')
                         } else {
                             // if validation pass
-                            employeesModel.addEmployee(value, (error) => {
+                            employeesService.addEmployee(value, (error) => {
                                 if (error) {
                                     cb(error)
                                     logger.error(error)
@@ -255,7 +250,7 @@ module.exports = {
 
             }  else {
 
-                employeesModel.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
+                employeesService.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
                     if (isExistEmailError) {
                         cb(isExistEmailError)
                     } else {
@@ -267,7 +262,7 @@ module.exports = {
                             logger.info('Edit employee: email is used')
                         } else {
                             // if validation pass
-                            employeesModel.editEmployee(employeeId, value, (error) => {
+                            employeesService.editEmployee(employeeId, value, (error) => {
                                 if (error) {
                                     cb(error)
                                     logger.error('editEmployee controller', error)
@@ -292,7 +287,7 @@ module.exports = {
 
         try {
 
-            employeesModel.deleteEmployee(employeeId, (error) => {
+            employeesService.deleteEmployee(employeeId, (error) => {
                 if (error) {
                     cb(error)
                     logger.error(error)
