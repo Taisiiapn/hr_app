@@ -11,7 +11,7 @@ const client = new Client({
     password: password,
     host: host,
     port: +port,
-    database: database
+    database: database 
 })
 
 client.connect()

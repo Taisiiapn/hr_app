@@ -99,8 +99,7 @@ module.exports = {
                 id: id
             }
         })
-        .then(allEmployees => {
-            console.log("All users editEmployee:", allEmployees)
+        .then(() => {
             cb(null)
         })
         .catch(error => {

@@ -261,7 +261,7 @@ module.exports = {
                     } else {
                         if (isExist) {
                             // if validation failed
-                           
+                            
                             cb(null, new Error(`Employee's email "${value.email} is used"`))
                             emitEmployeeFailedValidation('Edit employee: email is used')
                             logger.info('Edit employee: email is used')

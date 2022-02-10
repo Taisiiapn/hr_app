@@ -14,13 +14,7 @@ const postgres = {
     password,
     dialect: 'postgres',
     logging: false
-  },
-
-  client: null,
-
-  Department,
-
-  Employee
+  }
 
 }
 

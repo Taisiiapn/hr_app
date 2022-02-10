@@ -1,7 +1,7 @@
 const { Client } = require('pg')
 const logger = require('../config/logger')
 const environment = require('../config/environment')
-const Department = require('../model/department.model')
+const { Department, sequelize, departmentDTO, departmentWithViewValuesDTO } = require('../model/department.model')
 const Employee = require('../model/employee.model')
 
 const { port, host, user, password, database } = environment.db
@@ -18,7 +18,7 @@ client.connect()
 
 module.exports = {
 
-    getAllDepartments: (cb) => {
+    getAllDepartmentsWithViewValues: (cb) => {
 
         Department.findAll()
         .then(allDepartments => {
@@ -26,7 +26,7 @@ module.exports = {
             if (allDepartments.length === 0) {
                 cb(new Error(`Departments not found!`))
             } else {
-                cb(null, allDepartments)
+                cb(null, allDepartments.map(departmentInstance => departmentWithViewValuesDTO(departmentInstance)))
             }
             
         })
@@ -39,17 +39,14 @@ module.exports = {
 
     getDepartmentById: (id, cb) => {
 
-        Department.findAll({
-            where: {
-                id: id
-            }
-        })
-        .then(departments => {
+        Department.findByPk(id)
+        .then(departmentInstance => {
 
-            if (departments.length === 0) {
-                cb(new Error(`Department with id - ${id}, nothing found!`))
+            if (departmentInstance) {
+                const resultDepartmentValues = departmentDTO(departmentInstance)
+                cb(null, resultDepartmentValues)
             } else {
-                cb(null, departments)
+                cb(new Error(`Department with id - ${id}, nothing found!`))
             }
 
         })
@@ -62,7 +59,7 @@ module.exports = {
 
     getDepartmentByIdWithEmployees: (id, cb) => {
 
-        Department.findAll({
+        Department.findByPk({
             where: {
                 id: id
             },
@@ -87,7 +84,7 @@ module.exports = {
     },
 
     editDepartment: (departmentId, values, cb) => {
-
+        // todo get department instance by id and do bulk update
         const { name } = values
 
         Department.update({
@@ -124,29 +121,34 @@ module.exports = {
   
     },
 
-    deleteDepartment: (departmentId, cb) => {
+    deleteDepartment: async (departmentId, cb) => {
 
-        Employee.destroy({
-            where: {
-                departmentid: departmentId
-            }
-        })
-        .then(() => {
+        let t;
 
-            Department.destroy({
+        try { 
+            t = await sequelize.transaction()
+            
+            await Employee.destroy({
+                where: {
+                    departmentid: departmentId
+                }
+            }, {transaction: t})
+
+            await Department.destroy({
                 where: {
                     id: departmentId
                 }
-            })
-        })
-        .then(departments => {
-                cb(null, departments)
-            })
-        .catch(error => {
+            }, {transaction: t})
 
+            cb(null, departments)
+
+            await t.commit()
+
+        } catch (error) {
+            await t.rollback()
+            logger.error('deleteDepartment service', error)
             cb(new Error('internal server error'))
-            logger.error(error)
-        })
+        }
 
     },
 
