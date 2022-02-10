@@ -717,3 +717,13 @@
 {"level":"info","message":"Department name \"test\" is used","timestamp":"2022-02-10T13:32:28.453Z"}
 {"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-10T13:48:30.660Z"}
 {"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-10T13:48:30.686Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-10T14:25:31.331Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-10T14:25:31.360Z"}
+{"level":"info","message":"Department name \"test\" is used","timestamp":"2022-02-10T14:25:48.208Z"}
+{"level":"info","message":"Department name \"test\" is used","timestamp":"2022-02-10T14:27:59.659Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-10T14:32:01.137Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-10T14:32:01.163Z"}
+{"level":"info","message":"Department name \"test\" is used","timestamp":"2022-02-10T14:32:05.820Z"}
+{"level":"info","message":"Department name \"test\" is used","timestamp":"2022-02-10T14:35:47.632Z"}
+{"_original":{"birthday":"29.06.2006","departmentid":"00ecbcad-900f-49ae-ba24-fe9a3fb0a008","email":"tarddiszan@aimp","name":"test","salary":"8000"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"29.06.2006"},"message":"Age required to be 18 - 75 years range","path":["birthday"],"type":"any.custom"}],"level":"error","timestamp":"2022-02-10T14:37:48.766Z"}
+{"_original":{"birthday":"29.06.2000","departmentid":"00ecbcad-900f-49ae-ba24-fe9a3fb0a008","email":"tarddiszan@aimp","name":"test","salary":"8000"},"details":[{"context":{"invalids":["tarddiszan@aimp"],"key":"email","label":"email","value":"tarddiszan@aimp"},"message":"\"email\" must be a valid email","path":["email"],"type":"string.email"}],"level":"error","timestamp":"2022-02-10T14:38:00.177Z"}
