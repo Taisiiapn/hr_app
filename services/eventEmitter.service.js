@@ -44,7 +44,7 @@ myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, async (error) => {
     
 })
 
-myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, (error) => {
+myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, async (error) => {
 
     await sequelize.query(
         `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
