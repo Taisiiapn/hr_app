@@ -731,3 +731,8 @@
 {"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-10T15:37:59.756Z"}
 {"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-10T15:39:56.658Z"}
 {"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-10T15:39:56.705Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-15T17:31:21.757Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-15T17:31:21.789Z"}
+{"level":"info","message":"Department name \"dzvfdgrg\" is used","timestamp":"2022-02-15T17:31:25.929Z"}
+{"level":"info","message":"Department name \"necessary123\" is used","timestamp":"2022-02-15T17:31:34.675Z"}
+{"level":"info","message":"Department name \"necessary123\" is used","timestamp":"2022-02-15T17:31:34.693Z"}

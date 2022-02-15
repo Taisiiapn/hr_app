@@ -4,7 +4,7 @@ const {
     format
 } = require('winston')
 const { Pool } = require('pg')
-const environment = require('../config/environment')
+const environment = require('./environment')
 const { PostgresTransport } = require('winston-transport-pg')
 
 const { port, host, user, password, database } = environment.db
