@@ -19,7 +19,7 @@ client.connect()
 
 module.exports = {
 
-    getEmployeesWithViewValues: (depId, cb) => {
+    getEmployeesWithViewValues: (depId) => new Promise((resolve, reject) => {
 
         Employee.findAll({
             where: {
@@ -27,36 +27,36 @@ module.exports = {
             }
         })
         .then(allEmployees => {
-            cb(null, allEmployees
+            resolve(allEmployees
                 .map(employeeInstance => employeeWithViewValuesDTO(depId, employeeInstance)))
         })
         .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
+            reject(new Error('internal server error'))
+            logger.error('getEmployeesWithViewValues service', error)
         })
 
-    },
+    }),
 
-    getEmployeeById: (id, cb) => {
+    getEmployeeById: (id) => new Promise((resolve, reject) => {
 
         Employee.findByPk(id)
         .then(employeeInstance => {
 
             if (employeeInstance.length === 0) {
-                cb(new Error(`Employee with id - ${id}, nothing found!`))
+                reject(new Error(`Employee with id - ${id}, nothing found!`))
             } else {
                 const resultEmployeeValues = employeeDTO(employeeInstance)
-                cb(null, resultEmployeeValues)
+                resolve(resultEmployeeValues)
             }
         })
         .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
+            reject(error)
+            logger.error('getEmployeeById service', error)
         })
 
-    },
+    }),
 
-    addEmployee: (values, cb) => {
+    addEmployee: (values) => new Promise((resolve, reject) => {
 
         const { name, salary, departmentid, birthday, email } = values
 
@@ -70,17 +70,15 @@ module.exports = {
             birthday: birthdayParsed,
             email: email
         })
-        .then(() => {
-            cb(null)
-        })
+        .then(() => resolve())
         .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
+            reject(error)
+            logger.error('addEmployee service', error)
         })
        
-    },
+    }),
 
-    editEmployee: (id, values, cb) => {
+    editEmployee: (id, values) => new Promise((resolve, reject) => {
 
         const { name, salary, birthday, email } = values
         
@@ -97,77 +95,63 @@ module.exports = {
                 id: id
             }
         })
-        .then(() => {
-            cb(null)
-        })
+        .then(() => resolve())
         .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error('editEmployee Service', error)
+            reject(error)
+            logger.error('editEmployee service', error)
         })
         
-    },
+    }),
 
-    deleteEmployee: (employeeId, cb) => {
+    deleteEmployee: (employeeId) => new Promise((resolve, reject) => {
 
         Employee.destroy({
             where: {
                 id: employeeId
             }
         })
-        .then(() => {
-            cb(null)
-        })
+        .then(() => resolve())
         .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
+            reject(error)
+            logger.error('deleteEmployee service', error)
         })
         
-    },
+    }),
 
-    isTheSameEmailExists: (values, cb) => {
+    isTheSameEmailExists: (values) => new Promise((resolve, reject) => {
 
         const { email } = values
 
-        Employee.findAll({
+        Employee.count({
             where: {
                 email: email
-            }
+            },
+            distinct: true
         })
-        .then(allEmployees => {
-            if(allEmployees.length !== 0) {
-                cb(null, true)
-            } else {
-                cb(null, false)
-            }
-        })
+        .then(totalResult => resolve(totalResult))
         .catch(error => {
-            cb(new Error('internal server error'))
+            reject(new Error('internal server error'))
             logger.error(error)
         })
 
-    },
+    }),
 
-    isTheSameEmailExistsWithDifferentId: (employeeId, values, cb) => {
+    isTheSameEmailExistsWithDifferentId: (employeeId, values) => new Promise((resolve, reject) => {
 
         const { email } = values
 
-        Employee.findAll({
+        Employee.count({
             where: {
                 email: email,
                 id: { [Sequelize.Op.not]: employeeId }
-            }
+            },
+            distinct: true
         })
-        .then(allEmployees => {
-            if(allEmployees.length !== 0) {
-                cb(null, true)
-            } else {
-                cb(null, false)
-            }
-        })
+        .then(totalResult => resolve(totalResult))
         .catch(error => {
-            cb(new Error('internal server error'))
+            reject(error)
             logger.error('isTheSameEmailExistsWithDifferentId', error)
         })
-    }
+    })
 
 }

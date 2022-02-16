@@ -2,7 +2,7 @@ const { Client } = require('pg')
 const logger = require('../config/logger')
 const environment = require('../config/environment')
 const { Department, sequelize, departmentDTO, departmentWithViewValuesDTO } = require('../model/department.model')
-const Employee = require('../model/employee.model')
+const { Employee } = require('../model/employee.model')
 
 const { port, host, user, password, database } = environment.db
 
@@ -18,77 +18,77 @@ client.connect()
 
 module.exports = {
 
-    getAllDepartmentsWithViewValues: (cb) => {
+    getAllDepartmentsWithViewValues: () => new Promise((resolve, reject) => {
 
         Department.findAll()
-        .then(allDepartments => {
+            .then(allDepartments => {
 
-            if (allDepartments.length === 0) {
-                cb(new Error(`Departments not found!`))
-            } else {
-                cb(null, allDepartments
-                    .map(
-                        departmentInstance => 
-                            departmentWithViewValuesDTO(departmentInstance)
+                if (allDepartments.length === 0) {
+                    reject(new Error(`Departments not found!`))
+                } else {
+                    resolve(allDepartments
+                        .map(
+                            departmentInstance => 
+                                departmentWithViewValuesDTO(departmentInstance)
+                        )
                     )
-                )
-            }
-            
-        })
-        .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
-        })
+                }
+                
+            })
+            .catch(error => {
+                logger.error(error)
+                reject(error)
+            })
         
-    },
+    }),
 
-    getDepartmentById: (id, cb) => {
+    getDepartmentById: (id) => new Promise((resolve, reject) => {
 
         Department.findByPk(id)
-        .then(departmentInstance => {
+            .then(departmentInstance => {
 
-            if (departmentInstance) {
-                const resultDepartmentValues = departmentDTO(departmentInstance)
-                cb(null, resultDepartmentValues)
-            } else {
-                cb(new Error(`Department with id - ${id}, nothing found!`))
-            }
-
-        })
-        .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
-        })
-
-    },
-
-    getDepartmentByIdWithEmployees: (id, cb) => {
-
-        Department.findByPk({
-            where: {
-                id: id
-            },
-            include: [
-                {
-                    model: Employee, as: id,
-                    where: {
-                        departmentid: id
-                    },
-                    required: false
+                if (departmentInstance) {
+                    const resultDepartmentValues = departmentDTO(departmentInstance)
+                    resolve(resultDepartmentValues)
+                } else {
+                    reject(new Error(`Department with id - ${id}, nothing found!`))
                 }
-            ]
-        })
-        .then(departments => {
-            cb(null, departments)
-        })
-        .catch(error => {
-            cb(error)
-            logger.error(error)
-        })
 
-    },
+            })
+            .catch(error => {
+                logger.error(error)
+                reject(error)
+            })
 
-    editDepartment: (departmentId, values, cb) => {
+    }),
+
+    // getDepartmentByIdWithEmployees: (id) => new Promise((resolve, reject) => {
+
+    //     Department.findByPk({
+    //         where: {
+    //             id: id
+    //         },
+    //         include: [
+    //             {
+    //                 model: Employee, as: id,
+    //                 where: {
+    //                     departmentid: id
+    //                 },
+    //                 required: false
+    //             }
+    //         ]
+    //     })
+    //         .then(departments => {
+    //             resolve(departments)
+    //         })
+    //         .catch(error => {
+    //             logger.error(error)
+    //             reject(error)
+    //         })
+
+    // }),
+
+    editDepartment: (departmentId, values) => new Promise((resolve, reject) => {
         // todo get department instance by id and do bulk update
         const { name } = values
 
@@ -99,34 +99,30 @@ module.exports = {
                 id: departmentId
             }
         })
-        .then(() => {
-            cb(null)
-        })
-        .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
-        })
+            .then(() => resolve())
+            .catch(error => {
+                logger.error(error)
+                reject(error)
+            })
         
-    },
+    }),
 
-    addDepartment: (values, cb) => {
+    addDepartment: (values) => new Promise((resolve, reject) => {
 
         const { name } = values
 
         Department.create({
             name: name
         })
-        .then(() => {
-            cb(null)
-        })
-        .catch(error => {
-            cb(new Error('internal server error'))
-            logger.error(error)
-        })
+            .then(() => resolve())
+            .catch(error => {
+                logger.error('addDepartment service', error)
+                reject(error)
+            })
   
-    },
+    }),
 
-    deleteDepartment: async (departmentId, cb) => {
+    deleteDepartment:  (departmentId) => new Promise(async(resolve, reject) => {
 
         let t;
 
@@ -145,40 +141,33 @@ module.exports = {
                 }
             }, {transaction: t})
 
-            cb(null, departments)
+            resolve(departments)
 
             await t.commit()
 
         } catch (error) {
             await t.rollback()
             logger.error('deleteDepartment service', error)
-            cb(new Error('internal server error'))
+            reject(error)
         }
 
-    },
+    }),
 
-    isTheSameDepartmentNameExists: (values, cb) => {
+    isTheSameDepartmentNameExists: (values) => new Promise((resolve, reject) => {
 
         const { name } = values
 
-        Department.findAll({
+        Department.count({
             where: {
                 name: name
-            }
+            },
+            distinct: true
         })
-        .then(allDepartments => {
-
-            if(allDepartments.length !== 0) {
-                cb(null, true)
-            } else {
-                cb(null, false)
-            }
-        })
+        .then(totalResult => resolve(totalResult))
         .catch(error => {
-            cb(new Error('internal server error'))
             logger.error(error)
+            reject(error)
         })
-
-    }
+    })
 
 }

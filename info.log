@@ -736,3 +736,452 @@
 {"level":"info","message":"Department name \"dzvfdgrg\" is used","timestamp":"2022-02-15T17:31:25.929Z"}
 {"level":"info","message":"Department name \"necessary123\" is used","timestamp":"2022-02-15T17:31:34.675Z"}
 {"level":"info","message":"Department name \"necessary123\" is used","timestamp":"2022-02-15T17:31:34.693Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:12:52.910Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:12:52.972Z"}
+{"level":"error","message":"renderEditDepartment Cannot read property 'then' of undefined","stack":"TypeError: Cannot read property 'then' of undefined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:93:21)\n    at new Promise (<anonymous>)\n    at setUpParameters (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:76:48)\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:104:9)\n    at new Promise (<anonymous>)\n    at Object.renderEditDepartment (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:74:52)\n    at Object.editDepartmentRoute (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.router.js:50:20)\n    at app.get (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/server.js:18:78)\n    at Layer.handle [as handle_request] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/layer.js:95:5)\n    at next (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/route.js:137:13)","timestamp":"2022-02-16T09:13:05.977Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:14:11.261Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:14:11.291Z"}
+{"level":"error","message":"renderEditDepartment Cannot read property 'then' of undefined","stack":"TypeError: Cannot read property 'then' of undefined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:93:21)\n    at new Promise (<anonymous>)\n    at setUpParameters (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:76:48)\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:104:9)\n    at new Promise (<anonymous>)\n    at Object.renderEditDepartment (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:74:52)\n    at Object.editDepartmentRoute (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.router.js:50:20)\n    at app.get (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/server.js:18:78)\n    at Layer.handle [as handle_request] (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/layer.js:95:5)\n    at next (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/node_modules/express/lib/router/route.js:137:13)","timestamp":"2022-02-16T09:14:11.650Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:14:14.857Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:14:14.888Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:14:19.164Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:14:19.186Z"}
+{"level":"info","timestamp":"2022-02-16T09:14:19.242Z"}
+{"level":"error","message":"renderEditDepartment","timestamp":"2022-02-16T09:14:19.243Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:14:57.939Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:14:57.969Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:15:14.525Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:15:14.560Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:15:18.346Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:15:18.380Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:15:22.493Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:15:22.533Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:18:53.672Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:18:53.709Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:18:58.310Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:18:58.339Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:19:12.683Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:19:12.712Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:19:17.677Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:19:17.709Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:19:22.902Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:19:22.932Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:19:25.895Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:19:25.925Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:19:32.474Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:19:32.508Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:20:24.211Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:20:24.242Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:20:39.057Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:20:39.088Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:20:44.997Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:20:45.027Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:22:54.748Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:22:54.779Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:23:01.781Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:23:01.819Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:23:02.859Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:23:02.892Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:23:04.345Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:23:04.377Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:23:08.103Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:23:08.135Z"}
+{"level":"info","message":"Department name \"necessary12\" is used","timestamp":"2022-02-16T09:24:18.342Z"}
+{"level":"info","message":"Department name \"necessary12\" is used","timestamp":"2022-02-16T09:24:18.348Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:24:55.075Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:24:55.107Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:04.033Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:04.066Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:12.212Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:12.245Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:24.815Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:24.852Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:29.525Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:29.555Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:46.850Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:46.879Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:54.421Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:54.451Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:25:59.361Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:25:59.390Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:27:12.389Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:27:12.418Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:27:29.801Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:27:29.829Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:27:42.735Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:27:42.767Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:27:45.971Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:27:46.002Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:28:57.361Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:28:57.396Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:01.459Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:01.492Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:03.360Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:03.397Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:06.834Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:06.863Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:17.429Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:17.458Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:18.452Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:18.482Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:27.609Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:27.639Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:38.550Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:38.582Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:48.533Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:48.562Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:29:51.497Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:29:51.530Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:01.175Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:01.205Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:03.453Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:03.481Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:09.971Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:09.998Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:17.959Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:17.991Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:22.317Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:22.346Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:30:26.179Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:30:26.207Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:34:50.914Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:34:50.947Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:34:53.263Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:34:53.293Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:34:56.446Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:34:56.477Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:34:58.585Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:34:58.620Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:35:01.966Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:35:01.994Z"}
+{"level":"info","message":"Department name \"YEEEEEES\" is used","timestamp":"2022-02-16T09:55:33.678Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:56:25.025Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:56:25.055Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:56:49.381Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:56:49.409Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:07.158Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:07.186Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:10.119Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:10.148Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:14.331Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:14.368Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:16.175Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:16.208Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:19.378Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:19.406Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:27.118Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:27.154Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:32.788Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:32.820Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:39.022Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:39.053Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:41.890Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:41.918Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:47.281Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:47.311Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:50.280Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:50.309Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:57:58.001Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:57:58.032Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:00.591Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:00.620Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:02.799Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:02.826Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:09.913Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:09.942Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:16.892Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:16.927Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:18.900Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:18.932Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:20.991Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:21.023Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:24.761Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:24.798Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:28.349Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:28.380Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:30.668Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:30.699Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:58:58.659Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:58:58.689Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:59:08.883Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:59:08.911Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:59:13.347Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:59:13.377Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:59:17.072Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:59:17.101Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:59:39.210Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:59:39.245Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T09:59:47.019Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T09:59:47.049Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:02:50.874Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:02:50.904Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:02:57.103Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:02:57.131Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:03:01.307Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:03:01.338Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:03:03.504Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:03:03.534Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:03:26.577Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:03:26.606Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:03:34.104Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:03:34.135Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:03.228Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:03.256Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:13.771Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:13.804Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:17.269Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:17.300Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:42.889Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:42.918Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:50.351Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:50.380Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:04:55.123Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:04:55.151Z"}
+{"level":"error","timestamp":"2022-02-16T10:04:59.882Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:05:24.803Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:05:24.833Z"}
+{"level":"error","timestamp":"2022-02-16T10:05:25.187Z"}
+{"level":"error","timestamp":"2022-02-16T10:07:25.291Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:08:05.885Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:08:05.916Z"}
+{"level":"error","timestamp":"2022-02-16T10:08:08.878Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:10:59.003Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:10:59.035Z"}
+{"level":"error","timestamp":"2022-02-16T10:11:44.635Z"}
+{"level":"error","timestamp":"2022-02-16T10:13:41.217Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:37:48.988Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:37:49.021Z"}
+{"level":"error","timestamp":"2022-02-16T10:37:53.924Z"}
+{"level":"error","timestamp":"2022-02-16T10:37:57.211Z"}
+{"level":"error","timestamp":"2022-02-16T10:39:57.219Z"}
+{"level":"error","timestamp":"2022-02-16T10:41:58.314Z"}
+{"level":"error","timestamp":"2022-02-16T10:43:58.362Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:46:22.257Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:46:22.291Z"}
+{"level":"error","timestamp":"2022-02-16T10:48:43.380Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T10:55:16.264Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T10:55:16.297Z"}
+{"level":"error","timestamp":"2022-02-16T10:55:26.423Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T11:08:30.334Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T11:08:30.375Z"}
+{"level":"error","timestamp":"2022-02-16T11:08:37.753Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T11:13:58.757Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T11:13:58.790Z"}
+{"level":"error","message":"renderDepartments controller departments is not defined","stack":"ReferenceError: departments is not defined\n    at departmentsService.getAllDepartmentsWithViewValues.then.html (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:31:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T11:14:17.852Z"}
+{"level":"error","timestamp":"2022-02-16T11:14:17.854Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T11:15:25.721Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T11:15:25.748Z"}
+{"level":"error","message":"renderDepartments controller departments is not defined","stack":"ReferenceError: departments is not defined\n    at departmentsService.getAllDepartmentsWithViewValues.then.html (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:31:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T11:15:47.614Z"}
+{"level":"error","timestamp":"2022-02-16T11:15:47.622Z"}
+{"level":"error","message":"renderDepartments controller departments is not defined","stack":"ReferenceError: departments is not defined\n    at departmentsService.getAllDepartmentsWithViewValues.then.html (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/controller/departments/department.controller.js:31:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T11:47:43.150Z"}
+{"level":"error","timestamp":"2022-02-16T11:47:43.153Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T11:53:27.229Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T11:53:27.287Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T11:56:21.290Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T11:56:21.333Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T12:55:11.122Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T12:55:11.144Z"}
+{"level":"info","message":"\"name\" must only contain alpha-numeric characters","timestamp":"2022-02-16T12:55:59.315Z"}
+{"level":"info","message":"ValidationError: \"name\" must only contain alpha-numeric characters","timestamp":"2022-02-16T12:55:59.324Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:08:34.069Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:08:34.102Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:09:02.965Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:02.966Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:02.966Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:09:04.629Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:04.629Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:04.629Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:09:05.379Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:05.381Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:05.381Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:09:10.468Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:10.469Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:10.469Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:09:11.130Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:11.131Z"}
+{"level":"error","timestamp":"2022-02-16T13:09:11.131Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:09:54.020Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:09:54.050Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:10:05.705Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:10:05.733Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:10:08.066Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:10:08.098Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:10:19.100Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:10:19.130Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:27:07.596Z"}
+{"level":"error","timestamp":"2022-02-16T13:27:07.599Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:27:09.059Z"}
+{"level":"error","timestamp":"2022-02-16T13:27:09.059Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:27:09.708Z"}
+{"level":"error","timestamp":"2022-02-16T13:27:09.709Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:27:52.221Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:27:52.247Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:27:57.975Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:27:58.005Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:01.425Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:01.453Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:20.878Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:20.907Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:29.201Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:29.235Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:31.846Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:31.875Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:32.908Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:32.936Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:28:35.838Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:28:35.865Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:29:26.546Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:29:26.573Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:29:37.923Z"}
+{"level":"error","timestamp":"2022-02-16T13:29:37.926Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:30:18.967Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:30:18.995Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:30:21.899Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:30:21.926Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:30:31.320Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:30:31.347Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:31:09.098Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:31:09.124Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:31:14.223Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:31:14.250Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:31:18.088Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:31:18.116Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:31:20.996Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:31:21.024Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:31:28.027Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:28.029Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:28.029Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:31:29.101Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:29.102Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:29.102Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:31:29.698Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:29.700Z"}
+{"level":"error","timestamp":"2022-02-16T13:31:29.700Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:32:27.054Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:32:27.082Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:32:29.596Z"}
+{"level":"error","timestamp":"2022-02-16T13:32:29.597Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:32:30.532Z"}
+{"level":"error","timestamp":"2022-02-16T13:32:30.532Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:35:02.604Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:35:02.629Z"}
+{"level":"error","message":"deleteDepartment service Employee.destroy is not a function","stack":"TypeError: Employee.destroy is not a function\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:132:28)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:38:19.809Z"}
+{"level":"error","timestamp":"2022-02-16T13:38:19.812Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T13:45:45.152Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T13:45:45.181Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:45:59.491Z"}
+{"level":"error","timestamp":"2022-02-16T13:45:59.498Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T13:46:15.165Z"}
+{"level":"error","timestamp":"2022-02-16T13:46:15.166Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T14:58:37.122Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T14:58:37.153Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T14:58:40.057Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T14:58:40.087Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T14:58:50.673Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T14:58:50.709Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T14:58:53.676Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T14:58:53.705Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:01:49.194Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:01:49.224Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:13:00.182Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:13:00.212Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:14:29.004Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:14:29.035Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:14:48.867Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:14:48.896Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:14:58.137Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:14:58.165Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:17:22.415Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:17:22.443Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:19:35.411Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:19:35.442Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:19:37.420Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:19:37.449Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:19:42.230Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:19:42.258Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:19:55.929Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:19:55.959Z"}
+{"level":"info","message":"Department name \"kyky\" is used","timestamp":"2022-02-16T15:20:09.364Z"}
+{"level":"info","message":"Department name \"kyky\" is used","timestamp":"2022-02-16T15:20:14.679Z"}
+{"level":"info","message":"Department name \"kykyky\" is used","timestamp":"2022-02-16T15:22:44.332Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:43:12.578Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:43:12.601Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:43:18.949Z"}
+{"level":"error","timestamp":"2022-02-16T15:43:18.951Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:43:20.085Z"}
+{"level":"error","timestamp":"2022-02-16T15:43:20.086Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:43:21.114Z"}
+{"level":"error","timestamp":"2022-02-16T15:43:21.114Z"}
+{"level":"info","message":"Department name \"kyky\" is used","timestamp":"2022-02-16T15:45:54.186Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:46:21.100Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:46:21.123Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:46:23.407Z"}
+{"level":"error","timestamp":"2022-02-16T15:46:23.409Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:46:25.306Z"}
+{"level":"error","timestamp":"2022-02-16T15:46:25.306Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:47:15.109Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:47:15.132Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T15:47:23.453Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T15:47:23.477Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:47:31.079Z"}
+{"level":"error","timestamp":"2022-02-16T15:47:31.081Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T15:47:34.343Z"}
+{"level":"error","timestamp":"2022-02-16T15:47:34.344Z"}
+{"level":"info","message":"Department name \"kyky\" is used","timestamp":"2022-02-16T15:48:32.387Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:10:21.341Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:10:21.373Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:10:54.507Z"}
+{"level":"error","timestamp":"2022-02-16T16:10:54.509Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:10:57.955Z"}
+{"level":"error","timestamp":"2022-02-16T16:10:57.956Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:00.553Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:00.555Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:03.472Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:03.473Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:05.977Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:05.978Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:08.924Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:08.925Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:11.733Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:11.733Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:20.533Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:20.534Z"}
+{"level":"error","message":"deleteDepartment service departments is not defined","stack":"ReferenceError: departments is not defined\n    at Promise (/home/taisiia.pomazan/Taisiia/javascript-learning-taisiia-pomazan/src/services/departments.service.js:144:21)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","timestamp":"2022-02-16T16:11:28.183Z"}
+{"level":"error","timestamp":"2022-02-16T16:11:28.183Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-16T16:12:45.086Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-16T16:12:57.029Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-16T16:13:10.991Z"}
+{"level":"info","message":"Department name \"necessary1\" is used","timestamp":"2022-02-16T16:13:12.375Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:15:19.715Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:15:19.746Z"}
+{"level":"info","message":"Department name \"necessary2\" is used","timestamp":"2022-02-16T16:15:23.502Z"}
+{"level":"info","message":"Department name \"necessary111\" is used","timestamp":"2022-02-16T16:17:32.726Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:24:46.093Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:24:46.130Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:25:02.123Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:25:02.152Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:26:43.993Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:26:44.022Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:26:46.570Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:26:46.602Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:27:23.469Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:27:23.502Z"}
+{"level":"info","message":"Department name \"necessary2\" is used","timestamp":"2022-02-16T16:28:09.801Z"}
+{"level":"info","message":"Department name \"necessary2\" is used","timestamp":"2022-02-16T16:28:28.176Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:29:05.600Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:29:05.637Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:31:46.287Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:31:46.316Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T16:35:12.559Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T16:35:12.588Z"}
+{"level":"info","message":"Department name \"test2\" is used","timestamp":"2022-02-16T16:35:19.244Z"}
+{"level":"info","message":"Department name \"test2\" is used","timestamp":"2022-02-16T16:35:24.569Z"}
+{"level":"info","message":"Listening on port 3000...","timestamp":"2022-02-16T18:04:29.839Z"}
+{"level":"info","message":"Соединение с БД было успешно установлено","timestamp":"2022-02-16T18:04:29.870Z"}
+{"_original":{"birthday":"29.06.1993","departmentid":"00ecbcad-900f-49ae-ba24-fe9a3fb0a008","email":"tarddiszan@aimp","name":"test","salary":"8000"},"details":[{"context":{"invalids":["tarddiszan@aimp"],"key":"email","label":"email","value":"tarddiszan@aimp"},"message":"\"email\" must be a valid email","path":["email"],"type":"string.email"}],"level":"info","timestamp":"2022-02-16T18:04:49.485Z"}
+{"_original":{"birthday":"31.02.1993","email":"tarddiszan@aimp.ss","name":"test","salary":"8000"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"31.02.1993"},"message":"Invalid date","path":["birthday"],"type":"any.custom"}],"level":"info","timestamp":"2022-02-16T18:05:07.687Z"}
+{"level":"info","message":"ValidationError: Invalid date","timestamp":"2022-02-16T18:05:07.699Z"}
+{"_original":{"birthday":"31.06.1993","email":"tarddiszan@aimp.ss","name":"test","salary":"8000"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"31.06.1993"},"message":"Invalid date","path":["birthday"],"type":"any.custom"}],"level":"info","timestamp":"2022-02-16T18:05:15.803Z"}
+{"level":"info","message":"ValidationError: Invalid date","timestamp":"2022-02-16T18:05:15.811Z"}
+{"_original":{"birthday":"31.06.1993","email":"tarddiszan@aimp.ss","name":"test","salary":"8000"},"details":[{"context":{"error":{},"key":"birthday","label":"birthday","value":"31.06.1993"},"message":"Invalid date","path":["birthday"],"type":"any.custom"}],"level":"info","timestamp":"2022-02-16T18:05:17.213Z"}
+{"level":"info","message":"ValidationError: Invalid date","timestamp":"2022-02-16T18:05:17.220Z"}

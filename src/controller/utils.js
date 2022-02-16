@@ -11,6 +11,31 @@ function dateStrToDate(validDateStr) {
     return new Date(strYear, +strMonth-1, strDay)
 }
 
+class NotFoundError extends Error {
+
+    constructor(message) {
+        super(message)
+        this.status = 404
+    }
+}
+
+class InternalError extends Error {
+    constructor() {
+        let message = 'Internal server error';
+        super(message)
+        this.status = 500;
+    }
+
+
+}
+
+class BadRequestError extends Error {
+    constructor(message) {
+        super(message)
+        this.status = 400
+    }
+}
+
 
 module.exports = {
 
@@ -63,5 +88,12 @@ module.exports = {
 
         return birthdayStr
 
-    }
+    },
+
+    NotFoundError,
+
+    InternalError,
+
+    BadRequestError
+
 }

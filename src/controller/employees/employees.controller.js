@@ -59,186 +59,120 @@ const editEmployeeSchema = Joi.object({
 
 module.exports = {
 
-    renderEmployees: (departmentid, cb) => {
+    renderEmployees: (departmentid) => new Promise((resolve, reject) => {
 
-        try {
-
-            employeesService.getEmployeesWithViewValues(departmentid, (error, employees) => {
-                if (error) {
-                    cb(error)
-                    logger.error(error)
-                } else {
-
-                    // const mutatedEmployeesForEachDepartment = employees.map(employee => {
-                    //     return {
-                    //         name: employee.name,
-                    //         salary: employee.salary,
-                    //         birthday: employee.birthday,
-                    //         email: employee.email,
-                    //         id: employee.id,
-                    //         updateLink: `/departments/${employee.departmentid}/employees/${employee.id}/update`,
-                    //         deleteLink: `/departments/${employee.departmentid}/employees/${employee.id}/delete`
-                    //     }
-                    // })
-
-                    ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
-                        {data: employees, departmentid}, 
-                        function (error, html) {
-                            if (error) {
-                                cb(error)
-                                logger.error('err renderEmployees', error);
-                            } else {
-                                cb( null, html)
-                            }
-                        }
-                    )
-                }
+        employeesService.getEmployeesWithViewValues(departmentid)
+            .then(employees => {
+                ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
+                    {data: employees, departmentid}
+                )
+                .then(html => resolve(html))
+                .catch(error => reject(error))
             })
+            .catch(error => {
+                logger.error('renderEmployees controller', error)
+                reject(error)
+            })
+    }),
 
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-            logger.error(error)
-        }
-    },
+    renderCreateEmployee: (parameters, departmentId) => new Promise((resolve, reject) => {
 
-    renderCreateEmployee: (parameters, departmentId, cb) => {
+        ejs.renderFile(__dirname + '/../../views/employees/createEmployee.ejs',
+                {parameters, departmentId}
+        )
+        .then(html => resolve(html))
+        .catch(error => {
+            logger.error('renderCreateEmployee controller', error)
+            reject(error)
+        })
+    }),
 
-        try {
+    renderEditEmployee: (employeeId, departmentId, query) => new Promise((resolve, reject) => {
 
-            ejs.renderFile(__dirname + '/../../views/employees/createEmployee.ejs',
-                    {parameters, departmentId},
-                    function (error, html) {
-                        if (error) {
-                            cb(error)
-                            logger.error(error)
-                        } else {
-                            cb(null, html)
-                        }
-                    }
-            )
+        const setUpParameters = (id, query) => new Promise((params_resolve, params_reject) => {
 
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-        }
-
-    },
-
-    renderEditEmployee: (employeeId, departmentId, query, cb) => {
-
-        try {
-    
-
-            function setUpParameters(id, query, paramsCB) {
-
-                const resultParameters = {}
-                const { body, error } = query;
+            const resultParameters = {}
+            const { body, error } = query;
+            
+            if (error) {
                 
-                if (error) {
-                    
-                    const values = JSON.parse(body)
-                    resultParameters['values'] = values,
-                    resultParameters['error'] = error
-                    
-                    paramsCB(null, resultParameters)
+                const values = JSON.parse(body)
+                resultParameters['values'] = values,
+                resultParameters['error'] = error
+                
+                logger.info(error)
+                params_resolve(resultParameters)
 
-                    logger.info(error)
+            } else {
 
-                } else {
-
-                    employeesService.getEmployeeById(id, (error, employeeValues) => {
-                        if (error) {
-                            paramsCB(error)
-                            logger.info(error)
-                        } else {
-                            resultParameters['values'] = employeeValues
-                            paramsCB(null, resultParameters)
-                        }
+                employeesService.getEmployeeById(id)
+                    .then(employeeValues => {
+                        resultParameters['values'] = employeeValues
+                        params_resolve(resultParameters) 
                     })
-                }
+                    .catch(error => {
+                        logger.info(error)
+                        params_reject(resultParameters)
+                    })
             }
+        })
 
-            setUpParameters(employeeId, query, (setUpError, parameters) => {
-                
-                if (setUpError) {
-                    cb(setUpError)
-                    logger.info(setUpError)
-                } else {
-
-                    ejs.renderFile(__dirname + '/../../views/employees/editEmployee.ejs',
+        setUpParameters(employeeId, query)
+            .then(parameters => {
+                ejs.renderFile(__dirname + '/../../views/employees/editEmployee.ejs',
                     {
                         employeeId,
                         departmentId,
                         parameters
-                    },
-                    function (error, html) {
-                        if (error) {
-                            cb(error)
-                            logger.error(error)
-                        } else {
-                            cb(null, html)
-                        }
                     }
-                    )
-                }
+                )
+                .then(html => resolve(html))
             })
+            .catch(error => {
+                reject(error)
+                logger.error('renderEditEmployee controller', error)
+            })
+    }),
 
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-            logger.error(error)
-        }
-    },
+    addEmployee: (id, rawValues) => new Promise((resolve, reject) => {
 
-    addEmployee: (id, rawValues, cb) => {
+        rawValues.departmentid = id
 
-        try {
+        const { value, error } = addEmployeeSchema.validate(rawValues)
 
-            rawValues.departmentid = id
+        if (error) {
 
-            const { value, error } = addEmployeeSchema.validate(rawValues)
-
-            if (error) {
-
-                emitEmployeeFailedValidation(error.details[0].message)
-
-                cb(null, new Error(`${error}`));
-
-                logger.error(error)
-                
-            } else {
+            emitEmployeeFailedValidation(error.details[0].message)
+            resolve(new Error(`${error}`));
+            logger.info(error)
             
-                employeesService.isTheSameEmailExists(value, (isExistEmailError, isExist) => {
-                    if (isExistEmailError) {
-                        cb(isExistEmailError)
+        } else {
+        
+            employeesService.isTheSameEmailExists(value)
+                .then(resultTotal => {
+                    if (resultTotal !== 0) {
+                        // if validation failed
+                        resolve(new Error(`Employee's email "${value.email} is used"`))
+                        emitEmployeeFailedValidation('Add employee: email is used')
+                        logger.info('Add employee: email is used')
                     } else {
-                        if (isExist) {
-                            // if validation failed
-                            cb(null, new Error(`Employee's email "${value.email} is used"`))
-                            emitEmployeeFailedValidation('Add employee: email is used')
-                            logger.info('Add employee: email is used')
-                        } else {
-                            // if validation pass
-                            employeesService.addEmployee(value, (error) => {
-                                if (error) {
-                                    cb(error)
-                                    logger.error(error)
-                                } else {
-                                    cb(null)
-                                }
+                        // if validation pass
+                        employeesService.addEmployee(value)
+                            .then(result => resolve(result))
+                            .catch(error => {
+                                reject(error)
+                                logger.error(error)
                             })
-                        }
                     }
                 })
-            
-            }
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-            logger.error(error)
+                .catch(error => {
+                    reject(error)
+                    logger.error('addEmployee controller', error)
+                })
         }
-    },
+    }),
 
-    editEmployee: (employeeId, rawValues, cb) => {
-
-        try {
+    editEmployee: (employeeId, rawValues) => new Promise((resolve, reject) => {
 
             const { value, error } = editEmployeeSchema.validate(rawValues)
 
@@ -246,60 +180,42 @@ module.exports = {
 
                 emitEmployeeFailedValidation(error.details[0].message)
                 logger.info(error)
-                return cb(null, new Error(`${error}`))
+                resolve(new Error(`${error}`))
 
             }  else {
 
-                employeesService.isTheSameEmailExistsWithDifferentId(employeeId, value, (isExistEmailError, isExist) => {
-                    if (isExistEmailError) {
-                        cb(isExistEmailError)
-                    } else {
-                        if (isExist) {
+                employeesService.isTheSameEmailExistsWithDifferentId(employeeId, value)
+                    .then(resultTotal => {
+                        if (resultTotal !== 0) {
                             // if validation failed
-                            
-                            cb(null, new Error(`Employee's email "${value.email} is used"`))
+                            resolve(new Error(`Employee's email "${value.email} is used"`))
                             emitEmployeeFailedValidation('Edit employee: email is used')
                             logger.info('Edit employee: email is used')
                         } else {
                             // if validation pass
-                            employeesService.editEmployee(employeeId, value, (error) => {
-                                if (error) {
-                                    cb(error)
-                                    logger.error('editEmployee controller', error)
-                                } else {
-                                    cb(null)
-                                }
-                            })
+                            employeesService.editEmployee(employeeId, value)
+                                .then(result => resolve(result))
+                                .catch(error => {
+                                    logger.info(error)
+                                    reject(error)
+                                })
                         }
-                    }
-                })
+                    })
+                    .catch(error => {
+                        logger.error('editEmployee controller', error)
+                        reject(error)
+                    })
             }
+    }),
 
-            
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-            logger.error('editEmployee controller (catch)', error)
-        }
+    deleteEmployee: (employeeId) => {
 
-    },
-
-    deleteEmployee: (employeeId, cb) => {
-
-        try {
-
-            employeesService.deleteEmployee(employeeId, (error) => {
-                if (error) {
-                    cb(error)
-                    logger.error(error)
-                } else {
-                    cb(null)
-                }
+        employeesService.deleteEmployee(employeeId)
+            .then(resolve())
+            .catch(error => {
+                logger.error(error)
+                reject(error)
             })
-
-
-        } catch(error) {
-            cb(new Error('Internal server Error'))
-        }
     }
 
 }

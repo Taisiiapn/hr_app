@@ -23,228 +23,164 @@ const editDepartmentSchema = Joi.object({
 
 module.exports = {
     
-    renderDepartments: (cb) => {
+    renderDepartments: () => new Promise((resolve, reject) => {
 
-        try {
-            departmentsService.getAllDepartmentsWithViewValues((error, departments) => {
-                if (error) {
-                    return cb(error)
-                } else {
-
-                    ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
-                        {data: departments}, 
-                        function (error, html) {
-                            if (error) {
-                                logger.error('err renderDepartments', error)
-                                return cb(error)
-                            } else {
-                                return cb( null, html)
-                            }
-                        }
-                    )
-                }
+        departmentsService.getAllDepartmentsWithViewValues()
+            .then(departments => {
+                ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
+                    {data: departments}
+                )
+                .then(html => resolve(html))
+                .catch(error => reject(error))
             })
-        } catch(error) {
-            logger.error(error)
-            return cb(new Error('Internal server Error'))
-        }
-        
-    },
+            .catch(error => {
+                logger.error('renderDepartments controller', error)
+                reject(error)
+            })
+    }),
 
-    renderCreateDepartment: (parameters, cb) => {
+    renderCreateDepartment: (parameters) => new Promise((resolve, reject) => {
 
-        try {
-            ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
-                    {parameters},
-                    function (error, html) {
-                        if (error) {
-                            cb(error)
-                            logger.error(error)
-                        } else {
-                            cb(null, html)
-                        }
-                    }
-            )
-        } catch(error) {
-            logger.error(error)
-            cb(new Error('Internal server Error'))
-        }
-    },
+        ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
+            {parameters},
+                
+        )
+        .then(html => resolve(html))
+        .catch(error => {
+            logger.error('renderCreateDepartment controller', error)
+            reject(error)
+        })
+    }),
 
-    renderEditDepartment: (departmentId, query, cb) => {
-
-        try {
+    renderEditDepartment: (departmentId, query) => new Promise((render_resolve, render_reject) => {
     
-            function setUpParameters(id, query, paramsCB) {
+        const setUpParameters = (id, query) => new Promise((params_resolve, params_reject) => {
 
-                const resultParameters = {}
-                const { body, error } = query;
-                
-                if (error) {
-                    
-                    const values = JSON.parse(body)
-                    resultParameters['values'] = values,
-                    resultParameters['error'] = error
-                    
-                    paramsCB(null, resultParameters)
-
-                    logger.info(error)
-
-                } else {
-
-                    departmentsService.getDepartmentById(id, (error, departmentValues) => {
-                        if (error) {
-
-                            paramsCB(error)
-                            logger.info(error)
-
-                        } else {
-                            resultParameters['values'] = departmentValues
-                            paramsCB(null, resultParameters)
-                        }
-                    })
-                }
-            }
-
-            setUpParameters(departmentId, query, (setUpError, parameters) => {
-                
-                if (setUpError) {
-                    cb(setUpError)
-                } else {
-
-                    ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
-                    {
-                        id: departmentId,
-                        parameters
-                    },
-                    function (error, html) {
-                        if (error) {
-                            cb(error)
-                            logger.error('err renderEditDepartment', error);
-                        } else {
-                            cb(null, html)
-                        }
-                    }
-                    )
-                }
-            })
-
-        } catch(error) {
-            logger.error(error)
-            cb(new Error('Internal server Error'))
-        }
-    },
-
-    addDepartment: (rawValues, cb) => {
-
-        try {
-
-            // validation:
-
-            // - dep name required
-
-            const { value, error } = addDepartmentSchema.validate(rawValues)
-
-            if (error) {
-
-                cb(null, new Error(`${error}`))
-                logger.info(error)
-                emitDepartmentFailedValidation(error.details[0].message)
+            const resultParameters = {}
+            const { body, error } = query
             
-            } else {
-            // - unique dep name (async)
+            if (error) {
+                
+                const values = JSON.parse(body)
+                resultParameters['values'] = values
+                resultParameters['error'] = error
+                
+                logger.info(error)
+                params_resolve(resultParameters)
 
-                departmentsService.isTheSameDepartmentNameExists(value, (isTheSame_error, isExists) => {
-                    if (isTheSame_error) {
-                        cb(isTheSame_error)
+            } else {
+
+                departmentsService.getDepartmentById(id)
+                    .then(departmentValues => {
+                        resultParameters['values'] = departmentValues
+                        params_resolve(resultParameters)
+                    })
+                    .catch(error => {
+                        logger.info(error)
+                        params_reject(resultParameters)
+                    })
+            }
+        })
+
+        setUpParameters(departmentId, query)
+            .then(parameters => {
+                ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
+                {
+                    id: departmentId,
+                    parameters
+                })
+                .then(html => render_resolve(html))
+            })
+            .catch(error => {
+                render_reject(error)
+                logger.error('renderEditDepartment', error)
+            })
+    }),
+
+    addDepartment: (rawValues) => new Promise((resolve, reject) => {
+
+        // validation:
+        // - dep name required
+
+        const { value, error } = addDepartmentSchema.validate(rawValues)
+
+        if (error) {
+
+            resolve(new Error(`${error}`))
+            logger.info(error)
+            emitDepartmentFailedValidation(error.details[0].message)
+        
+        } else {
+        // - unique dep name (async)
+
+            departmentsService.isTheSameDepartmentNameExists(value)
+                .then(resultTotal => {
+                    if (resultTotal !== 0) {
+                        // if validation failed
+                        resolve(new Error(`Department name "${value.name}" is used`))
+                        logger.info(`Department name "${value.name}" is used`)
+                        emitDepartmentFailedValidation('Add department: name is used')
                     } else {
-                        if (isExists) {
-                            // if validation failed
-                            cb(null, new Error(`Department name "${value.name}" is used`))
-                            logger.info(`Department name "${value.name}" is used`)
-                            emitDepartmentFailedValidation('Add department: name is used')
-                        } else {
-                            // if validation pass
-                            departmentsService.addDepartment(value, (error) => {
-                                if (error) {
-                                    cb(error)
-                                    logger.error(error)
-                                } else {
-                                    cb(null)
-                                }
+                        // if validation pass
+                        departmentsService.addDepartment(value)
+                            .then(result => resolve(result))
+                            .catch(error => {
+                                reject(error)
+                                logger.error(error)
                             })
-                        }
                     }
                 })
-            }
-        } catch(error) {
-            logger.error(error)
-            cb(new Error('Internal server Error'))
+                .catch(error => {
+                    reject(error)
+                    logger.error('addDepartment controller', error)
+                })
         }
-    },
+    }),
 
-    editDepartment: (departmentId, rawValues, cb) => {
-
-        try {
+    editDepartment: (departmentId, rawValues) => new Promise((resolve, reject) => {
 
             const { value, error } = editDepartmentSchema.validate(rawValues)
 
             if (error) {
 
-                cb(null, new Error(`${error}`))
+                resolve(new Error(`${error}`))
                 logger.info(error.details[0].message)
                 emitDepartmentFailedValidation(error.details[0].message)
             
             } else {
 
-                departmentsService.isTheSameDepartmentNameExists(value, (isTheSame_error, isExists) => {
-                    if (isTheSame_error) {
-                        cb(isTheSame_error)
-                    } else {
-                        if (isExists) {
+                departmentsService.isTheSameDepartmentNameExists(value)
+                    .then(resultTotal => {
+                        if (resultTotal !== 0) {
                             // if validation failed
-                            cb(null, new Error(`Department name "${value.name}" is used`))
+                            resolve(new Error(`Department name "${value.name}" is used`))
                             logger.info(`Department name "${value.name}" is used`)
                             emitDepartmentFailedValidation('Edit department: name is used')
                         } else {
                             // if validation pass
-                            departmentsService.editDepartment(departmentId, value, (error) => {
-                                if (error) {
-                                    cb(error)
+                            departmentsService.editDepartment(departmentId, value)
+                                .then(result => resolve(result))
+                                .catch(error => {
                                     logger.info(error)
-                                } else {
-                                    cb(null)
-                                }
-                            })
+                                    reject(error)
+                                })
                         }
-                    }
-                })
+                    })
+                    .catch(error => {
+                        logger.error('editDepartment controller', error)
+                        reject(error)
+                    })
             }
+    }),
 
-        } catch(error) {
-            logger.error(error)
-            cb(new Error('Internal server Error'))
-        }
+    deleteDepartment: (departmentId) => new Promise((resolve, reject) => {
 
-    },
-
-    deleteDepartment: (departmentId, cb) => {
-
-        try {
-
-            departmentsService.deleteDepartment(departmentId, (error) => {
-                if (error) {
-                    cb(error)
-                    logger.error(error)
-                } else {
-                    cb(null)
-                }
+        departmentsService.deleteDepartment(departmentId)
+            .then(resolve())
+            .catch(error => {
+                logger.error(error)
+                reject(error)
             })
-
-        } catch(error) {
-            logger.error(error)
-            cb(new Error('Internal server Error'))
-        }
-    }
+    })
 
 }
