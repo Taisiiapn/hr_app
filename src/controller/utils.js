@@ -41,6 +41,16 @@ module.exports = {
 
     dateStrRegExp,
 
+    proceedError: (error) => {
+        let result;
+        if (error.status) {
+            result = error
+        } else {
+            result = new InternalError()
+        }
+        return result
+    },
+
     validDateCheck: (dateStr) => {
 
         const newDate = dateStrToDate(dateStr)

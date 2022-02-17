@@ -3,7 +3,8 @@ const { Sequelize } = require('sequelize');
 const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
 const { Employee, employeeWithViewValuesDTO, employeeDTO } = require('../model/employee.model')
-const logger = require('../config/logger')
+const logger = require('../config/logger');
+const { InternalError, BadRequestError } = require('../controller/utils');
 
 const { port, host, user, password, database } = environment.db
 
@@ -27,12 +28,20 @@ module.exports = {
             }
         })
         .then(allEmployees => {
-            resolve(allEmployees
-                .map(employeeInstance => employeeWithViewValuesDTO(depId, employeeInstance)))
+            if (allEmployees.length === 0) {
+                reject(new BadRequestError(`Employees not found!`))
+            } else {
+                resolve(allEmployees
+                    .map(
+                        employeeInstance => 
+                            employeeWithViewValuesDTO(depId, employeeInstance)
+                    )
+                )
+            }
         })
         .catch(error => {
-            reject(new Error('internal server error'))
             logger.error('getEmployeesWithViewValues service', error)
+            reject(new InternalError())
         })
 
     }),
@@ -43,15 +52,15 @@ module.exports = {
         .then(employeeInstance => {
 
             if (employeeInstance.length === 0) {
-                reject(new Error(`Employee with id - ${id}, nothing found!`))
+                reject(new BadRequestError(`Employee with id - ${id}, nothing found!`))
             } else {
                 const resultEmployeeValues = employeeDTO(employeeInstance)
                 resolve(resultEmployeeValues)
             }
         })
         .catch(error => {
-            reject(error)
             logger.error('getEmployeeById service', error)
+            reject(new InternalError())
         })
 
     }),
@@ -72,8 +81,8 @@ module.exports = {
         })
         .then(() => resolve())
         .catch(error => {
-            reject(error)
             logger.error('addEmployee service', error)
+            reject(new InternalError())
         })
        
     }),
@@ -97,8 +106,8 @@ module.exports = {
         })
         .then(() => resolve())
         .catch(error => {
-            reject(error)
             logger.error('editEmployee service', error)
+            reject(new InternalError())
         })
         
     }),
@@ -112,8 +121,8 @@ module.exports = {
         })
         .then(() => resolve())
         .catch(error => {
-            reject(error)
             logger.error('deleteEmployee service', error)
+            reject(new InternalError())
         })
         
     }),
@@ -130,8 +139,8 @@ module.exports = {
         })
         .then(totalResult => resolve(totalResult))
         .catch(error => {
-            reject(new Error('internal server error'))
             logger.error(error)
+            reject(new InternalError())
         })
 
     }),
@@ -149,8 +158,8 @@ module.exports = {
         })
         .then(totalResult => resolve(totalResult))
         .catch(error => {
-            reject(error)
             logger.error('isTheSameEmailExistsWithDifferentId', error)
+            reject(new InternalError())
         })
     })
 

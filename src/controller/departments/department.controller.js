@@ -3,6 +3,7 @@ const Joi = require('joi')
 const logger = require('../../config/logger')
 const departmentsService = require('../../services/departments.service')
 const { emitDepartmentFailedValidation } = require('../../services/eventEmitter.service')
+const { InternalError } = require('../utils')
 
 const addDepartmentSchema = Joi.object({
     name: Joi.string()
@@ -48,7 +49,7 @@ module.exports = {
         .then(html => resolve(html))
         .catch(error => {
             logger.error('renderCreateDepartment controller', error)
-            reject(error)
+            reject(InternalError())
         })
     }),
 
@@ -92,8 +93,8 @@ module.exports = {
                 .then(html => render_resolve(html))
             })
             .catch(error => {
-                render_reject(error)
                 logger.error('renderEditDepartment', error)
+                render_reject(error)
             })
     }),
 
@@ -106,33 +107,33 @@ module.exports = {
 
         if (error) {
 
-            resolve(new Error(`${error}`))
             logger.info(error)
             emitDepartmentFailedValidation(error.details[0].message)
+            resolve(new Error(`${error}`))
         
         } else {
-        // - unique dep name (async)
+            // - unique dep name (async)
 
             departmentsService.isTheSameDepartmentNameExists(value)
                 .then(resultTotal => {
                     if (resultTotal !== 0) {
                         // if validation failed
-                        resolve(new Error(`Department name "${value.name}" is used`))
                         logger.info(`Department name "${value.name}" is used`)
                         emitDepartmentFailedValidation('Add department: name is used')
+                        resolve(new Error(`Department name "${value.name}" is used`))
                     } else {
                         // if validation pass
                         departmentsService.addDepartment(value)
-                            .then(result => resolve(result))
+                            .then(() => resolve())
                             .catch(error => {
-                                reject(error)
                                 logger.error(error)
+                                reject(error)
                             })
                     }
                 })
                 .catch(error => {
-                    reject(error)
                     logger.error('addDepartment controller', error)
+                    reject(error)
                 })
         }
     }),
@@ -143,9 +144,9 @@ module.exports = {
 
             if (error) {
 
-                resolve(new Error(`${error}`))
                 logger.info(error.details[0].message)
                 emitDepartmentFailedValidation(error.details[0].message)
+                resolve(new Error(`${error}`))
             
             } else {
 
@@ -153,13 +154,13 @@ module.exports = {
                     .then(resultTotal => {
                         if (resultTotal !== 0) {
                             // if validation failed
-                            resolve(new Error(`Department name "${value.name}" is used`))
                             logger.info(`Department name "${value.name}" is used`)
                             emitDepartmentFailedValidation('Edit department: name is used')
+                            resolve(new Error(`Department name "${value.name}" is used`))
                         } else {
                             // if validation pass
                             departmentsService.editDepartment(departmentId, value)
-                                .then(result => resolve(result))
+                                .then(() => resolve())
                                 .catch(error => {
                                     logger.info(error)
                                     reject(error)
@@ -178,7 +179,7 @@ module.exports = {
         departmentsService.deleteDepartment(departmentId)
             .then(resolve())
             .catch(error => {
-                logger.error(error)
+                logger.error('deleteDepartment controller', error)
                 reject(error)
             })
     })

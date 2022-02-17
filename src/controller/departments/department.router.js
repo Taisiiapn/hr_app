@@ -1,5 +1,5 @@
-const { resolve } = require('bluebird');
 const logger = require('../../config/logger');
+const { proceedError } = require('../utils');
 const controller = require('./department.controller')
 
 
@@ -13,15 +13,14 @@ module.exports = {
                 res.end(html)
             })
             .catch(error => {
-                logger.error(error)
-                // todo 
-                // res.writeHead(error.status, { 'Content-Type': 'text/html' })
-                res.writeHead(500, { 'Content-Type': 'text/html' })
-                res.end(error.message)
+                logger.error('departmentsRootRoute router', error)
+                const proceededError = proceedError(error)
+                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                res.end(proceededError.message)
             })
     },
 
-    addDepartmentRoute: (req, res) => new Promise((resolve, reject) => {
+    addDepartmentRoute: (req, res) => {
 
         let query = req.query
 
@@ -38,16 +37,16 @@ module.exports = {
             .then(html => {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
                 res.end(html)
-                resolve(html)
             })
             .catch(error => {
-                logger.error(error)
-                res.writeHead(500, { 'Content-Type': 'text/html' })
-                reject(error)
+                logger.error('addDepartmentRoute router', error)
+                const proceededError = proceedError(error)
+                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                res.end(proceededError.message)
             })
-    }),
+    },
 
-    editDepartmentRoute: (req, res) => new Promise ((route_resolve, route_reject) => {
+    editDepartmentRoute: (req, res) => {
 
         const { departmentId } = req.params
         const query = req.query
@@ -55,16 +54,16 @@ module.exports = {
 
         controller.renderEditDepartment(departmentId, query)
             .then(html => {
-                route_resolve(html)
                 res.writeHead(200, { 'Content-Type': 'text/html' })
                 res.end(html)
             })
             .catch(error => {
-                logger.error(error)
-                route_reject(error)
-                res.writeHead(500, { 'Content-Type': 'text/html' })
+                logger.error('editDepartmentRoute router', error)
+                const proceededError = proceedError(error)
+                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                res.end(proceededError.message)
             })
-    }),
+    },
 
     deleteDepartmentAction: (req, res) => {
 
@@ -76,9 +75,10 @@ module.exports = {
                 res.end()
             })
             .catch(error => {
-                logger.error(error)
-                res.writeHead(500, { 'Content-Type': 'text/plain'})
-                res.end(error.message)
+                logger.error('deleteDepartmentAction router', error)
+                const proceededError = proceedError(error)
+                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                res.end(proceededError.message)
             })
     },
 
@@ -94,14 +94,16 @@ module.exports = {
                         const redirectUrl = `create?body=${bodyJSON}&error=${validationError.message}`
                         res.writeHead(301, { 'Location':  redirectUrl })
                         res.end()
-                    } 
-                    res.writeHead(301, { 'Location':  '/departments' })
-                    res.end()
+                    } else {
+                        res.writeHead(301, { 'Location':  '/departments' })
+                        res.end()
+                    }
                 })
                 .catch(error => {
-                    res.writeHead(500, { 'Content-Type': 'text/plain' })
-                    res.end(error.message)
-                    logger.error(error)
+                    logger.error('addDepartmentAction router', error)
+                    const proceededError = proceedError(error)
+                    res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                    res.end(proceededError.message)
                 })  
     },
 
@@ -119,14 +121,16 @@ module.exports = {
                         const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
                         res.writeHead(301, { 'Location':  redirectUrl })
                         res.end()
+                    } else {
+                        res.writeHead(301, { 'Location':  '/departments' })
+                        res.end()
                     }
-                    res.writeHead(301, { 'Location':  '/departments' })
-                    res.end()
                 })
                 .catch(error => {
-                    res.writeHead(500, { 'Content-Type': 'text/plain'})
-                    res.end(error.message)
-                    logger.error(error)
+                    logger.error('editDepartmentAction', error)
+                    const proceededError = proceedError(error)
+                    res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+                    res.end(proceededError.message)
                 })
     }
 

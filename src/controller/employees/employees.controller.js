@@ -129,8 +129,8 @@ module.exports = {
                 .then(html => resolve(html))
             })
             .catch(error => {
-                reject(error)
                 logger.error('renderEditEmployee controller', error)
+                reject(error)
             })
     }),
 
@@ -143,8 +143,8 @@ module.exports = {
         if (error) {
 
             emitEmployeeFailedValidation(error.details[0].message)
-            resolve(new Error(`${error}`));
             logger.info(error)
+            resolve(new Error(`${error}`))
             
         } else {
         
@@ -158,7 +158,7 @@ module.exports = {
                     } else {
                         // if validation pass
                         employeesService.addEmployee(value)
-                            .then(result => resolve(result))
+                            .then(() => resolve())
                             .catch(error => {
                                 reject(error)
                                 logger.error(error)
@@ -166,8 +166,8 @@ module.exports = {
                     }
                 })
                 .catch(error => {
-                    reject(error)
                     logger.error('addEmployee controller', error)
+                    reject(error)
                 })
         }
     }),
@@ -208,14 +208,14 @@ module.exports = {
             }
     }),
 
-    deleteEmployee: (employeeId) => {
+    deleteEmployee: (employeeId) => new Promise( (resolve, reject) => {
 
         employeesService.deleteEmployee(employeeId)
-            .then(resolve())
+            .then(() => resolve()) 
             .catch(error => {
                 logger.error(error)
                 reject(error)
             })
-    }
+    })
 
 }
