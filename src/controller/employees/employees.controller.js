@@ -1,6 +1,6 @@
 const ejs = require('ejs')
 const Joi = require('joi');
-const logger = require('../../config//logger');
+const { logger } = require('../../config//logger');
 const employeesService = require('../../services/employees.service');
 const { emitEmployeeFailedValidation } = require('../../services/eventEmitter.service');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
@@ -59,40 +59,22 @@ const editEmployeeSchema = Joi.object({
 
 module.exports = {
 
-    renderEmployees: (departmentid) => new Promise((resolve, reject) => {
+    renderEmployees: async (departmentid) => {
 
-        employeesService.getEmployeesWithViewValues(departmentid)
-            .then(employees => {
-                ejs.renderFile(__dirname + '/../../views/employees/employeesList.ejs',
-                    {data: employees, departmentid}
-                )
-                .then(html => resolve(html))
-                .catch(error => reject(error))
-            })
-            .catch(error => {
-                logger.error('renderEmployees controller', error)
-                reject(error)
-            })
-    }),
-
-    renderCreateEmployee: (parameters, departmentId) => new Promise((resolve, reject) => {
-
-        ejs.renderFile(__dirname + '/../../views/employees/createEmployee.ejs',
-                {parameters, departmentId}
+        const employees = await employeesService.getEmployeesWithViewValues(departmentid)
+        const html = await ejs.renderFile(
+            __dirname + '/../../views/employees/employeesList.ejs',
+            {data: employees, departmentid}
         )
-        .then(html => resolve(html))
-        .catch(error => {
-            logger.error('renderCreateEmployee controller', error)
-            reject(error)
-        })
-    }),
+        return html
+    },
 
-    renderEditEmployee: (employeeId, departmentId, query) => new Promise((resolve, reject) => {
+    renderCreateEmployee: async (query, departmentId) => {
 
-        const setUpParameters = (id, query) => new Promise((params_resolve, params_reject) => {
+        const setUpParameters = (query) => {
 
             const resultParameters = {}
-            const { body, error } = query;
+            const { body, error } = query
             
             if (error) {
                 
@@ -101,40 +83,57 @@ module.exports = {
                 resultParameters['error'] = error
                 
                 logger.info(error)
-                params_resolve(resultParameters)
+            }
+            
+            return resultParameters
+        }
+
+        const parameters = setUpParameters(query)
+
+        const html = await ejs.renderFile(
+            __dirname + '/../../views/employees/createEmployee.ejs',
+            {parameters, departmentId}
+        )
+        return html
+    },
+
+    renderEditEmployee: async (employeeId, departmentId, query) => {
+
+        const setUpParameters = async (id, query) => {
+
+            const resultParameters = {}
+            const { body, error } = query
+            
+            if (error) {
+                
+                const values = JSON.parse(body)
+                resultParameters['values'] = values,
+                resultParameters['error'] = error
+                
+                logger.info(error)
+                return resultParameters
 
             } else {
 
-                employeesService.getEmployeeById(id)
-                    .then(employeeValues => {
-                        resultParameters['values'] = employeeValues
-                        params_resolve(resultParameters) 
-                    })
-                    .catch(error => {
-                        logger.info(error)
-                        params_reject(resultParameters)
-                    })
+                const employeeValues = await employeesService.getEmployeeById(id)
+                resultParameters['values'] = employeeValues
+                return resultParameters   
             }
-        })
+        }
 
-        setUpParameters(employeeId, query)
-            .then(parameters => {
-                ejs.renderFile(__dirname + '/../../views/employees/editEmployee.ejs',
-                    {
-                        employeeId,
-                        departmentId,
-                        parameters
-                    }
-                )
-                .then(html => resolve(html))
-            })
-            .catch(error => {
-                logger.error('renderEditEmployee controller', error)
-                reject(error)
-            })
-    }),
+        const parameters = await setUpParameters(employeeId, query)
+        const html = await ejs.renderFile(
+            __dirname + '/../../views/employees/editEmployee.ejs',
+            {
+                employeeId,
+                departmentId,
+                parameters
+            }
+        )
+        return html
+    },
 
-    addEmployee: (id, rawValues) => new Promise((resolve, reject) => {
+    addEmployee: async (id, rawValues) => {
 
         rawValues.departmentid = id
 
@@ -144,78 +143,53 @@ module.exports = {
 
             emitEmployeeFailedValidation(error.details[0].message)
             logger.info(error)
-            resolve(new Error(`${error}`))
+            return new Error(`${error}`)
             
         } else {
         
-            employeesService.isTheSameEmailExists(value)
-                .then(resultTotal => {
-                    if (resultTotal !== 0) {
-                        // if validation failed
-                        resolve(new Error(`Employee's email "${value.email} is used"`))
-                        emitEmployeeFailedValidation('Add employee: email is used')
-                        logger.info('Add employee: email is used')
-                    } else {
-                        // if validation pass
-                        employeesService.addEmployee(value)
-                            .then(() => resolve())
-                            .catch(error => {
-                                reject(error)
-                                logger.error(error)
-                            })
-                    }
-                })
-                .catch(error => {
-                    logger.error('addEmployee controller', error)
-                    reject(error)
-                })
-        }
-    }),
-
-    editEmployee: (employeeId, rawValues) => new Promise((resolve, reject) => {
-
-            const { value, error } = editEmployeeSchema.validate(rawValues)
-
-            if (error) {
-
-                emitEmployeeFailedValidation(error.details[0].message)
-                logger.info(error)
-                resolve(new Error(`${error}`))
-
-            }  else {
-
-                employeesService.isTheSameEmailExistsWithDifferentId(employeeId, value)
-                    .then(resultTotal => {
-                        if (resultTotal !== 0) {
-                            // if validation failed
-                            resolve(new Error(`Employee's email "${value.email} is used"`))
-                            emitEmployeeFailedValidation('Edit employee: email is used')
-                            logger.info('Edit employee: email is used')
-                        } else {
-                            // if validation pass
-                            employeesService.editEmployee(employeeId, value)
-                                .then(result => resolve(result))
-                                .catch(error => {
-                                    logger.info(error)
-                                    reject(error)
-                                })
-                        }
-                    })
-                    .catch(error => {
-                        logger.error('editEmployee controller', error)
-                        reject(error)
-                    })
+            const resultTotal = await employeesService.isTheSameEmailExists(value)
+            if (resultTotal !== 0) {
+                // if validation failed
+                emitEmployeeFailedValidation('Add employee: email is used')
+                logger.info('Add employee: email is used')
+                return new Error(`Employee's email "${value.email} is used"`)
+            } else {
+                // if validation pass
+                await employeesService.addEmployee(value)
             }
-    }),
+        }
+    },
 
-    deleteEmployee: (employeeId) => new Promise( (resolve, reject) => {
+    editEmployee: async (employeeId, rawValues) => {
 
-        employeesService.deleteEmployee(employeeId)
-            .then(() => resolve()) 
-            .catch(error => {
-                logger.error(error)
-                reject(error)
-            })
-    })
+        const { value, error } = editEmployeeSchema.validate(rawValues)
+
+        if (error) {
+
+            emitEmployeeFailedValidation(error.details[0].message)
+            logger.info(error)
+            return new Error(`${error}`)
+
+        }  else {
+
+            const resultTotal = await employeesService.isTheSameEmailExistsWithDifferentId(employeeId, value)
+            if (resultTotal !== 0) {
+                // if validation failed
+                emitEmployeeFailedValidation('Edit employee: email is used')
+                logger.info('Edit employee: email is used')
+                return new Error(`Employee's email "${value.email} is used"`)
+            } else {
+                // if validation pass
+                await employeesService.editEmployee(employeeId, value)
+                
+            }
+        }
+    },
+
+    deleteEmployee: async (employeeId) => {
+
+        await employeesService.deleteEmployee(employeeId)
+            
+    }
 
 }

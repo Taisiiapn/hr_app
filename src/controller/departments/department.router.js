@@ -1,137 +1,149 @@
-const logger = require('../../config/logger');
+const { logger, errorNames } = require('../../config/logger');
 const { proceedError } = require('../utils');
 const controller = require('./department.controller')
 
 
 module.exports = {
 
-    departmentsRootRoute: (req, res) => {
+    departmentsRootRoute: async (req, res) => {
+        try {
+            const html = await controller.renderDepartments()
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html)
+            
+        } catch (error) {
+            logger.error(errorNames.departments.DEPARTMENTS_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+        }     
+    },
+
+    addDepartmentRoute: async (req, res) => {
+
+        try {
+
+            let query = req.query
+
+            const parameters = Object.assign({})
+
+            if(query.error) {
+                parameters.error = query.error
+            }
+            if(query.body) {
+                parameters.values = JSON.parse(query.body)
+            }
+
+            const html = await controller.renderCreateDepartment(parameters)
+            res.writeHead(200, { 'Content-Type': 'text/html' });
+            res.end(html)
+
+        } catch(error) {
+
+            logger.error(errorNames.departments.DEPARTMENT_CREATE_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+        }
+    },
+
+    editDepartmentRoute: async (req, res) => {
+
+        try {
+
+            const { departmentId } = req.params
+            const query = req.query
+
+            const html = await controller.renderEditDepartment(departmentId, query)
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html)
+
+        } catch(error) {
+
+            logger.error(errorNames.departments.DEPARTMENT_UPDATE_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+        }
+    },
+
+    deleteDepartmentAction: async (req, res) => {
+
+        try {
+
+            const { departmentId } = req.params
+
+            controller.deleteDepartment(departmentId)
         
-        controller.renderDepartments()
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' })
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('departmentsRootRoute router', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
-    },
+            res.writeHead(301, { 'Location':  '/departments' })
+            res.end()
 
-    addDepartmentRoute: (req, res) => {
+        } catch (error) {
 
-        let query = req.query
-
-        const parameters = Object.assign({})
-
-        if(query.error) {
-            parameters.error = query.error
-        }
-        if(query.body) {
-            parameters.values = JSON.parse(query.body)
+            logger.error(errorNames.departments.DEPARTMENT_DELETE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
         }
 
-        controller.renderCreateDepartment(parameters)
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('addDepartmentRoute router', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
     },
 
-    editDepartmentRoute: (req, res) => {
+    addDepartmentAction: async (req, res) => {
 
-        const { departmentId } = req.params
-        const query = req.query
+        try {
+            const body = req.body
 
+            const validationError = await controller.addDepartment(body)
+            
+            if (validationError) {
+                const bodyJSON = JSON.stringify(body)
 
-        controller.renderEditDepartment(departmentId, query)
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' })
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('editDepartmentRoute router', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
-    },
-
-    deleteDepartmentAction: (req, res) => {
-
-        const { departmentId } = req.params
-
-        controller.deleteDepartment(departmentId)
-            .then(() => {
+                const redirectUrl = `create?body=${bodyJSON}&error=${validationError.message}`
+                res.writeHead(301, { 'Location':  redirectUrl })
+                res.end()
+            } else {
                 res.writeHead(301, { 'Location':  '/departments' })
                 res.end()
-            })
-            .catch(error => {
-                logger.error('deleteDepartmentAction router', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
+            }
+        } catch(error) {
+
+            logger.error(errorNames.departments.DEPARTMENT_CREATE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+
+        }  
     },
 
-    addDepartmentAction: (req, res) => {
+    editDepartmentAction: async (req, res) => {
 
-        const body = req.body
+        try {
 
-            controller.addDepartment(body)
-                .then(validationError => {
-                    if (validationError) {
-                        const bodyJSON = JSON.stringify(body)
+            const { departmentId } = req.params
+            
+            const body = req.body
 
-                        const redirectUrl = `create?body=${bodyJSON}&error=${validationError.message}`
-                        res.writeHead(301, { 'Location':  redirectUrl })
-                        res.end()
-                    } else {
-                        res.writeHead(301, { 'Location':  '/departments' })
-                        res.end()
-                    }
-                })
-                .catch(error => {
-                    logger.error('addDepartmentAction router', error)
-                    const proceededError = proceedError(error)
-                    res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                    res.end(proceededError.message)
-                })  
-    },
+            const validationError = await controller.editDepartment(departmentId, body)
 
-    editDepartmentAction: (req, res) => {
+            if (validationError) {
+                const bodyJSON = JSON.stringify(body)
 
-        const { departmentId } = req.params
-        
-        const body = req.body
+                const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
+                res.writeHead(301, { 'Location':  redirectUrl })
+                res.end()
+            } else {
+                res.writeHead(301, { 'Location':  '/departments' })
+                res.end()
+            }
 
-            controller.editDepartment(departmentId, body)
-                .then(validationError => {
-                    if (validationError) {
-                        const bodyJSON = JSON.stringify(body)
+        } catch(error) {
 
-                        const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
-                        res.writeHead(301, { 'Location':  redirectUrl })
-                        res.end()
-                    } else {
-                        res.writeHead(301, { 'Location':  '/departments' })
-                        res.end()
-                    }
-                })
-                .catch(error => {
-                    logger.error('editDepartmentAction', error)
-                    const proceededError = proceedError(error)
-                    res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                    res.end(proceededError.message)
-                })
+            logger.error(errorNames.departments.DEPARTMENT_UPDATE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+            
+        }
     }
 
 }

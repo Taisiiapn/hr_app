@@ -1,144 +1,148 @@
-const logger = require('../../config/logger');
+const { logger, errorNames } = require('../../config/logger');
 const { proceedError } = require('../utils');
 const controller = require('./employees.controller')
 
 
 module.exports = {
 
-    employeesRoute: (req, res) => {
+    employeesRoute: async (req, res) => {
 
-        const departmentid = req.params.departmentId
+        try {
 
-        controller.renderEmployees(departmentid)
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' })
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('employeesRoute', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
+            const departmentid = req.params.departmentId
+
+            const html = await controller.renderEmployees(departmentid)
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html)
+
+        } catch (error) {
+
+            logger.error(errorNames.employee.EMPLOYEES_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+        }
     },
 
-    addEmployeeRoute: (req, res) => {
+    addEmployeeRoute: async (req, res) => {
+
+        try {
     
-        const { departmentId } = req.params
-        const query = req.query
+            const { departmentId } = req.params
+            const query = req.query
 
-        const parameters = Object.assign({})
+            const html = await controller.renderCreateEmployee(query, departmentId)
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html)
 
-        if(query.error) {
-            parameters.error = query.error
+        } catch(error) {
+
+            logger.error(errorNames.employee.EMPLOYEE_CREATE_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
         }
-        if(query.body) {
-            parameters.values = JSON.parse(query.body)
+    },
+
+    editEmployeeRoute: async (req, res) => {
+
+        try {
+
+            const { departmentId } = req.params
+            const { employeeId } = req.params
+            const query = req.query
+
+
+            const html = await controller.renderEditEmployee(employeeId, departmentId, query)
+            res.writeHead(200, { 'Content-Type': 'text/html' })
+            res.end(html)
+
+        } catch(error) {
+
+            logger.error(errorNames.employee.EMPLOYEE_UPDATE_RENDER, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
         }
-
-        controller.renderCreateEmployee(parameters, departmentId)
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' })
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('addEmployeeRoute', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
     },
 
-    editEmployeeRoute: (req, res) => {
+    addEmployeeAction: async (req, res) => {
 
-        const { departmentId } = req.params
-        const { employeeId } = req.params
-        const query = req.query
+        try {
 
+            const { departmentId } = req.params
 
-        controller.renderEditEmployee(employeeId, departmentId, query)
-            .then(html => {
-                res.writeHead(200, { 'Content-Type': 'text/html' })
-                res.end(html)
-            })
-            .catch(error => {
-                logger.error('editEmployeeRoute', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
-    },
+            const body = req.body
 
-    addEmployeeAction: (req, res) => {
+            const validationError = await controller.addEmployee(departmentId, body)
+            if (validationError) {
+                const bodyJSON = JSON.stringify(body)
 
-        const { departmentId } = req.params
-
-        const body = req.body
-
-            controller.addEmployee(departmentId, body)
-                .then(validationError => {
-                    if (validationError) {
-                        const bodyJSON = JSON.stringify(body)
-
-                        const redirectUrl = `/departments/${departmentId}/employees/create?body=${bodyJSON}&error=${validationError}`
-                        res.writeHead(301, { 'Location':  redirectUrl });
-                        res.end();
-                    } else {
-                        res.writeHead(301, { 'Location':  `/departments/${departmentId}` })
-                        res.end()
-                    }
-                })
-                .catch(error => {
-                    logger.error('addEmployeeAction', error)
-                    const proceededError = proceedError(error)
-                    res.writeHead(proceededError.status, { 'Content-Type': 'text/plain' }) 
-                    res.end(proceededError.message)
-                })
-    },
-
-    editEmployeeAction: (req, res) => {
-
-        const { departmentId } = req.params
-        const { employeeId } = req.params
-
-        const body = req.body
-
-            controller.editEmployee(employeeId, body)
-                .then(validationError => {
-                    if (validationError) {
-                        const bodyJSON = JSON.stringify(body)
-
-                        const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
-                        res.writeHead(301, { 'Location':  redirectUrl })
-                        res.end()
-                    } else {
-                        res.writeHead(301, { 'Location':  `/departments/${departmentId}` })
-                        res.end()
-                    }
-                })
-                .catch(error => {
-                    logger.error('editEmployeeAction', error)
-                    const proceededError = proceedError(error)
-                    res.writeHead(proceededError.status, { 'Content-Type': 'text/plain'})
-                    res.end(proceededError.message)
-                })
-    },
-
-    deleteEmployeeAction: (req, res) => {
-        
-        const { departmentId } = req.params
-        const { employeeId } = req.params
-
-        controller.deleteEmployee(employeeId)
-            .then(() => {
+                const redirectUrl = `/departments/${departmentId}/employees/create?body=${bodyJSON}&error=${validationError}`
+                res.writeHead(301, { 'Location':  redirectUrl });
+                res.end();
+            } else {
                 res.writeHead(301, { 'Location':  `/departments/${departmentId}` })
                 res.end()
-            })
-            .catch(error => {
-                logger.error('deleteEmployeeAction router', error)
-                const proceededError = proceedError(error)
-                res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
-                res.end(proceededError.message)
-            })
+            }
+
+        } catch(error) {
+
+            logger.error(errorNames.employee.EMPLOYEE_CREATE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/plain' }) 
+            res.end(proceededError.message)
+        }
+    },
+
+    editEmployeeAction: async (req, res) => {
+
+        try {
+
+            const { departmentId } = req.params
+            const { employeeId } = req.params
+
+            const body = req.body
+
+            const validationError = await controller.editEmployee(employeeId, body)
+
+            if (validationError) {
+                const bodyJSON = JSON.stringify(body)
+
+                const redirectUrl = `update?body=${bodyJSON}&error=${validationError.message}`
+                res.writeHead(301, { 'Location':  redirectUrl })
+                res.end()
+            } else {
+                res.writeHead(301, { 'Location':  `/departments/${departmentId}` })
+                res.end()
+            }
+        } catch(error) {
+
+            logger.error(errorNames.employee.EMPLOYEE_UPDATE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/plain'})
+            res.end(proceededError.message)
+        }
+    },
+
+    deleteEmployeeAction: async (req, res) => {
+
+        try {
+        
+            const { departmentId } = req.params
+            const { employeeId } = req.params
+
+            await controller.deleteEmployee(employeeId)
+            res.writeHead(301, { 'Location':  `/departments/${departmentId}` })
+            res.end()
+
+        } catch(error) {
+
+            logger.error(errorNames.employee.EMPLOYEE_DELETE_ACTION, error)
+            const proceededError = proceedError(error)
+            res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
+            res.end(proceededError.message)
+
+        }
     },
 }

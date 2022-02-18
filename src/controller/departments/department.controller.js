@@ -1,9 +1,8 @@
 const ejs = require('ejs')
 const Joi = require('joi')
-const logger = require('../../config/logger')
+const { logger, errorNames } = require('../../config/logger')
 const departmentsService = require('../../services/departments.service')
 const { emitDepartmentFailedValidation } = require('../../services/eventEmitter.service')
-const { InternalError } = require('../utils')
 
 const addDepartmentSchema = Joi.object({
     name: Joi.string()
@@ -24,38 +23,27 @@ const editDepartmentSchema = Joi.object({
 
 module.exports = {
     
-    renderDepartments: () => new Promise((resolve, reject) => {
+    renderDepartments: async () => {
 
-        departmentsService.getAllDepartmentsWithViewValues()
-            .then(departments => {
-                ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
-                    {data: departments}
-                )
-                .then(html => resolve(html))
-                .catch(error => reject(error))
-            })
-            .catch(error => {
-                logger.error('renderDepartments controller', error)
-                reject(error)
-            })
-    }),
+        const departments = await departmentsService.getAllDepartmentsWithViewValues()
 
-    renderCreateDepartment: (parameters) => new Promise((resolve, reject) => {
-
-        ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
-            {parameters},
-                
+        const html = ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
+            {data: departments}
         )
-        .then(html => resolve(html))
-        .catch(error => {
-            logger.error('renderCreateDepartment controller', error)
-            reject(InternalError())
-        })
-    }),
+        return html
+    },
 
-    renderEditDepartment: (departmentId, query) => new Promise((render_resolve, render_reject) => {
+    renderCreateDepartment: async(parameters) => {
+
+        const html = ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
+            {parameters},       
+        )
+        return html
+    },
+
+    renderEditDepartment: async (departmentId, query) => {
     
-        const setUpParameters = (id, query) => new Promise((params_resolve, params_reject) => {
+        const setUpParameters = async (id, query) => {
 
             const resultParameters = {}
             const { body, error } = query
@@ -67,38 +55,26 @@ module.exports = {
                 resultParameters['error'] = error
                 
                 logger.info(error)
-                params_resolve(resultParameters)
+                return resultParameters
 
             } else {
 
-                departmentsService.getDepartmentById(id)
-                    .then(departmentValues => {
-                        resultParameters['values'] = departmentValues
-                        params_resolve(resultParameters)
-                    })
-                    .catch(error => {
-                        logger.info(error)
-                        params_reject(resultParameters)
-                    })
+                const departmentValues = await departmentsService.getDepartmentById(id)
+                resultParameters['values'] = departmentValues
+                return resultParameters
             }
-        })
+        }
 
-        setUpParameters(departmentId, query)
-            .then(parameters => {
-                ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
+        const parameters = await setUpParameters(departmentId, query)
+        const html = ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
                 {
                     id: departmentId,
                     parameters
                 })
-                .then(html => render_resolve(html))
-            })
-            .catch(error => {
-                logger.error('renderEditDepartment', error)
-                render_reject(error)
-            })
-    }),
+        return html
+    },
 
-    addDepartment: (rawValues) => new Promise((resolve, reject) => {
+    addDepartment: async (rawValues) => {
 
         // validation:
         // - dep name required
@@ -109,79 +85,54 @@ module.exports = {
 
             logger.info(error)
             emitDepartmentFailedValidation(error.details[0].message)
-            resolve(new Error(`${error}`))
+            return new Error(`${error}`)
         
         } else {
             // - unique dep name (async)
 
-            departmentsService.isTheSameDepartmentNameExists(value)
-                .then(resultTotal => {
-                    if (resultTotal !== 0) {
-                        // if validation failed
-                        logger.info(`Department name "${value.name}" is used`)
-                        emitDepartmentFailedValidation('Add department: name is used')
-                        resolve(new Error(`Department name "${value.name}" is used`))
-                    } else {
-                        // if validation pass
-                        departmentsService.addDepartment(value)
-                            .then(() => resolve())
-                            .catch(error => {
-                                logger.error(error)
-                                reject(error)
-                            })
-                    }
-                })
-                .catch(error => {
-                    logger.error('addDepartment controller', error)
-                    reject(error)
-                })
-        }
-    }),
-
-    editDepartment: (departmentId, rawValues) => new Promise((resolve, reject) => {
-
-            const { value, error } = editDepartmentSchema.validate(rawValues)
-
-            if (error) {
-
-                logger.info(error.details[0].message)
-                emitDepartmentFailedValidation(error.details[0].message)
-                resolve(new Error(`${error}`))
-            
+            const resultTotal = await departmentsService.isTheSameDepartmentNameExists(value)
+            if (resultTotal !== 0) {
+                // if validation failed
+                logger.info(`Department name "${value.name}" is used`)
+                emitDepartmentFailedValidation('Add department: name is used')
+                return new Error(`Department name "${value.name}" is used`)
             } else {
-
-                departmentsService.isTheSameDepartmentNameExists(value)
-                    .then(resultTotal => {
-                        if (resultTotal !== 0) {
-                            // if validation failed
-                            logger.info(`Department name "${value.name}" is used`)
-                            emitDepartmentFailedValidation('Edit department: name is used')
-                            resolve(new Error(`Department name "${value.name}" is used`))
-                        } else {
-                            // if validation pass
-                            departmentsService.editDepartment(departmentId, value)
-                                .then(() => resolve())
-                                .catch(error => {
-                                    logger.info(error)
-                                    reject(error)
-                                })
-                        }
-                    })
-                    .catch(error => {
-                        logger.error('editDepartment controller', error)
-                        reject(error)
-                    })
+                // if validation pass
+                await departmentsService.addDepartment(value)
             }
-    }),
+        }
+    },
 
-    deleteDepartment: (departmentId) => new Promise((resolve, reject) => {
+    editDepartment: async (departmentId, rawValues) => {
 
-        departmentsService.deleteDepartment(departmentId)
-            .then(resolve())
-            .catch(error => {
-                logger.error('deleteDepartment controller', error)
-                reject(error)
-            })
-    })
+        const { value, error } = editDepartmentSchema.validate(rawValues)
+
+        if (error) {
+
+            logger.info(error.details[0].message)
+            emitDepartmentFailedValidation(error.details[0].message)
+            return new Error(`${error}`)
+        
+        } else {
+
+            const resultTotal = await departmentsService.isTheSameDepartmentNameExists(value)
+
+            if (resultTotal !== 0) {
+                // if validation failed
+                logger.info(`Department name "${value.name}" is used`)
+                emitDepartmentFailedValidation('Edit department: name is used')
+                return new Error(`Department name "${value.name}" is used`)
+            } else {
+                // if validation pass
+                await departmentsService.editDepartment(departmentId, value)
+            }
+        }
+    },
+
+    deleteDepartment: async (departmentId) => {
+
+        await departmentsService.deleteDepartment(departmentId)
+    
+    }
 
 }

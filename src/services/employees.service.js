@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
 const { Employee, employeeWithViewValuesDTO, employeeDTO } = require('../model/employee.model')
-const logger = require('../config/logger');
+const { logger } = require('../config/logger');
 const { InternalError, BadRequestError } = require('../controller/utils');
 
 const { port, host, user, password, database } = environment.db
@@ -20,147 +20,161 @@ client.connect()
 
 module.exports = {
 
-    getEmployeesWithViewValues: (depId) => new Promise((resolve, reject) => {
+    getEmployeesWithViewValues: async (depId) => {
 
-        Employee.findAll({
-            where: {
-                departmentid: depId
-            }
-        })
-        .then(allEmployees => {
-            if (allEmployees.length === 0) {
-                reject(new BadRequestError(`Employees not found!`))
-            } else {
-                resolve(allEmployees
-                    .map(
-                        employeeInstance => 
-                            employeeWithViewValuesDTO(depId, employeeInstance)
-                    )
+        try {
+
+            const allEmployees = await Employee.findAll({
+                where: {
+                    departmentid: depId
+                }
+            })
+           
+            return allEmployees
+                .map(
+                    employeeInstance => 
+                        employeeWithViewValuesDTO(depId, employeeInstance)
                 )
-            }
-        })
-        .catch(error => {
+
+        } catch(error) {
+
             logger.error('getEmployeesWithViewValues service', error)
-            reject(new InternalError())
-        })
+            new InternalError()
+        }
 
-    }),
+    },
 
-    getEmployeeById: (id) => new Promise((resolve, reject) => {
+    getEmployeeById: async (id) => {
 
-        Employee.findByPk(id)
-        .then(employeeInstance => {
+        try {
+
+            const employeeInstance = await Employee.findByPk(id)
 
             if (employeeInstance.length === 0) {
-                reject(new BadRequestError(`Employee with id - ${id}, nothing found!`))
+                return new BadRequestError(`Employee with id - ${id}, nothing found!`)
             } else {
                 const resultEmployeeValues = employeeDTO(employeeInstance)
-                resolve(resultEmployeeValues)
+                return resultEmployeeValues
             }
-        })
-        .catch(error => {
+
+        } catch(error) {
             logger.error('getEmployeeById service', error)
-            reject(new InternalError())
-        })
+            new InternalError()
+        }
 
-    }),
+    },
 
-    addEmployee: (values) => new Promise((resolve, reject) => {
+    addEmployee: async (values) => {
 
-        const { name, salary, departmentid, birthday, email } = values
+        try {
 
-        const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
-        const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+            const { name, salary, departmentid, birthday, email } = values
 
-        Employee.create({
-            name: name,
-            salary: salaryParsed,
-            departmentid: departmentid,
-            birthday: birthdayParsed,
-            email: email
-        })
-        .then(() => resolve())
-        .catch(error => {
-            logger.error('addEmployee service', error)
-            reject(new InternalError())
-        })
-       
-    }),
+            const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
+            const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
 
-    editEmployee: (id, values) => new Promise((resolve, reject) => {
-
-        const { name, salary, birthday, email } = values
-        
-        const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
-        const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
-        
-        Employee.update({
-            name: name,
-            salary: salaryParsed,
-            birthday: birthdayParsed,
-            email: email
-        }, {
-            where: {
-                id: id
-            }
-        })
-        .then(() => resolve())
-        .catch(error => {
-            logger.error('editEmployee service', error)
-            reject(new InternalError())
-        })
-        
-    }),
-
-    deleteEmployee: (employeeId) => new Promise((resolve, reject) => {
-
-        Employee.destroy({
-            where: {
-                id: employeeId
-            }
-        })
-        .then(() => resolve())
-        .catch(error => {
-            logger.error('deleteEmployee service', error)
-            reject(new InternalError())
-        })
-        
-    }),
-
-    isTheSameEmailExists: (values) => new Promise((resolve, reject) => {
-
-        const { email } = values
-
-        Employee.count({
-            where: {
+            await Employee.create({
+                name: name,
+                salary: salaryParsed,
+                departmentid: departmentid,
+                birthday: birthdayParsed,
                 email: email
-            },
-            distinct: true
-        })
-        .then(totalResult => resolve(totalResult))
-        .catch(error => {
+            })
+        } catch(error) {
+            logger.error('addEmployee service', error)
+            new InternalError()
+        }
+       
+    },
+
+    editEmployee: async (id, values) => {
+
+        try {
+
+            const { name, salary, birthday, email } = values
+        
+            const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
+            const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+            
+            await Employee.update({
+                name: name,
+                salary: salaryParsed,
+                birthday: birthdayParsed,
+                email: email
+            }, {
+                where: {
+                    id: id
+                }
+            })
+            
+        } catch(error) {
+
+            logger.error('editEmployee service', error)
+            new InternalError()
+
+        }
+        
+    },
+
+    deleteEmployee: async (employeeId) => {
+
+        try {
+
+            await Employee.destroy({
+                where: {
+                    id: employeeId
+                }
+            })
+
+        } catch(error) {
+
+            logger.error('deleteEmployee service', error)
+            new InternalError()
+        }
+        
+    },
+
+    isTheSameEmailExists: async (values) => {
+
+        try {
+
+            const { email } = values
+
+            const totalResult = await Employee.count({
+                where: {
+                    email: email
+                },
+                distinct: true
+            })
+            return totalResult
+
+        } catch(error) {
             logger.error(error)
-            reject(new InternalError())
-        })
+            new InternalError()
+        }
+    },
 
-    }),
+    isTheSameEmailExistsWithDifferentId: async (employeeId, values) => {
 
-    isTheSameEmailExistsWithDifferentId: (employeeId, values) => new Promise((resolve, reject) => {
+        try {
 
-        const { email } = values
+            const { email } = values
 
-        Employee.count({
-            where: {
-                email: email,
-                id: { [Sequelize.Op.not]: employeeId }
-            },
-            distinct: true
-        })
-        .then(totalResult => resolve(totalResult))
-        .catch(error => {
+            const totalResult = await Employee.count({
+                where: {
+                    email: email,
+                    id: { [Sequelize.Op.not]: employeeId }
+                },
+                distinct: true
+            })
+            return totalResult
+
+        } catch(error) {
+
             logger.error('isTheSameEmailExistsWithDifferentId', error)
-            reject(new InternalError())
-        })
-    })
+            new InternalError()
+
+        }
+    }
 
 }

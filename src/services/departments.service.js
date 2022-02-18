@@ -1,5 +1,5 @@
 const { Client } = require('pg')
-const logger = require('../config/logger')
+const { logger } = require('../config/logger')
 const environment = require('../config/environment')
 const { Department, sequelize, departmentDTO, departmentWithViewValuesDTO } = require('../model/department.model')
 const { Employee } = require('../model/employee.model')
@@ -19,49 +19,44 @@ client.connect()
 
 module.exports = {
 
-    getAllDepartmentsWithViewValues: () => new Promise((resolve, reject) => {
+    getAllDepartmentsWithViewValues: async () => {
 
-        Department.findAll()
-            .then(allDepartments => {
+        try{
+            let allDepartments = await Department.findAll()
 
-                if (allDepartments.length === 0) {
-                    reject(new BadRequestError(`Departments not found!`))
-                } else {
-                    resolve(allDepartments
-                        .map(
-                            departmentInstance => 
-                                departmentWithViewValuesDTO(departmentInstance)
-                        )
+            if (allDepartments.length === 0) {
+                new BadRequestError(`Departments not found!`)
+            } else {
+                return allDepartments
+                    .map(departmentInstance => 
+                            departmentWithViewValuesDTO(departmentInstance)
                     )
-                }
-                
-            })
-            .catch(error => {
-                logger.error(error)
-                reject(new InternalError())
-            })
-        
-    }),
+            }
+        } catch(error) {
+            logger.error(error)
+            new InternalError()
+        }
+    },
 
-    getDepartmentById: (id) => new Promise((resolve, reject) => {
+    getDepartmentById: async (id) => {
 
-        Department.findByPk(id)
-            .then(departmentInstance => {
+        try {
 
-                if (departmentInstance) {
-                    const resultDepartmentValues = departmentDTO(departmentInstance)
-                    resolve(resultDepartmentValues)
-                } else {
-                    reject(new BadRequestError(`Department with id - ${id}, nothing found!`))
-                }
+            const departmentInstance = await Department.findByPk(id)
+            if (departmentInstance) {
+                const resultDepartmentValues = departmentDTO(departmentInstance)
+                return resultDepartmentValues
+            } else {
+                return new BadRequestError(`Department with id - ${id}, nothing found!`)
+            }
 
-            })
-            .catch(error => {
-                logger.error(error)
-                reject(new InternalError())
-            })
+        } catch (error) {
 
-    }),
+            logger.error(error)
+            new InternalError()
+
+        }
+    },
 
     // getDepartmentByIdWithEmployees: (id) => new Promise((resolve, reject) => {
 
@@ -88,90 +83,90 @@ module.exports = {
     //         })
 
     // }),
-    
-    addDepartment: (values) => new Promise((resolve, reject) => {
 
-        const { name } = values
+    addDepartment: async (values) => {
 
-        Department.create({
-            name: name
-        })
-            .then(() => resolve())
-            .catch(error => {
-                logger.error('addDepartment service', error)
-                reject(new InternalError())
+        try {
+
+            const { name } = values
+
+            await Department.create({
+                name: name
             })
+        } catch(error) {
+
+            logger.error('addDepartment service', error)
+            new InternalError()
+        }
   
-    }),
+    },
 
-    editDepartment: (departmentId, values) => new Promise((resolve, reject) => {
-        // todo get department instance by id and do bulk update
-        const { name } = values
+    editDepartment: async (departmentId, values) => {
 
-        Department.update({
-            name: name
-        }, {
-            where: {
-                id: departmentId
-            }
-        })
-            .then(() => resolve())
-            .catch(error => {
-                logger.error(error)
-                reject(new InternalError())
+        try {
+            const { name } = values
+
+            await Department.update({
+                name: name
+            }, {
+                where: {
+                    id: departmentId
+                }
             })
-        
-    }),
+        } catch(error) {
 
-    deleteDepartment:  (departmentId) => new Promise((resolve, reject) => {
+            logger.error(error)
+            new InternalError()
+        }
+    },
+
+    deleteDepartment: async (departmentId) => {
     
         let t;
+        
+        try {
 
-        sequelize.transaction()
-        .then(transaction => {
+            const transaction = await sequelize.transaction()
             t = transaction
 
-            Employee.destroy({
+            await Employee.destroy({
                 where: {
                     departmentid: departmentId
                 }
             }, {transaction: t})
+          
+            await Department.destroy({
+                where: {
+                    id: departmentId
+                }
+            }, {transaction: t})
 
-            .then(() => {
-                Department.destroy({
-                    where: {
-                        id: departmentId
-                    }
-                }, {transaction: t})
-
-                .then(() => {
-                    t.commit()
-                    resolve()
-                })
-            })
-        })
-        .catch(error => {
+            t.commit()
+                
+        } catch(error) {
             t.rollback()
             logger.error('deleteDepartment service', error)
-            reject(new InternalError())
-        })
-    }),
+            new InternalError()
+        }
+    },
 
-    isTheSameDepartmentNameExists: (values) => new Promise((resolve, reject) => {
+    isTheSameDepartmentNameExists: async (values) => {
 
-        const { name } = values
+        try {
+         
+            const { name } = values
 
-        Department.count({
-            where: {
-                name: name
-            },
-            distinct: true
-        })
-        .then(totalResult => resolve(totalResult))
-        .catch(error => {
+            const totalResult = await Department.count({
+                where: {
+                    name: name
+                },
+                distinct: true
+            })
+            return totalResult
+        } catch(error) {
             logger.error(error)
-            reject(new InternalError())
-        })
-    })
+            return new InternalError()
+        }
+    }
 
 }

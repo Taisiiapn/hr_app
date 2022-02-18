@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
-const logger = require('./config/logger')
+const { logger } = require('./config/logger')
 const departmentsRouter = require('./controller/departments/department.router')
 const commonController = require('./controller/common');
 const employeesRouter = require('./controller/employees/employees.router')

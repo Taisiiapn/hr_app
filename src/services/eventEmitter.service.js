@@ -36,24 +36,21 @@ const events = {
     EMPLOYEE_VALIDATION_FAIL: 'EMPLOYEE_VALIDATION_FAIL',
 }
 
-myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, (error) => {
+myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, async (error) => {
     
-    sequelize.query(`INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
-        {  model: Logs}
-    )
-    .then(() => {})
-    .catch(error => error)
-    
-})
-
-myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, (error) => {
-
-    sequelize.query(
+    await sequelize.query(
         `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
         {  model: Logs}
     )
-    .then(() => {})
-    .catch(error => error)
+    
+})
+
+myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, async (error) => {
+
+    await sequelize.query(
+        `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
+        {  model: Logs}
+    )
 
 })
 
