@@ -27,18 +27,16 @@ module.exports = {
 
         const departments = await departmentsService.getAllDepartmentsWithViewValues()
 
-        const html = ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
+        return ejs.renderFile(__dirname + '/../../views/departments/departmentsList.ejs',
             {data: departments}
         )
-        return html
     },
 
-    renderCreateDepartment: async(parameters) => {
+    renderCreateDepartment: (parameters) => {
 
-        const html = ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
+        return ejs.renderFile(__dirname + '/../../views/departments/createDepartment.ejs',
             {parameters},       
         )
-        return html
     },
 
     renderEditDepartment: async (departmentId, query) => {
@@ -66,12 +64,11 @@ module.exports = {
         }
 
         const parameters = await setUpParameters(departmentId, query)
-        const html = ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
+        return ejs.renderFile(__dirname + '/../../views/departments/editDepartment.ejs',
                 {
                     id: departmentId,
                     parameters
                 })
-        return html
     },
 
     addDepartment: async (rawValues) => {

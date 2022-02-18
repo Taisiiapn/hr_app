@@ -36,18 +36,18 @@ const events = {
     EMPLOYEE_VALIDATION_FAIL: 'EMPLOYEE_VALIDATION_FAIL',
 }
 
-myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, async (error) => {
+myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, (error) => {
     
-    await sequelize.query(
+    sequelize.query(
         `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
         {  model: Logs}
     )
     
 })
 
-myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, async (error) => {
+myEmitter.on(events.EMPLOYEE_VALIDATION_FAIL, (error) => {
 
-    await sequelize.query(
+    sequelize.query(
         `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
         {  model: Logs}
     )

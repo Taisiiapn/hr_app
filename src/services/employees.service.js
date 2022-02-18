@@ -39,7 +39,7 @@ module.exports = {
         } catch(error) {
 
             logger.error('getEmployeesWithViewValues service', error)
-            new InternalError()
+            throw new InternalError()
         }
 
     },
@@ -50,8 +50,8 @@ module.exports = {
 
             const employeeInstance = await Employee.findByPk(id)
 
-            if (employeeInstance.length === 0) {
-                return new BadRequestError(`Employee with id - ${id}, nothing found!`)
+            if (!employeeInstance) {
+                throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
             } else {
                 const resultEmployeeValues = employeeDTO(employeeInstance)
                 return resultEmployeeValues
@@ -59,7 +59,7 @@ module.exports = {
 
         } catch(error) {
             logger.error('getEmployeeById service', error)
-            new InternalError()
+            throw new InternalError()
         }
 
     },
@@ -82,7 +82,7 @@ module.exports = {
             })
         } catch(error) {
             logger.error('addEmployee service', error)
-            new InternalError()
+            throw new InternalError()
         }
        
     },
@@ -110,7 +110,7 @@ module.exports = {
         } catch(error) {
 
             logger.error('editEmployee service', error)
-            new InternalError()
+            throw new InternalError()
 
         }
         
@@ -129,50 +129,48 @@ module.exports = {
         } catch(error) {
 
             logger.error('deleteEmployee service', error)
-            new InternalError()
+            throw new InternalError()
         }
         
     },
 
-    isTheSameEmailExists: async (values) => {
+    isTheSameEmailExists: (values) => {
 
         try {
 
             const { email } = values
 
-            const totalResult = await Employee.count({
+            return Employee.count({
                 where: {
                     email: email
                 },
                 distinct: true
             })
-            return totalResult
 
         } catch(error) {
             logger.error(error)
-            new InternalError()
+            throw new InternalError()
         }
     },
 
-    isTheSameEmailExistsWithDifferentId: async (employeeId, values) => {
+    isTheSameEmailExistsWithDifferentId: (employeeId, values) => {
 
         try {
 
             const { email } = values
 
-            const totalResult = await Employee.count({
+            return Employee.count({
                 where: {
                     email: email,
                     id: { [Sequelize.Op.not]: employeeId }
                 },
                 distinct: true
             })
-            return totalResult
 
         } catch(error) {
 
             logger.error('isTheSameEmailExistsWithDifferentId', error)
-            new InternalError()
+            throw new InternalError()
 
         }
     }

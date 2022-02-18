@@ -62,14 +62,13 @@ module.exports = {
     renderEmployees: async (departmentid) => {
 
         const employees = await employeesService.getEmployeesWithViewValues(departmentid)
-        const html = await ejs.renderFile(
+        return ejs.renderFile(
             __dirname + '/../../views/employees/employeesList.ejs',
             {data: employees, departmentid}
         )
-        return html
     },
 
-    renderCreateEmployee: async (query, departmentId) => {
+    renderCreateEmployee: (query, departmentId) => {
 
         const setUpParameters = (query) => {
 
@@ -90,11 +89,10 @@ module.exports = {
 
         const parameters = setUpParameters(query)
 
-        const html = await ejs.renderFile(
+        return ejs.renderFile(
             __dirname + '/../../views/employees/createEmployee.ejs',
             {parameters, departmentId}
         )
-        return html
     },
 
     renderEditEmployee: async (employeeId, departmentId, query) => {
@@ -122,7 +120,7 @@ module.exports = {
         }
 
         const parameters = await setUpParameters(employeeId, query)
-        const html = await ejs.renderFile(
+        return ejs.renderFile(
             __dirname + '/../../views/employees/editEmployee.ejs',
             {
                 employeeId,
@@ -130,7 +128,6 @@ module.exports = {
                 parameters
             }
         )
-        return html
     },
 
     addEmployee: async (id, rawValues) => {

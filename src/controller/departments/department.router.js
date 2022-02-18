@@ -73,7 +73,7 @@ module.exports = {
 
             const { departmentId } = req.params
 
-            controller.deleteDepartment(departmentId)
+            await controller.deleteDepartment(departmentId)
         
             res.writeHead(301, { 'Location':  '/departments' })
             res.end()

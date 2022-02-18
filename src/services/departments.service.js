@@ -34,7 +34,8 @@ module.exports = {
             }
         } catch(error) {
             logger.error(error)
-            new InternalError()
+            throw new InternalError()
+            
         }
     },
 
@@ -47,13 +48,13 @@ module.exports = {
                 const resultDepartmentValues = departmentDTO(departmentInstance)
                 return resultDepartmentValues
             } else {
-                return new BadRequestError(`Department with id - ${id}, nothing found!`)
+                throw new BadRequestError(`Department with id - ${id}, nothing found!`)
             }
 
         } catch (error) {
 
             logger.error(error)
-            new InternalError()
+            throw new InternalError()
 
         }
     },
@@ -96,7 +97,7 @@ module.exports = {
         } catch(error) {
 
             logger.error('addDepartment service', error)
-            new InternalError()
+            throw new InternalError()
         }
   
     },
@@ -116,7 +117,7 @@ module.exports = {
         } catch(error) {
 
             logger.error(error)
-            new InternalError()
+            throw new InternalError()
         }
     },
 
@@ -126,8 +127,7 @@ module.exports = {
         
         try {
 
-            const transaction = await sequelize.transaction()
-            t = transaction
+            t = await sequelize.transaction()
 
             await Employee.destroy({
                 where: {
@@ -146,26 +146,26 @@ module.exports = {
         } catch(error) {
             t.rollback()
             logger.error('deleteDepartment service', error)
-            new InternalError()
+            throw new InternalError()
         }
     },
 
-    isTheSameDepartmentNameExists: async (values) => {
+    isTheSameDepartmentNameExists: (values) => {
 
         try {
          
             const { name } = values
 
-            const totalResult = await Department.count({
+            return Department.count({
                 where: {
                     name: name
                 },
                 distinct: true
             })
-            return totalResult
+            
         } catch(error) {
             logger.error(error)
-            return new InternalError()
+            throw new InternalError()
         }
     }
 
