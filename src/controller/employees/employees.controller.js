@@ -1,7 +1,7 @@
 const ejs = require('ejs')
 const Joi = require('joi');
 const { logger } = require('../../config//logger');
-const employeesService = require('../../services/employees.service');
+const employeesService = require('../../services/user.service');
 const { emitEmployeeFailedValidation } = require('../../services/eventEmitter.service');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
 

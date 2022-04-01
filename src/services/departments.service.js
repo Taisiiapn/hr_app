@@ -2,7 +2,7 @@ const { Client } = require('pg')
 const { logger } = require('../config/logger')
 const environment = require('../config/environment')
 const { Department, sequelize, departmentDTO, departmentWithViewValuesDTO } = require('../model/department.model')
-const { Employee } = require('../model/employee.model')
+const { Employee } = require('../model/user.model')
 const { InternalError, BadRequestError } = require('../controller/utils')
 
 const { port, host, user, password, database } = environment.db

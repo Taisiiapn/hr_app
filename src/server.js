@@ -5,7 +5,7 @@ const { logger } = require('./config/logger')
 const departmentsRouter = require('./controller/departments/department.router')
 const commonController = require('./controller/common');
 const employeesRouter = require('./controller/employees/employees.router')
-const { Sequelize } = require('sequelize/dist')
+const { Sequelize } = require('sequelize')
 const postgres = require('./config/sequelize')
 
 

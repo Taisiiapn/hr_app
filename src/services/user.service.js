@@ -2,9 +2,10 @@ const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
 const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
-const { Employee, employeeWithViewValuesDTO, employeeDTO } = require('../model/employee.model')
+const { User, userWithViewValuesDTO, userDTO } = require('../model/user.model')
 const { logger } = require('../config/logger');
 const { InternalError, BadRequestError } = require('../controller/utils');
+const {user_role} = require("../config/constants");
 
 const { port, host, user, password, database } = environment.db
 
@@ -24,7 +25,7 @@ module.exports = {
 
         try {
 
-            const allEmployees = await Employee.findAll({
+            const allEmployees = await User.findAll({
                 where: {
                     departmentid: depId
                 }
@@ -32,8 +33,8 @@ module.exports = {
            
             return allEmployees
                 .map(
-                    employeeInstance => 
-                        employeeWithViewValuesDTO(depId, employeeInstance)
+                    userInstance =>
+                        userWithViewValuesDTO(depId, userInstance)
                 )
 
         } catch(error) {
@@ -43,17 +44,22 @@ module.exports = {
         }
 
     },
-
+// todo rename methods and conditionals
     getEmployeeById: async (id) => {
 
         try {
 
-            const employeeInstance = await Employee.findByPk(id)
+            const employeeInstance = await User.find({
+                where: {
+                    role: user_role.ROLE_EMPLOYEE,
+                    id
+                }
+            })
 
             if (!employeeInstance) {
                 throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
             } else {
-                const resultEmployeeValues = employeeDTO(employeeInstance)
+                const resultEmployeeValues = userDTO(employeeInstance)
                 return resultEmployeeValues
             }
 
@@ -73,7 +79,7 @@ module.exports = {
             const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
             const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
 
-            await Employee.create({
+            await User.create({
                 name: name,
                 salary: salaryParsed,
                 departmentid: departmentid,
@@ -96,7 +102,7 @@ module.exports = {
             const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
             const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
             
-            await Employee.update({
+            await User.update({
                 name: name,
                 salary: salaryParsed,
                 birthday: birthdayParsed,
@@ -120,7 +126,7 @@ module.exports = {
 
         try {
 
-            await Employee.destroy({
+            await User.destroy({
                 where: {
                     id: employeeId
                 }
@@ -140,7 +146,7 @@ module.exports = {
 
             const { email } = values
 
-            return Employee.count({
+            return User.count({
                 where: {
                     email: email
                 },
@@ -159,7 +165,7 @@ module.exports = {
 
             const { email } = values
 
-            return Employee.count({
+            return User.count({
                 where: {
                     email: email,
                     id: { [Sequelize.Op.not]: employeeId }

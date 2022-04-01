@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const { Employee } = require('./employee.model');
+const { User } = require('./user.model');
 const postgres = require('../config/sequelize')
 const sequelize = new Sequelize(postgres.options)
 
@@ -60,8 +60,8 @@ const Department = sequelize.define('Department', {
   tableName: 'department'
 });
 
-Department.hasMany(Employee, {foreignKey: 'departmentid', sourceKey: 'id'})
-Employee.belongsTo(Department, {foreignKey: 'id'})
+Department.hasMany(User, {foreignKey: 'departmentid', sourceKey: 'id'})
+User.belongsTo(Department, {foreignKey: 'id'})
 
 console.log('Connected to Department bd')
 
