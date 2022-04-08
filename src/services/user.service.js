@@ -2,7 +2,7 @@ const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
 const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
-const { User, userWithViewValuesDTO, userDTO } = require('../model/user.model')
+const { User, userAuthTokenDTO, userWithViewValuesDTO, userDTO } = require('../model/user.model')
 const { logger } = require('../config/logger');
 const { InternalError, BadRequestError } = require('../controller/utils');
 const {user_role} = require("../config/constants");
@@ -20,18 +20,46 @@ const client = new Client({
 client.connect()
 
 module.exports = {
-    
-    getEmployeesWithViewValues: async (depId) => {
+
+    getUserByEmailAuth: async (email) => {
+        try {
+            const userInstance = await User.findOne({
+                where: {
+                    email
+                }
+            })
+
+            if (!userInstance) {
+                throw new BadRequestError(`${email} not found!`)
+            } else {
+                const resultUserValues = userAuthTokenDTO(userInstance)
+                return resultUserValues
+            }
+        }
+        catch(error) {
+            if (error.status) {
+                throw error
+            } else {
+                logger.error('getUserByEmailAuth service', error)
+                throw new InternalError()
+            }
+
+
+        }
+    },
+
+    getUsersWithViewValues: async (depId) => {
 
         try {
 
-            const allEmployees = await User.findAll({
+            const allUsers = await User.findAll({
                 where: {
-                    departmentid: depId
+                    departmentid: depId,
+                    role: user_role.ROLE_EMPLOYEE
                 }
             })
            
-            return allEmployees
+            return allUsers
                 .map(
                     userInstance =>
                         userWithViewValuesDTO(depId, userInstance)
@@ -39,38 +67,38 @@ module.exports = {
 
         } catch(error) {
 
-            logger.error('getEmployeesWithViewValues service', error)
+            logger.error('getUserWithViewValues service', error)
             throw new InternalError()
         }
 
     },
-// todo rename methods and conditionals
-    getEmployeeById: async (id) => {
+
+    getUserById: async (id) => {
 
         try {
 
-            const employeeInstance = await User.find({
+            const userInstance = await User.find({
                 where: {
+                    id,
                     role: user_role.ROLE_EMPLOYEE,
-                    id
                 }
             })
 
-            if (!employeeInstance) {
+            if (!userInstance) {
                 throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
             } else {
-                const resultEmployeeValues = userDTO(employeeInstance)
-                return resultEmployeeValues
+                const resultUserValues = userDTO(userInstance)
+                return resultUserValues
             }
 
         } catch(error) {
-            logger.error('getEmployeeById service', error)
+            logger.error('getUserById service', error)
             throw new InternalError()
         }
 
     },
 
-    addEmployee: async (values) => {
+    addUser: async (values) => {
 
         try {
 
@@ -80,20 +108,21 @@ module.exports = {
             const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
 
             await User.create({
-                name: name,
+                name,
                 salary: salaryParsed,
-                departmentid: departmentid,
+                departmentid,
                 birthday: birthdayParsed,
-                email: email
+                email,
+                role: user_role.ROLE_EMPLOYEE
             })
         } catch(error) {
-            logger.error('addEmployee service', error)
+            logger.error('addUser service', error)
             throw new InternalError()
         }
        
     },
 
-    editEmployee: async (id, values) => {
+    editUser: async (id, values) => {
 
         try {
 
@@ -103,38 +132,40 @@ module.exports = {
             const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
             
             await User.update({
-                name: name,
+                name,
                 salary: salaryParsed,
                 birthday: birthdayParsed,
-                email: email
+                email
             }, {
                 where: {
-                    id: id
+                    role: user_role.ROLE_EMPLOYEE,
+                    id
                 }
             })
             
         } catch(error) {
 
-            logger.error('editEmployee service', error)
+            logger.error('editUser service', error)
             throw new InternalError()
 
         }
         
     },
 
-    deleteEmployee: async (employeeId) => {
+    deleteEmployee: async (userId) => {
 
         try {
 
             await User.destroy({
                 where: {
-                    id: employeeId
+                    role: user_role.ROLE_EMPLOYEE,
+                    id: userId
                 }
             })
 
         } catch(error) {
 
-            logger.error('deleteEmployee service', error)
+            logger.error('deleteUser service', error)
             throw new InternalError()
         }
         
@@ -148,18 +179,19 @@ module.exports = {
 
             return User.count({
                 where: {
-                    email: email
+                    email,
+                    role: user_role.ROLE_EMPLOYEE
                 },
                 distinct: true
             })
 
         } catch(error) {
-            logger.error(error)
+            logger.error('isTheSameEmailExists service', error)
             throw new InternalError()
         }
     },
 
-    isTheSameEmailExistsWithDifferentId: (employeeId, values) => {
+    isTheSameEmailExistsWithDifferentId: (userId, values) => {
 
         try {
 
@@ -167,8 +199,9 @@ module.exports = {
 
             return User.count({
                 where: {
-                    email: email,
-                    id: { [Sequelize.Op.not]: employeeId }
+                    email,
+                    role: user_role.ROLE_EMPLOYEE,
+                    id: { [Sequelize.Op.not]: userId }
                 },
                 distinct: true
             })

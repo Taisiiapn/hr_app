@@ -7,9 +7,10 @@ const sequelize = new Sequelize(postgres.options);
 
 const userAuthTokenDTO = (userInstance) => {
   return {
-    //id
-    //role
-    // depID
+    id: userInstance.get('id'),
+    password: userInstance.get('password'),
+    role: userInstance.get('role'),
+    departmentid: userInstance.get('departmentid'),
   }
 }
 
@@ -20,7 +21,7 @@ const userDTO = (userInstance) => {
     birthday: userInstance.get('birthday'),
     email: userInstance.get('email'),
     id: userInstance.get('id'),
-    password: userInstance.get('password'),
+    password: userInstance.get('password')
     //role: ''
   }
 }
@@ -44,11 +45,7 @@ const userWithViewValuesDTO = (departmentId, userInstance) => {
     deleteLink: `/departments/${departmentId}/employees/${userInstance.get('id')}/delete`
   }
 }
-//todo renaming to user-
-// todo db table, model rename to user
-// todo add to user table role column
-//todo for role usages in a code- use role constants
-//todo refactor all employee services usages through the user model
+
 const User = sequelize.define('User', {
 
   id: {
@@ -79,13 +76,13 @@ const User = sequelize.define('User', {
     type: DataTypes.STRING
   },
 
-      password: {
-        type: DataTypes.STRING
-      },
+  password: {
+    type: DataTypes.STRING
+  },
 
-      role: {
-        type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
-      },
+  role: {
+    type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
+  },
   
   createdAt: {
     type: DataTypes.DATE,
@@ -97,16 +94,18 @@ const User = sequelize.define('User', {
     field: 'updated_at'
   }
 },
-{
-  sequelize: sequelize,
-  freezeTableName: true,
-  tableName: 'user'
-});
+  {
+    sequelize: sequelize,
+    freezeTableName: true,
+    tableName: 'user'
+  }
+);
 
 console.log('Connected to User bd')
 
 module.exports = {
   User,
+  userAuthTokenDTO,
   userDTO,
   userWithViewValuesDTO
 }

@@ -4,8 +4,9 @@ const { logger } = require('../../config//logger');
 const employeesService = require('../../services/user.service');
 const { emitEmployeeFailedValidation } = require('../../services/eventEmitter.service');
 const { dateStrRegExp, ageRequirementCheck, validDateCheck } = require('../utils')
+const bcrypt = require('bcryptjs')
 
-const addEmployeeSchema = Joi.object({
+const addUserSchema = Joi.object({
     name: Joi.string()
         .alphanum()
         .min(3)
@@ -34,7 +35,7 @@ const addEmployeeSchema = Joi.object({
     
 }).unknown()
 
-const editEmployeeSchema = Joi.object({
+const editUserSchema = Joi.object({
     name: Joi.string()
         .alphanum()
         .min(3)
@@ -59,9 +60,33 @@ const editEmployeeSchema = Joi.object({
 
 module.exports = {
 
+    renderLogin: (query) => {
+
+        const setUpParams = (query) => {
+            const result = {}
+            const { body, error } = query
+
+            if (error) {
+                const values = JSON.parse(body)
+                result['values'] = values
+                result['error'] = error
+                logger.info(error)
+            }
+
+            return result
+        }
+
+        const parameters = setUpParams(query)
+
+        return ejs.renderFile(
+            __dirname + '/../../views/login.ejs',
+            {parameters}
+        )
+    },
+
     renderEmployees: async (departmentid) => {
 
-        const employees = await employeesService.getEmployeesWithViewValues(departmentid)
+        const employees = await employeesService.getUsersWithViewValues(departmentid)
         return ejs.renderFile(
             __dirname + '/../../views/employees/employeesList.ejs',
             {data: employees, departmentid}
@@ -113,7 +138,7 @@ module.exports = {
 
             } else {
 
-                const employeeValues = await employeesService.getEmployeeById(id)
+                const employeeValues = await employeesService.getUserById(id)
                 resultParameters['values'] = employeeValues
                 return resultParameters   
             }
@@ -130,11 +155,46 @@ module.exports = {
         )
     },
 
+    login: async (body) => {
+
+        const { email, password } = body
+        let user
+
+        //const hashPassword = await bcrypt.hash(password, 10)
+
+        try {
+            user = await employeesService.getUserByEmailAuth(email)
+        } catch (error) {
+            if (error.status === 400) {
+                return error
+            } else {
+                throw error
+            }
+        }
+
+        const hashPassword = user.password
+        const departmentId = user.departmentid
+        const userId = user.id
+        const isValidPassword = await bcrypt.compareSync(password, hashPassword)
+
+        if (isValidPassword) {
+            return {
+                userId,
+                departmentId
+            }
+        } else {
+            logger.info("Password is invalid")
+            return new Error("Password is invalid")
+        }
+
+        //await employeesService.addUser(body)
+    },
+
     addEmployee: async (id, rawValues) => {
 
         rawValues.departmentid = id
 
-        const { value, error } = addEmployeeSchema.validate(rawValues)
+        const { value, error } = addUserSchema.validate(rawValues)
 
         if (error) {
 
@@ -152,14 +212,14 @@ module.exports = {
                 return new Error(`Employee's email "${value.email} is used"`)
             } else {
                 // if validation pass
-                await employeesService.addEmployee(value)
+                await employeesService.addUser(value)
             }
         }
     },
 
     editEmployee: async (employeeId, rawValues) => {
 
-        const { value, error } = editEmployeeSchema.validate(rawValues)
+        const { value, error } = editUserSchema.validate(rawValues)
 
         if (error) {
 
@@ -177,7 +237,7 @@ module.exports = {
                 return new Error(`Employee's email "${value.email} is used"`)
             } else {
                 // if validation pass
-                await employeesService.editEmployee(employeeId, value)
+                await employeesService.editUser(employeeId, value)
                 
             }
         }

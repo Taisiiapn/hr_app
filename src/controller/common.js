@@ -2,7 +2,7 @@ module.exports = {
 
     // redirect to /departments
     rootRouteRedirect: (req,res) => {
-        res.redirect('/departments')
+        res.redirect('/login')
     },
 
 
