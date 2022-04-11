@@ -12,7 +12,7 @@ module.exports = {
             res.end(html)
             
         } catch (error) {
-            logger.error(errorNames.departments.DEPARTMENTS_RENDER, error)
+            logger.error(errorNames.department.DEPARTMENTS_RENDER, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)
@@ -40,7 +40,7 @@ module.exports = {
 
         } catch(error) {
 
-            logger.error(errorNames.departments.DEPARTMENT_CREATE_RENDER, error)
+            logger.error(errorNames.department.DEPARTMENT_CREATE_RENDER, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)
@@ -60,7 +60,7 @@ module.exports = {
 
         } catch(error) {
 
-            logger.error(errorNames.departments.DEPARTMENT_UPDATE_RENDER, error)
+            logger.error(errorNames.department.DEPARTMENT_UPDATE_RENDER, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)
@@ -80,7 +80,7 @@ module.exports = {
 
         } catch (error) {
 
-            logger.error(errorNames.departments.DEPARTMENT_DELETE_ACTION, error)
+            logger.error(errorNames.department.DEPARTMENT_DELETE_ACTION, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)
@@ -107,7 +107,7 @@ module.exports = {
             }
         } catch(error) {
 
-            logger.error(errorNames.departments.DEPARTMENT_CREATE_ACTION, error)
+            logger.error(errorNames.department.DEPARTMENT_CREATE_ACTION, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)
@@ -138,7 +138,7 @@ module.exports = {
 
         } catch(error) {
 
-            logger.error(errorNames.departments.DEPARTMENT_UPDATE_ACTION, error)
+            logger.error(errorNames.department.DEPARTMENT_UPDATE_ACTION, error)
             const proceededError = proceedError(error)
             res.writeHead(proceededError.status, { 'Content-Type': 'text/html' })
             res.end(proceededError.message)

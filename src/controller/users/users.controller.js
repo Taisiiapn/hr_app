@@ -103,7 +103,7 @@ module.exports = {
             if (error) {
                 
                 const values = JSON.parse(body)
-                resultParameters['values'] = values,
+                resultParameters['values'] = values
                 resultParameters['error'] = error
                 
                 logger.info(error)
@@ -130,7 +130,7 @@ module.exports = {
             if (error) {
                 
                 const values = JSON.parse(body)
-                resultParameters['values'] = values,
+                resultParameters['values'] = values
                 resultParameters['error'] = error
                 
                 logger.info(error)
@@ -138,7 +138,7 @@ module.exports = {
 
             } else {
 
-                const employeeValues = await employeesService.getUserById(id)
+                const  employeeValues = await employeesService.getUserById(id)
                 resultParameters['values'] = employeeValues
                 return resultParameters   
             }

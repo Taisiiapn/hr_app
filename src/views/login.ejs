@@ -1,0 +1,82 @@
+<form method="post" action="/login" id="form-login">
+
+    <% if (parameters.values) { %>
+        <p>
+            <input type="text" maxlength="20"
+                name="email"
+                placeholder="Enter your email"
+                value="<%= parameters.values.email %>"
+            >
+        </p>
+
+        <p>
+            <input type="text" maxlength="20"
+                name="password"
+                placeholder="Enter your password"
+                value="<%= parameters.values.password %>"
+            >
+        </p>
+
+    <% } else { %>
+
+        <p>
+            <input type="text" maxlength="20"
+                name="email"
+                placeholder="Enter your email"
+            >
+        </p>
+
+        <p>
+            <input type="text" maxlength="20"
+                name="password"
+                placeholder="Enter your password"
+            >
+        </p>
+
+    <% } %>
+
+    <% if (parameters) { %>
+            <span><%= parameters.error %></span>
+    <% } %>
+
+    <p>
+           <input type="submit" value="SEND" id="login">
+    </p>
+
+</form>
+
+<!-- <script> -->
+
+<!--     document.getElementById('login').addEventListener('click', async e => { -->
+
+<!--         e.preventDefault() -->
+
+<!--         const formData = new FormData(document.getElementById('form-login')); -->
+<!--         const url = 'http://localhost:3000/login' -->
+<!--         const responseData = await postFormDataAsJson({ url, formData }); -->
+<!--         async function postFormDataAsJson({ url, formData }) { -->
+<!--             const plainFormData = Object.fromEntries(formData.entries()); -->
+<!--             const formDataJsonString = JSON.stringify(plainFormData); -->
+
+<!--             const fetchOptions = { -->
+<!--                 method: "POST", -->
+<!--                 headers: { -->
+<!--                     "Content-Type": "application/json", -->
+<!--                     Accept: "application/json", -->
+<!--                 }, -->
+<!--                 body: formDataJsonString, -->
+<!--             }; -->
+
+<!--              const response = await fetch(url, fetchOptions); -->
+
+<!--             if (!response.ok) { -->
+<!--                 const errorMessage = await response.text() -->
+<!--                 throw new Error(errorMessage) -->
+<!--             } -->
+
+<!--             return response.json() -->
+<!--         } -->
+
+<!--     }) -->
+
+<!-- </script> -->
