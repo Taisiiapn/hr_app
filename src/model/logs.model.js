@@ -1,11 +1,12 @@
 const { DataTypes } = require('sequelize')
 const { sequelize } = require('./department.model')
 
-const Logs = sequelize.define('Department', {
+const Logs = sequelize.define('Department', 
+  {
 
     level: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.STRING,
+      allowNull: false
     },
   
     message: {
@@ -20,15 +21,17 @@ const Logs = sequelize.define('Department', {
       type: DataTypes.JSON
     }
   },
+
   {
     sequelize: sequelize,
     freezeTableName: true,
     tableName: 'department',
     createdAt: false,
     updatedAt: false
-  });
+  }
+);
 
 
 module.exports = {
-    Logs
+  Logs
 }

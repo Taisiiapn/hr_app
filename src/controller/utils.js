@@ -13,7 +13,8 @@ function dateStrToDate(validDateStr) {
 
 class NotFoundError extends Error {
 
-    constructor(message) {
+    constructor() {
+        const message = 'Not found!'
         super(message)
         this.status = 404
     }
@@ -25,8 +26,6 @@ class InternalError extends Error {
         super(message)
         this.status = 500;
     }
-
-
 }
 
 class BadRequestError extends Error {

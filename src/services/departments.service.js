@@ -1,9 +1,10 @@
 const { Client } = require('pg')
 const { logger } = require('../config/logger')
 const environment = require('../config/environment')
-const { Department, sequelize, departmentDTO, departmentWithViewValuesDTO } = require('../model/department.model')
-const { Employee } = require('../model/user.model')
-const { InternalError, BadRequestError } = require('../controller/utils')
+const { Department, sequelize, departmentDTO, createdDepartmentDTO } = require('../model/department.model')
+const { User } = require('../model/user.model')
+const { BadRequestError } = require('../controller/utils')
+const { user_role } = require('../config/constants')
 
 const { port, host, user, password, database } = environment.db
 
@@ -19,7 +20,7 @@ client.connect()
 
 module.exports = {
 
-    getAllDepartmentsWithViewValues: async () => {
+    getAllDepartments: async () => {
 
         try{
             let allDepartments = await Department.findAll()
@@ -29,13 +30,13 @@ module.exports = {
             } else {
                 return allDepartments
                     .map(departmentInstance => 
-                            departmentWithViewValuesDTO(departmentInstance)
+                            departmentDTO(departmentInstance)
                     )
             }
         } catch(error) {
+
             logger.error(error)
-            throw new InternalError()
-            
+            throw error
         }
     },
 
@@ -54,36 +55,52 @@ module.exports = {
         } catch (error) {
 
             logger.error(error)
-            throw new InternalError()
-
+            throw error
         }
     },
 
-    // getDepartmentByIdWithEmployees: (id) => new Promise((resolve, reject) => {
+    getDepartmentByIdWithEmployees: async (id) => {
 
-    //     Department.findByPk({
-    //         where: {
-    //             id: id
-    //         },
-    //         include: [
-    //             {
-    //                 model: Employee, as: id,
-    //                 where: {
-    //                     departmentid: id
-    //                 },
-    //                 required: false
-    //             }
-    //         ]
-    //     })
-    //         .then(departments => {
-    //             resolve(departments)
-    //         })
-    //         .catch(error => {
-    //             logger.error(error)
-    //             reject(error)
-    //         })
+        try {
 
-    // }),
+            const department = await Department.findByPk(id, {
+                include:  {
+                    model: User,
+                    as: 'users',
+                    where: {
+                        role: user_role.ROLE_EMPLOYEE
+                    }
+                }
+            })
+
+            return department
+
+        } catch (error) {
+
+            logger.error(error)
+            throw error
+        }
+    },
+
+    getDepartmentByIdWithUsers: async (id) => {
+
+        try {
+
+            const department = await Department.findByPk(id, {
+                include:  {
+                    model: User,
+                    as: 'users'
+                }
+            })
+
+            return department
+
+        } catch (error) {
+
+            logger.error(error)
+            throw error
+        }
+    },
 
     addDepartment: async (values) => {
 
@@ -91,15 +108,17 @@ module.exports = {
 
             const { name } = values
 
-            await Department.create({
+            const result = await Department.create({
                 name: name
             })
+
+            return createdDepartmentDTO(result)
+
         } catch(error) {
 
             logger.error('addDepartment service', error)
-            throw new InternalError()
+            throw error
         }
-  
     },
 
     editDepartment: async (departmentId, values) => {
@@ -114,10 +133,12 @@ module.exports = {
                     id: departmentId
                 }
             })
+
         } catch(error) {
 
             logger.error(error)
-            throw new InternalError()
+            throw error
+
         }
     },
 
@@ -129,7 +150,7 @@ module.exports = {
 
             t = await sequelize.transaction()
 
-            await Employee.destroy({
+            await User.destroy({
                 where: {
                     departmentid: departmentId
                 }
@@ -144,9 +165,10 @@ module.exports = {
             t.commit()
                 
         } catch(error) {
+
             t.rollback()
             logger.error('deleteDepartment service', error)
-            throw new InternalError()
+            throw error
         }
     },
 
@@ -164,8 +186,10 @@ module.exports = {
             })
             
         } catch(error) {
+
             logger.error(error)
-            throw new InternalError()
+            throw error
+            
         }
     }
 

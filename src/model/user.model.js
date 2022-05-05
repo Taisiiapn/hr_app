@@ -16,19 +16,38 @@ const userAuthTokenDTO = (userInstance) => {
 
 const userDTO = (userInstance) => {
   return {
-    name: userInstance.get('name'),
+    firstName: userInstance.get('firstName'),
+    lastName: userInstance.get('lastName'),
     salary: userInstance.get('salary'),
     birthday: userInstance.get('birthday'),
     email: userInstance.get('email'),
     id: userInstance.get('id'),
-    password: userInstance.get('password')
-    //role: ''
+    password: userInstance.get('password'),
+    role: userInstance.get('role'),
+    departmentid: userInstance.get('departmentid')
+  }
+}
+
+const createdUserDTO = (userInstance) => {
+  return {
+    id: userInstance.get('id')
+  }
+}
+
+const userGetFullNameDTO = (userInstance) => {
+  return {
+    fullName: userInstance.get('fullName'),
+    email: userInstance.get('email'),
+    departmentid: userInstance.get('departmentid'),
+    id: userInstance.get('id'),
+    role: userInstance.get('role')
   }
 }
 
 const userFullDTO = (userInstance) => {
   return {
-    name: userInstance.get('name'),
+    firstName: userInstance.get('firstName'),
+    lastName: userInstance.get('lastName'),
     salary: userInstance.get('salary'),
     birthday: userInstance.get('birthday'),
     email: userInstance.get('email'),
@@ -38,62 +57,68 @@ const userFullDTO = (userInstance) => {
   }
 }
 
-const userWithViewValuesDTO = (departmentId, userInstance) => {
-  return {
-    ...userDTO(userInstance),
-    updateLink: `/departments/${departmentId}/employees/${userInstance.get('id')}/update`,
-    deleteLink: `/departments/${departmentId}/employees/${userInstance.get('id')}/delete`
-  }
-}
+const User = sequelize.define('User', 
+  {
 
-const User = sequelize.define('User', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV4,
+      allowNull: false,
+      primaryKey: true
+    },
 
-  id: {
-    type: DataTypes.UUID,
-    defaultValue: DataTypes.UUIDV4,
-    allowNull: false,
-    primaryKey: true
-  },
+    firstName: {
+      type: DataTypes.STRING
+    },
 
-  name: {
-    type: DataTypes.STRING
-  },
+    lastName: {
+      type: DataTypes.STRING
+    },
 
-  salary: {
-    type: DataTypes.INTEGER
-  },
+    salary: {
+      type: DataTypes.INTEGER
+    },
 
-  departmentid: {
-    type: DataTypes.UUID,
-    allowNull: true
-  },
+    departmentid: {
+      type: DataTypes.UUID,
+      allowNull: true
+    },
 
-  birthday: {
-    type: DataTypes.STRING
-  },
+    birthday: {
+      type: DataTypes.STRING
+    },
 
-  email: {
-    type: DataTypes.STRING
-  },
+    email: {
+      type: DataTypes.STRING
+    },
 
-  password: {
-    type: DataTypes.STRING
-  },
+    password: {
+      type: DataTypes.STRING
+    },
 
-  role: {
-    type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
-  },
+    role: {
+      type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
+    },
   
-  createdAt: {
-    type: DataTypes.DATE,
-    field: 'created_at'
+    createdAt: {
+      type: DataTypes.DATE,
+      field: 'created_at'
+    },
+
+    updatedAt: {
+      type: DataTypes.DATE,
+      field: 'updated_at'
+    },
+
+    fullName: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        const rawValue = this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
+        return rawValue ? rawValue : null;
+      }
+    }
   },
 
-  updatedAt: {
-    type: DataTypes.DATE,
-    field: 'updated_at'
-  }
-},
   {
     sequelize: sequelize,
     freezeTableName: true,
@@ -101,11 +126,11 @@ const User = sequelize.define('User', {
   }
 );
 
-console.log('Connected to User bd')
 
 module.exports = {
   User,
   userAuthTokenDTO,
   userDTO,
-  userWithViewValuesDTO
+  userGetFullNameDTO,
+  createdUserDTO
 }

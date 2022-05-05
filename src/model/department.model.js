@@ -10,6 +10,12 @@ const departmentDTO = (departmentInstance) => {
   }
 }
 
+const createdDepartmentDTO = (departmentInstance) => {
+  return {
+    id: departmentInstance.get('id')
+  }
+}
+
 const departmentFullDTO = (departmentInstance) => {
   return {
     id: departmentInstance.get('id'),
@@ -19,17 +25,6 @@ const departmentFullDTO = (departmentInstance) => {
   }
 }
 
-const departmentWithViewValuesDTO = (departmentInstance) => {
-   
-  return {
-    ...departmentDTO(departmentInstance),
-    addLink: '/departments/create',
-    updateLink: `/departments/${departmentInstance.get('id')}/update`,
-    showLink: `/departments/${departmentInstance.get('id')}`,
-    deleteLink: `/departments/${departmentInstance.get('id')}`
-  }
-
-}
 
 const Department = sequelize.define('Department', {
 
@@ -60,15 +55,20 @@ const Department = sequelize.define('Department', {
   tableName: 'department'
 });
 
-Department.hasMany(User, {foreignKey: 'departmentid', sourceKey: 'id'})
-User.belongsTo(Department, {foreignKey: 'id'})
-
-console.log('Connected to Department bd')
+Department.hasMany(User, {
+  foreignKey: 'departmentid', 
+  sourceKey: 'id', 
+  as: 'users'
+})
+User.belongsTo(Department, {
+  foreignKey: 'id',
+  as: 'department'
+})
 
 
 module.exports = {
   Department, 
   sequelize,
   departmentDTO,
-  departmentWithViewValuesDTO
+  createdDepartmentDTO
 }
