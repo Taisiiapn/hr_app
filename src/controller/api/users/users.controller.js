@@ -37,21 +37,18 @@ const addUserSchema = Joi.object({
         .valid(`ROLE_ADMIN`, `ROLE_EMPLOYEE`)
         .required(),
         
-
 }).unknown()
 
 const editUserSchema = Joi.object({
     firstName: Joi.string()
         .alphanum()
         .min(3)
-        .max(20)
-        .required(),
+        .max(20),
 
     lastName: Joi.string()
         .alphanum()
         .min(3)
-        .max(20)
-        .required(),
+        .max(20),
 
     salary: Joi.number(),
 
@@ -63,8 +60,10 @@ const editUserSchema = Joi.object({
         .message('Age required to be 18 - 75 years range'),
 
     email: Joi.string()
-        .email({ tlds: { allow: false } })
-        .required()
+        .email({ tlds: { allow: false } }),
+
+    departmentid: Joi.string()
+        .uuid()
 
 }).unknown()
 
@@ -173,9 +172,13 @@ const editUser = async (req, res, next) => {
 
         } else {
 
-            const result = await usersService.isTheSameEmailExists(value)
-            
-            if (result !== 0) {
+            let amountOfTheSameEmails
+
+            if (value.email) {
+               amountOfTheSameEmails = await usersService.isTheSameEmailExists(value) 
+            }
+
+            if (amountOfTheSameEmails !== 0 && typeof amountOfTheSameEmails !== 'undefined') {
                 // if validation failed
                 logger.info(`Edit user: "${value.email}" is used`)
                 emitUserFailedValidation('Edit user: email is used')

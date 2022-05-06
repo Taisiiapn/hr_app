@@ -33,7 +33,7 @@ const me = async (req, res, next) => {
 
         const decoded = jwtDecode(token)
 
-        const user = await employeesService.getUserById(decoded.id)
+        const user = await employeesService.getAuthUserById(decoded.id)
         res.json(user)
 
     } catch (error) {

@@ -1,8 +1,8 @@
 const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
-const { parseOptionalStringValueToColumnRecord, parseOptionalNumberValueToColumnRecord } = require('./utils')
+const { parseOptionalValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
-const { User, userAuthTokenDTO, userDTO, userGetFullNameDTO, createdUserDTO } = require('../model/user.model')
+const { User, userAuthTokenDTO, userDTO, userFullDTO, createdUserDTO } = require('../model/user.model')
 const { logger } = require('../config/logger');
 const { InternalError, BadRequestError } = require('../controller/utils');
 const {user_role} = require("../config/constants");
@@ -45,6 +45,29 @@ module.exports = {
         }
     },
 
+    getAuthUserById: async (id) => {
+        try {
+            const userInstance = await User.findOne({
+                where: {
+                    id
+                }
+            })
+
+            if (!userInstance) {
+                throw new BadRequestError('User not found!')
+            } else {
+                const resultUserValues = userAuthTokenDTO(userInstance)
+                return resultUserValues
+            }
+        }
+        catch(error) {
+
+            logger.error('getUserById service', error)
+            throw error
+
+        }
+    },
+
     getUserById: async (id) => {
         try {
             const userInstance = await User.findOne({
@@ -56,7 +79,7 @@ module.exports = {
             if (!userInstance) {
                 throw new BadRequestError('User not found!')
             } else {
-                const resultUserValues = userGetFullNameDTO(userInstance)
+                const resultUserValues = userFullDTO(userInstance)
                 return resultUserValues
             }
         }
@@ -136,15 +159,14 @@ module.exports = {
         }
     },
 
-    addUser: async (values, role, departmentid) => {
+    addUser: async (values) => {
 
         try {
 
-            const { firstName, lastName, salary, birthday, email } = values
-            const { role } = values
+            const { firstName, lastName, salary, birthday, email, role, departmentid } = values
 
-            const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
-            const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+            const salaryParsed = parseOptionalValueToColumnRecord(salary)
+            const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
 
            const result =  await User.create({
                 firstName,
@@ -170,20 +192,25 @@ module.exports = {
 
         try {
 
-            const { firstName, lastName, salary, birthday, email } = values
-        
-            const salaryParsed = parseOptionalNumberValueToColumnRecord(salary)
-            const birthdayParsed = parseOptionalStringValueToColumnRecord(birthday)
+            const { firstName, lastName, salary, birthday, email, departmentid } = values
+             
+            const salaryParsed = parseOptionalValueToColumnRecord(salary)
+            const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
             
+            const resultObj = Object.assign(values, {
+                salary: salaryParsed ? salaryParsed : undefined,
+                birthday: birthday ? birthday : undefined
+            })
+
             await User.update({
                 firstName,
                 lastName,
                 salary: salaryParsed,
                 birthday: birthdayParsed,
-                email
+                email,
+                departmentid
             }, {
                 where: {
-                    role: ROLE_EMPLOYEE,
                     id
                 }
             })
@@ -221,8 +248,7 @@ module.exports = {
 
             return User.count({
                 where: {
-                    email,
-                    role: ROLE_EMPLOYEE
+                    email
                 },
                 distinct: true
             })

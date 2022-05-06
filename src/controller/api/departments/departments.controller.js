@@ -104,9 +104,6 @@ const addDepartment = async (req, res, next) => {
 
         } else {
 
-            // check department exists 
-            await departmentsService.getDepartmentById(id)
-
             const result = await departmentsService.isTheSameDepartmentNameExists(value)
             if (result !== 0) {
                 // if validation failed
@@ -151,7 +148,11 @@ const addEmployee = async (req, res, next) => {
                 throw new BadRequestError(`"${value.email}" is used`)
             } else {
                 // if validation pass
-                const { id } = await usersService.addUser(value, ROLE_EMPLOYEE, departmentId)
+                const { id } = await usersService.addUser({
+                    ...value,
+                    role: ROLE_EMPLOYEE,
+                    departmentid: departmentId
+                })
                 const user = await usersService.getUserById(id)
                 res.send(user)
             }

@@ -7,6 +7,7 @@ const sequelize = new Sequelize(postgres.options);
 
 const userAuthTokenDTO = (userInstance) => {
   return {
+    fullName:userInstance.get('fullName'),
     id: userInstance.get('id'),
     password: userInstance.get('password'),
     role: userInstance.get('role'),
@@ -31,16 +32,6 @@ const userDTO = (userInstance) => {
 const createdUserDTO = (userInstance) => {
   return {
     id: userInstance.get('id')
-  }
-}
-
-const userGetFullNameDTO = (userInstance) => {
-  return {
-    fullName: userInstance.get('fullName'),
-    email: userInstance.get('email'),
-    departmentid: userInstance.get('departmentid'),
-    id: userInstance.get('id'),
-    role: userInstance.get('role')
   }
 }
 
@@ -130,7 +121,7 @@ const User = sequelize.define('User',
 module.exports = {
   User,
   userAuthTokenDTO,
+  userFullDTO,
   userDTO,
-  userGetFullNameDTO,
   createdUserDTO
 }
