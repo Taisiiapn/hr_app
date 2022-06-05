@@ -6,7 +6,7 @@ const jwtDecode = require("jwt-decode")
 const employeesService = require("../../services/user.service");
 const {emitAuthFailedValidation} = require("../../services/eventEmitter.service");
 const { user_role } = require('../../config/constants');
-const { BadRequestError } = require('../utils');
+const { BadRequestError, commonErrorToErrorObjDTO, ValidationError } = require('../utils');
 const { ROLE_EMPLOYEE, ROLE_ADMIN } = user_role
 
 const loginSchema = Joi.object({
@@ -29,6 +29,7 @@ const loginSchema = Joi.object({
 const me = async (req, res, next) => {
 
     try {
+
         const { token } = req.headers
 
         const decoded = jwtDecode(token)
@@ -51,9 +52,14 @@ const login = async (req, res, next) => {
 
 
         if (error) {
-            emitAuthFailedValidation(error.details[0].message)
-            logger.info(error)
-            throw new BadRequestError(error.details[0].message)
+
+            const errorObjJSON = JSON.stringify(
+                commonErrorToErrorObjDTO(error.details[0].message)
+            )
+
+            emitAuthFailedValidation(errorObjJSON)
+            logger.info('AuthFailedValidation', errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
@@ -74,15 +80,22 @@ const login = async (req, res, next) => {
                     },
                     process.env.JWT_KEY,
                     {expiresIn: "24h"}
-                    //{expiresIn: "1s"}
                 )
 
-                res.json({
-                    token: token
-                })
+                res
+                    .cookie('token', token)
+                    .json({
+                        token: token
+                    })
             } else {
-                logger.info("Password is invalid")
-                throw new BadRequestError("Password is invalid")
+
+                const errorObjJSON = JSON.stringify(
+                    commonErrorToErrorObjDTO("Password is invalid")
+                )
+
+                logger.info("Password is invalid", errorObjJSON)
+                throw new ValidationError(errorObjJSON)
+            
             }
         }
 

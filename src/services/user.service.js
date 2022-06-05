@@ -4,7 +4,7 @@ const { parseOptionalValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
 const { User, userAuthTokenDTO, userDTO, userFullDTO, createdUserDTO } = require('../model/user.model')
 const { logger } = require('../config/logger');
-const { InternalError, BadRequestError } = require('../controller/utils');
+const { InternalError, BadRequestError, ValidationError, commonErrorToErrorObjDTO } = require('../controller/utils');
 const {user_role} = require("../config/constants");
 const { ROLE_ADMIN, ROLE_EMPLOYEE } = user_role
 
@@ -31,7 +31,10 @@ module.exports = {
             })
 
             if (!userInstance) {
-                throw new BadRequestError(`${email} not found!`)
+                const errorObjJSON = JSON.stringify(
+                    commonErrorToErrorObjDTO(`${email} not found!`)
+                )
+                throw new ValidationError(errorObjJSON)
             } else {
                 const resultUserValues = userAuthTokenDTO(userInstance)
                 return resultUserValues

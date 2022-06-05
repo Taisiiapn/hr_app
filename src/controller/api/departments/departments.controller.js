@@ -2,7 +2,11 @@ const departmentsService = require("../../../services/departments.service");
 const {logger} = require("../../../config/logger");
 const {emitDepartmentFailedValidation} = require("../../../services/eventEmitter.service");
 const Joi = require("joi");
-const { BadRequestError, dateStrRegExp, validDateCheck, ageRequirementCheck } = require("../../utils");
+const { ValidationError, dateStrRegExp, 
+    validDateCheck, ageRequirementCheck,
+    joiErrorDetailsToErrorObjDTO, 
+    singleErrorToErrorObjDTO
+} = require("../../utils");
 const { user_role } = require("../../../config/constants");
 const { ROLE_EMPLOYEE, ROLE_ADMIN } = user_role;
 const usersService = require("../../../services/user.service");
@@ -53,6 +57,7 @@ const addEmployeeSchema = Joi.object({
 
 
 
+
 const getDepartments = async (req, res, next) => {
 
     try {
@@ -98,18 +103,25 @@ const addDepartment = async (req, res, next) => {
 
         if (error) {
 
-            logger.info(error)
-            emitDepartmentFailedValidation(error.details[0].message)
-            throw new BadRequestError(`${error}`)
+            const errorObj = joiErrorDetailsToErrorObjDTO(error.details)
+            const errorObjJSON = JSON.stringify(errorObj)
+
+            logger.info('addDepartmentFailedValidation', errorObjJSON)
+            emitDepartmentFailedValidation(errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
             const result = await departmentsService.isTheSameDepartmentNameExists(value)
             if (result !== 0) {
                 // if validation failed
-                logger.info(`Department name "${value.name}" is used`)
-                emitDepartmentFailedValidation('Add department: name is used')
-                throw new BadRequestError(`Department name "${value.name}" is used`)
+
+                const errorObj = singleErrorToErrorObjDTO('name', `Department name "${value.name}" is used`)
+                const errorObjJSON = JSON.stringify(errorObj)
+
+                logger.info('addDepartmentFailedValidation', errorObjJSON)
+                emitDepartmentFailedValidation(errorObjJSON)
+                throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
                 const { id } = await departmentsService.addDepartment(value)
@@ -134,18 +146,27 @@ const addEmployee = async (req, res, next) => {
 
         if (error) {
 
-            logger.info(error)
-            emitDepartmentFailedValidation(error.details[0].message)
-            throw new BadRequestError(`${error}`)
+            const errorObjJSON = JSON.stringify(
+                joiErrorDetailsToErrorObjDTO(error.details)
+            )
+
+            logger.info('DepartmentFailedValidation', errorObjJSON)
+            emitDepartmentFailedValidation(errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
             const result = await usersService.isTheSameEmailExists(value)
             if (result !== 0) {
                 // if validation failed
-                logger.info(`"${value.email}" is used`)
-                emitDepartmentFailedValidation('Add employee: email is used')
-                throw new BadRequestError(`"${value.email}" is used`)
+
+                const errorObjJSON = JSON.stringify(
+                    singleErrorToErrorObjDTO('email', `${value.email} is used`)
+                )
+
+                logger.info('addEmployeeFailedValidation', errorObjJSON)
+                emitDepartmentFailedValidation(errorObjJSON)
+                throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
                 const { id } = await usersService.addUser({
@@ -173,9 +194,13 @@ const editDepartment = async (req, res, next) => {
 
         if (error) {
 
-            logger.info(error.details[0].message)
-            emitDepartmentFailedValidation(error.details[0].message)
-            throw new BadRequestError(`${error}`)
+            const errorObjJSON = JSON.stringify(
+                joiErrorDetailsToErrorObjDTO(error.details)
+            )
+
+            logger.info('editDepartmentFailedValidation', errorObjJSON)
+            emitDepartmentFailedValidation(errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
@@ -186,9 +211,14 @@ const editDepartment = async (req, res, next) => {
 
             if (result !== 0) {
                 // if validation failed
-                logger.info(`Department name "${value.name}" is used`)
-                emitDepartmentFailedValidation('Edit department: name is used')
-                throw new BadRequestError(`Department name "${value.name}" is used`)
+
+                const errorObjJSON = JSON.stringify(
+                    singleErrorToErrorObjDTO('name', `Department name "${value.name}" is used`)    
+                ) 
+
+                logger.info('editDepartmentFailedValidation', errorObjJSON)
+                emitDepartmentFailedValidation(errorObjJSON)
+                throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
                 await departmentsService.editDepartment(id, value)

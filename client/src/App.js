@@ -1,13 +1,17 @@
-import './App.css';
+import './style.css';
+import AuthMiddleware from './components/middlewares/AuthMiddleware';
 
-function App() {
-  return (
-    <div className="App">
-      <p>
-        Taisiia
-      </p>
-    </div>
-  );
+
+const App = () => {
+
+    return (
+    
+      <div className="App">
+
+        <AuthMiddleware />
+
+      </div>
+    )
 }
 
 export default App;

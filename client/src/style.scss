@@ -1,0 +1,34 @@
+.App {
+    text-align: center;
+
+    &__logOut-btn {
+        position: absolute;
+        top: 15px;
+        right: 6%;
+    }
+
+    &__add-btn {
+        position: absolute;
+        top: 15px;
+        left: 6%;
+    }
+}
+  
+.form {
+    margin: 10% auto;
+    padding: 25px 0;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    align-items: center;
+
+    &__btn {
+        margin: 20px 0;
+    }
+}
+  
+  
+.warned-text {
+    color: rgb(235, 41, 41);
+}

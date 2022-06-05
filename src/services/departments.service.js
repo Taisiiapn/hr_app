@@ -3,7 +3,7 @@ const { logger } = require('../config/logger')
 const environment = require('../config/environment')
 const { Department, sequelize, departmentDTO, createdDepartmentDTO } = require('../model/department.model')
 const { User } = require('../model/user.model')
-const { BadRequestError } = require('../controller/utils')
+const { BadRequestError, ValidationError } = require('../controller/utils')
 const { user_role } = require('../config/constants')
 
 const { port, host, user, password, database } = environment.db

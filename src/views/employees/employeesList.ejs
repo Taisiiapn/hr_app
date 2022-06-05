@@ -17,7 +17,7 @@
 
                 document.getElementById(`delete-${'<%= item.id %>'}`).addEventListener('click', e => {
 
-                    fetch(`http://localhost:3000/departments/<%= departmentid %>/employees/<%= item.id %>/delete`, {
+                    fetch(`http://localhost:3000/api/users/delete?id=<%= item.id %>`, {
                         method: 'post'
                     })
                     .then(() => location.reload())

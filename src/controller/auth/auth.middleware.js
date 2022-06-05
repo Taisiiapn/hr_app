@@ -81,7 +81,7 @@ const complexGetAllUsersCheck = (req, res, next) => {
 }
 
 
-const tokenRequired = (req, res, next) => {
+const tokenRequired = async (req, res, next) => {
 
     const { token } = req.headers
 
@@ -89,7 +89,7 @@ const tokenRequired = (req, res, next) => {
         res.sendStatus(401)
     } 
     
-    jwt.verify(
+    await jwt.verify(
         token,
         process.env.JWT_KEY,
         (err, result) => {

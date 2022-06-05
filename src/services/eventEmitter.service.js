@@ -17,17 +17,6 @@ const client = new Client({
 
 client.connect()
 
-function departmentToSQL_DTO (values) {
-    // todo from js object to sql query values
-
-    values
-} 
-
-function emoployeeToSQL_DTO (values) {
-    
-    values
-} 
-
 
 const events = {
 

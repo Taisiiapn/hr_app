@@ -1,7 +1,10 @@
 const { logger } = require('../../../config/logger');
 const usersService = require('../../../services/user.service');
 const { emitUserFailedValidation } = require('../../../services/eventEmitter.service');
-const { dateStrRegExp, ageRequirementCheck, validDateCheck, BadRequestError } = require('../../utils')
+const { dateStrRegExp, ageRequirementCheck, 
+    validDateCheck, ValidationError,
+    joiErrorDetailsToErrorObjDTO, 
+    singleErrorToErrorObjDTO} = require('../../utils')
 const { user_role } = require('../../../config/constants');
 const { ROLE_ADMIN, ROLE_EMPLOYEE } = user_role
 const Joi = require('joi');
@@ -83,9 +86,14 @@ const getUsers = async (req, res, next) => {
         const query = req.query
         const { value, error } = querySchema.validate(query)
 
-        const users = await usersService.getUsers(value)
+        if (error) {
+// todo
+        } else {
 
-        res.json(users)
+            const users = await usersService.getUsers(value)
+            res.json(users)
+
+        }
 
     } catch (error) {
         next(error)
@@ -130,18 +138,26 @@ const createUser = async (req, res, next) => {
 
         if (error) {
 
-            logger.info(error)
-            emitUserFailedValidation(error.details[0].message)
-            throw new BadRequestError(`${error}`)
+            const errorObjJSON = JSON.stringify(
+                joiErrorDetailsToErrorObjDTO(error.details)
+            )
+
+            logger.info('createUserFailedValidation', errorObjJSON)
+            emitUserFailedValidation(errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
             const result = await usersService.isTheSameEmailExists(value)
             if (result !== 0) {
                 // if validation failed
-                logger.info(`Create user: "${value.email}" is used`)
-                emitUserFailedValidation('Create user: email is used')
-                throw new BadRequestError(`Create user: "${value.email}" is used`)
+
+                const errorObjJSON = JSON.stringify(
+                    singleErrorToErrorObjDTO('email', `Create user: "${value.email}" is used`)
+                )
+                logger.info(errorObjJSON)
+                emitUserFailedValidation(errorObjJSON)
+                throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
                 const { id } = await usersService.addUser(value)
@@ -166,9 +182,13 @@ const editUser = async (req, res, next) => {
 
         if (error) {
 
-            logger.info(error.details[0].message)
-            emitUserFailedValidation(error.details[0].message)
-            throw new BadRequestError(`${error}`)
+            const errorObjJSON = JSON.stringify(
+                joiErrorDetailsToErrorObjDTO(error.details)
+            )
+
+            logger.info('editUserFailedValidation', errorObjJSON)
+            emitUserFailedValidation(errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 
@@ -180,9 +200,14 @@ const editUser = async (req, res, next) => {
 
             if (amountOfTheSameEmails !== 0 && typeof amountOfTheSameEmails !== 'undefined') {
                 // if validation failed
-                logger.info(`Edit user: "${value.email}" is used`)
-                emitUserFailedValidation('Edit user: email is used')
-                throw new BadRequestError(`Edit user: "${value.email}" is used`)
+
+                const errorObjJSON = JSON.stringify(
+                    singleErrorToErrorObjDTO('email', `Edit user: "${value.email}" is used`)    
+                ) 
+
+                logger.info('editUserFailedValidation', errorObjJSON)
+                emitUserFailedValidation(errorObjJSON)
+                throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
                 await usersService.editUser(id, value)
