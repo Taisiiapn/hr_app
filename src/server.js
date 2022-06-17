@@ -1,6 +1,9 @@
 const express = require('express')
 const app = express()
-const { Sequelize } = require('sequelize')
+const sequelize = require('./syncDB')
+const User = require('./model/user')
+const Department = require('./model/department')
+const Logs = require('./model/logs')
 const postgres = require('./config/sequelize')
 const bodyParser = require('body-parser')
 const { logger } = require('./config/logger')
@@ -36,18 +39,6 @@ app.use('*', (err, req, res, next) => {
     next(new NotFoundError())
 })
 
-async function connectToDB() {
-    const sequelize = new Sequelize(postgres.options)
-
-    try {
-        await sequelize.authenticate()
-        console.log('Соединение с БД было успешно установлено')
-        return sequelize
-      } catch (e) {
-        console.log('Невозможно выполнить подключение к БД: ', e)
-        logger.error('Невозможно выполнить подключение к БД: ', e)
-    }
-}
 
 const postgresClient = connectToDB()
 postgres.client = postgresClient

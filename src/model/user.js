@@ -1,8 +1,7 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const postgres = require('../config/sequelize');
 const {user_role} = require("../config/constants");
 const { ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE } = user_role
-const sequelize = new Sequelize(postgres.options);
+const sequelize = require('../syncDB');
+const { DataTypes } = require('sequelize');
 
 
 const userAuthTokenDTO = (userInstance) => {
@@ -48,74 +47,79 @@ const userFullDTO = (userInstance) => {
   }
 }
 
-const User = sequelize.define('User', 
-  {
+const User = (DataTypes, sequelize) => {
 
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      primaryKey: true
-    },
+  sequelize.define('User', 
+    {
 
-    firstName: {
-      type: DataTypes.STRING
-    },
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
 
-    lastName: {
-      type: DataTypes.STRING
-    },
+      firstName: {
+        type: DataTypes.STRING,
+        field: 'firstname'
+      },
 
-    salary: {
-      type: DataTypes.INTEGER
-    },
+      lastName: {
+        type: DataTypes.STRING,
+        field: 'lastname'
+      },
 
-    departmentid: {
-      type: DataTypes.UUID,
-      allowNull: true
-    },
+      salary: {
+        type: DataTypes.INTEGER
+      },
 
-    birthday: {
-      type: DataTypes.STRING
-    },
+      departmentid: {
+        type: DataTypes.UUID,
+        allowNull: true
+      },
 
-    email: {
-      type: DataTypes.STRING
-    },
+      birthday: {
+        type: DataTypes.STRING
+      },
 
-    password: {
-      type: DataTypes.STRING
-    },
+      email: {
+        type: DataTypes.STRING
+      },
 
-    role: {
-      type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
-    },
-  
-    createdAt: {
-      type: DataTypes.DATE,
-      field: 'created_at'
-    },
+      password: {
+        type: DataTypes.STRING
+      },
 
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: 'updated_at'
-    },
+      role: {
+        type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
+      },
+    
+      createdAt: {
+        type: DataTypes.DATE,
+        field: 'createdat'
+      },
 
-    fullName: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        const rawValue = this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
-        return rawValue ? rawValue : null;
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: 'updatedat'
+      },
+
+      fullName: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          const rawValue = this.getDataValue('firstName') + ' ' + this.getDataValue('lastName');
+          return rawValue ? rawValue : null;
+        }
       }
-    }
-  },
+    },
 
-  {
-    sequelize: sequelize,
-    freezeTableName: true,
-    tableName: 'user'
-  }
-);
+    {
+      sequelize: sequelize,
+      freezeTableName: true,
+      tableName: 'user'
+    }
+  )
+};
 
 
 module.exports = {

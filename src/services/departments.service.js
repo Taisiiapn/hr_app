@@ -1,18 +1,21 @@
 const { Client } = require('pg')
 const { logger } = require('../config/logger')
 const environment = require('../config/environment')
-const { Department, sequelize, departmentDTO, createdDepartmentDTO } = require('../model/department.model')
-const { User } = require('../model/user.model')
+const { Department, departmentDTO, createdDepartmentDTO } = require('../model/department')
+const { User } = require('../model/user')
 const { BadRequestError, ValidationError } = require('../controller/utils')
 const { user_role } = require('../config/constants')
+const { sequelize } = require('../syncDB')
 
-const { port, host, user, password, database } = environment.db
+
+// const { port, host, user, password, database } = environment.db
+const { host, user, password, database } = environment.db
 
 const client = new Client({
     user: user,
     password: password,
     host: host,
-    port: +port,
+    // port: +port,
     database: database
 })
 

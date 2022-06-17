@@ -2,19 +2,21 @@ const { Client } = require('pg')
 const { Sequelize } = require('sequelize');
 const { parseOptionalValueToColumnRecord } = require('./utils')
 const environment = require('../config/environment')
-const { User, userAuthTokenDTO, userDTO, userFullDTO, createdUserDTO } = require('../model/user.model')
+const { userAuthTokenDTO, userDTO, userFullDTO, createdUserDTO } = require('../model/user')
+const { User } = require('../model/user')
 const { logger } = require('../config/logger');
 const { InternalError, BadRequestError, ValidationError, commonErrorToErrorObjDTO } = require('../controller/utils');
 const {user_role} = require("../config/constants");
 const { ROLE_ADMIN, ROLE_EMPLOYEE } = user_role
 
-const { port, host, user, password, database } = environment.db
+// const { port, host, user, password, database } = environment.db
+const { host, user, password, database } = environment.db
 
 const client = new Client({
     user: user,
     password: password,
     host: host,
-    port: +port,
+    // port: +port,
     database: database
 })
 

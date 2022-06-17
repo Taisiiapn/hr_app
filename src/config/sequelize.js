@@ -1,12 +1,14 @@
 const environment = require('./environment')
+require('dotenv').config();
 
-const { port, host, user, password, database } = environment.db
+const { host, user, password, database } = environment.db
+// const { port, host, user, password, database } = environment.db
 
 const postgres = {
 
   options: {
     host,
-    port,
+    // port,
     database,
     username: user,
     password,

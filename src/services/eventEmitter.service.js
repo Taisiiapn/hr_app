@@ -1,17 +1,18 @@
 const EventEmitter = require('events');
 const myEmitter = new EventEmitter();
-const { sequelize } = require('../model/department.model')
+const sequelize = require('../syncDB')
 const { Client } = require('pg')
 const environment = require('../config/environment');
-const { Logs } = require('../model/logs.model');
+const { Logs } = require('../model/logs');
 
-const { port, host, user, password, database } = environment.db
+const { host, user, password, database } = environment.db
+// const { port, host, user, password, database } = environment.db
 
 const client = new Client({
     user: user,
     password: password,
     host: host,
-    port: +port,
+    // port: +port,
     database: database 
 })
 
