@@ -1,31 +1,25 @@
-const { DataTypes } = require('sequelize')
-const sequelize = require('../syncDB')
+const LogsModelBuilder = (DataTypes, sequelize) => {
 
-
-module.exports = (DataTypes, sequelize) => {
-
-  const Logs = sequelize.define('Logs', 
+  const Logs = sequelize.define('Logs',
     {
 
       level: {
         type: DataTypes.STRING,
         allowNull: false
       },
-    
+
       message: {
         type: DataTypes.STRING
       },
-    
+
       timestamp: {
         type: DataTypes.DATE
       },
-    
+
       meta: {
         type: DataTypes.JSON
       }
-    },
-
-    {
+    }, {
       sequelize: sequelize,
       freezeTableName: true,
       tableName: 'logs',
@@ -33,5 +27,9 @@ module.exports = (DataTypes, sequelize) => {
       updatedAt: false
     }
   )
+  return Logs
+}
 
+module.exports = {
+  builder: LogsModelBuilder
 }

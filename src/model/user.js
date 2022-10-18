@@ -1,7 +1,5 @@
 const {user_role} = require("../config/constants");
 const { ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE } = user_role
-const sequelize = require('../syncDB');
-const { DataTypes } = require('sequelize');
 
 
 const userAuthTokenDTO = (userInstance) => {
@@ -47,9 +45,9 @@ const userFullDTO = (userInstance) => {
   }
 }
 
-const User = (DataTypes, sequelize) => {
+const UserModelBuilder = (DataTypes, sequelize) => {
 
-  sequelize.define('User', 
+  const User = sequelize.define('User',
     {
 
       id: {
@@ -93,7 +91,7 @@ const User = (DataTypes, sequelize) => {
       role: {
         type: DataTypes.ENUM(ROLE_ADMIN, ROLE_MODERATOR, ROLE_EMPLOYEE)
       },
-    
+
       createdAt: {
         type: DataTypes.DATE,
         field: 'createdat'
@@ -119,11 +117,21 @@ const User = (DataTypes, sequelize) => {
       tableName: 'user'
     }
   )
+
+  User.associate = (models) => {
+    const {User: UserInitialised, Department} = models;
+    UserInitialised.belongsTo(Department, {
+      foreignKey: 'departmentid',
+      as: 'department'
+    })
+  }
+
+  return User
 };
 
 
 module.exports = {
-  User,
+  builder: UserModelBuilder,
   userAuthTokenDTO,
   userFullDTO,
   userDTO,

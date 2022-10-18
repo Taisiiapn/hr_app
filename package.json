@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "syncDB": "node src/syncDB.js",
+    "syncDB:force": "FORCE_SYNC=true node src/syncDB.js",
     "start:prod": "npm run build-back && node dist/server.js",
     "start:dev": "nodemon src/server.js NODE_ENV='development'",
     "build-back": "babel server.js -d dist"

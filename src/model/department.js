@@ -1,7 +1,3 @@
-const { DataTypes } = require('sequelize');
-const { User } = require('./user');
-const sequelize = require('../syncDB')
-
 const departmentDTO = (departmentInstance) => {
   return {
     id: departmentInstance.get('id'),
@@ -25,51 +21,52 @@ const departmentFullDTO = (departmentInstance) => {
 }
 
 
-module.exports = (DataTypes, sequelize) => {
-  
-  const Department = sequelize.define('Department', {
+const DepartmentModelBuilder = (DataTypes, sequelize) => {
 
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
-      primaryKey: true
-    },
+  const Department = sequelize.define('Department', 
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+        allowNull: false,
+        primaryKey: true
+      },
 
-    name: {
-      type: DataTypes.STRING
-    },
+      name: {
+        type: DataTypes.STRING
+      },
 
-    createdAt: {
-      type: DataTypes.DATE,
-      field: 'createdat'
-    },
+      createdAt: {
+        type: DataTypes.DATE,
+        field: 'createdat'
+      },
 
-    updatedAt: {
-      type: DataTypes.DATE,
-      field: 'updatedat'
-    }
-  },
-  {
-    sequelize: sequelize,
-    freezeTableName: true,
-    tableName: 'department'
-  })
+      updatedAt: {
+        type: DataTypes.DATE,
+        field: 'updatedat'
+      }
+    }, 
+    {
+      sequelize: sequelize,
+      freezeTableName: true,
+      tableName: 'department'
+    })
 
-  Department.hasMany(User, {
-    foreignKey: 'departmentid', 
-    sourceKey: 'id', 
-    as: 'users'
-  })
+  Department.associate = (models) => {
+    const {Department: DepartmentInitialized, User} = models;
+    DepartmentInitialized.hasMany(User, {
+      foreignKey: 'departmentid',
+      sourceKey: 'id',
+      as: 'user'
+    })
 
-  User.belongsTo(Department, {
-    foreignKey: 'id',
-    as: 'department'
-  })
+  }
 
+  return Department
 }
 
 module.exports = {
+  builder: DepartmentModelBuilder,
   departmentDTO,
   createdDepartmentDTO
 }
