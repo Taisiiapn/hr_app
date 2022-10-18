@@ -11,7 +11,7 @@ const {
 const defaultState = {
     isLoading: false,
     data: null,
-    error: ''
+    error: null
 }
 
 export const meReducer = (state=defaultState, action) => {

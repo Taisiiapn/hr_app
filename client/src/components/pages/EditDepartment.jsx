@@ -19,21 +19,16 @@ const EditDepartmentPage = (props) => {
     const params = useParams()
     const { id } = params
 
-    const formErrorReduxState = useSelector(state => state.form.error)
+    const formFieldsReduxState = useSelector(state => state.form.fields)
     const isLoadingFormValuesReduxState = useSelector(state => state.form.isLoading)
 
-    const depReduxState = useSelector(state => state.departments)
-    const isLoadingDepartmentStateRedux = depReduxState.isLoading
-    const depNameReduxState = {
-        "name": depReduxState.departmentById.name
-    }
-    // const isDepartmentUpdated = depReduxState.updatedDepartment
+    const departmentByIdReduxState = useSelector(state => state.departments.departmentById)
+    const isLoadingDepartmentStateRedux = useSelector(state => state.departments.isLoading)
+    let depNameReduxState = {
+        'name': departmentByIdReduxState.name
+    }    
     
-    
-    // const formIsDirty = textError 
-    //     ? true 
-    //     : false
-    const [isLoadingDepartment, setIsLoadingDepartment] = useState(isLoadingDepartmentStateRedux)
+    // const [isLoadingDepartment, setIsLoadingDepartment] = useState(isLoadingDepartmentStateRedux)
     const [isValuesSent, setIsValuesSent] = useState(false)
 
 
@@ -41,40 +36,49 @@ const EditDepartmentPage = (props) => {
         dispatch(actionGetDepById(id))
         // eslint-disable-next-line
     }, [])
+
+
+    // useEffect(() => {
+    //     depNameReduxState['name'] = departmentByIdReduxState.name
+    //     // eslint-disable-next-line
+    // }, [departmentByIdReduxState])
     
 
-    useEffect(() => {
-        setIsLoadingDepartment(isLoadingDepartment)
-    }, [isLoadingDepartment])
+    // useEffect(() => {
+    //     setIsLoadingDepartment(isLoadingDepartmentStateRedux)
+    // }, [isLoadingDepartmentStateRedux])
 
     useEffect(() => {
-        if (!!formErrorReduxState 
-            && !isLoadingFormValuesReduxState 
-            && isValuesSent) {
+
+        const isErrorInForm = formFieldsReduxState.some(field => field.error)
+
+        if (isValuesSent 
+            && !isErrorInForm 
+            && !isLoadingDepartmentStateRedux) {
             navigate('/departments')
         }
         // eslint-disable-next-line
-    }, [formErrorReduxState, isLoadingFormValuesReduxState])
+    }, [formFieldsReduxState, isLoadingFormValuesReduxState])
 
 
     const onSubmit = values => {
             
         dispatch(putDepartment(id, values))
-        isLoadingFormValuesReduxState && setIsValuesSent(true) // todo check isLoading
+
+        setIsValuesSent(true) // todo check isLoading
 
     }
 
 
     return (
         <>
-            {isLoadingDepartment 
+            {isLoadingDepartmentStateRedux 
                 ? <LoadingPage /> 
                 : <form className='form'>
 
                     <FormBuilder 
                         formConfig={formConfig}
                         onSubmit={onSubmit}
-                        // formIsDirty={formIsDirty}
                         initialValue={depNameReduxState}
                     />
 

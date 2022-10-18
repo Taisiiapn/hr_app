@@ -7,7 +7,7 @@ export const actionFunctions = {
 
     setMeData: (payload) => ({
         type: actionTypes.SET_ME_DATA, 
-        payload
+        payload: payload.data
     }),
 
     removeMeData: () => {
