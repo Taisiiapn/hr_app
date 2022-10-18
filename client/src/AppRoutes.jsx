@@ -20,7 +20,9 @@ const AppRoutes = () => {
     return (
         <Routes>
 
-            <Route exact path="/" element={<Navigate to="/departments" />} />
+            <Route exact path="/" 
+                element={<Navigate to="/departments" />} 
+            />
 
             <Route path='/login' 
                 element={<LoginPage formConfig={formLoginConfig} />}

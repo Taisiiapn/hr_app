@@ -8,60 +8,50 @@ import { postNewDepartment } from '../../store/actions/postNewDepartment';
 
 
 
-export const CreateDepartmentPage = (props) => {
+export const CreateDepartmentPage = ({ formConfig }) => {
 
-    
-    const { formConfig } = props
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
-    const formErrorReduxState = useSelector(state => state.form.error)
-    const isLoadingFormValuesRedux = useSelector(state => state.form.isLoading)
+    const formFieldsReduxState = useSelector(state => state.form.fields)
+    const isLoadingFormValuesReduxState = useSelector(state => state.form.isLoading)
 
     
     const [isValuesSent, setIsValuesSent] = useState(false)
-    const [textError, setTextError] = useState(formErrorReduxState)
-    const formIsDirty = textError ? true : false
 
     useEffect(() => {
-        setTextError(formErrorReduxState)
-    }, [formErrorReduxState])
 
-    
-    useEffect(() => {
-        if (!formErrorReduxState 
-            && !isLoadingFormValuesRedux 
-            && isValuesSent) {
-            navigate('/departments')
+        const isErrorInForm = formFieldsReduxState.some(field => field.error)
+
+        if (isValuesSent) {
+            if (!isErrorInForm 
+                && !isLoadingFormValuesReduxState) {
+                navigate('/departments')
+            }
         }
+        
         // eslint-disable-next-line
-    }, [formErrorReduxState, isLoadingFormValuesRedux])
+    }, [formFieldsReduxState, isLoadingFormValuesReduxState])
+
+    const onSubmit = (fieldsValue) => {
+
+        dispatch(postNewDepartment(fieldsValue))
 
 
-    const onSubmit = values => {
-            
-        dispatch(postNewDepartment(values))
-        isLoadingFormValuesRedux && setIsValuesSent(true)
-
+        // if (isLoadingFormValuesReduxState) {
+            setIsValuesSent(true)     // todo check isLoading
+        // } 
     }
 
 
     return (
-        <>
-            {<form className='form'>
+        <form className='form'>
 
-                <span className='warned-text'>
-                    {textError}
-                </span>
+            <FormBuilder 
+                formConfig={formConfig}
+                onSubmit={onSubmit}
+            />
 
-                <FormBuilder 
-                    formConfig={formConfig}
-                    onSubmit={onSubmit}
-                    formIsDirty={formIsDirty}
-                />
-
-            </form>}
-        </>
+        </form>
     )
 }

@@ -1,4 +1,4 @@
-import { actionFormTypes } from '../actions/form'
+import { actionFormTypes } from '../actions/form';
 
 const {
 
@@ -40,6 +40,7 @@ export const formReducer = (state=defaultState, action) => {
         case FIELD_VALUE_CHANGE:
             return{
                 ...state,
+                // eslint-disable-next-line
                 fields: state.fields.map(field => {
                     if (field.name === action.fieldName) {
                         return {
@@ -47,12 +48,14 @@ export const formReducer = (state=defaultState, action) => {
                             value: action.value
                         }
                     }
+                    return {...field}
                 })
             }
 
-        case FIELD_ERROR_CHANGE: 
+        case FIELD_ERROR_CHANGE:
             return{
                 ...state,
+                // eslint-disable-next-line
                 fields: state.fields.map((field) => {
                     if (field.name === action.fieldName) {
                         return {
@@ -60,6 +63,7 @@ export const formReducer = (state=defaultState, action) => {
                             error: action.error
                         }
                     }
+                    return 
                 })
             }
 
