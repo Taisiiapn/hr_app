@@ -57,10 +57,17 @@ module.exports = {
       throw error
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
     }
   },
 
+=======
+
+    }
+  },
+
+>>>>>>> Stashed changes
 =======
 
     }
@@ -133,7 +140,11 @@ module.exports = {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 =======
     } catch (error) {
 >>>>>>> Stashed changes
@@ -159,6 +170,7 @@ module.exports = {
           id
         }
       })
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 
@@ -283,6 +295,33 @@ module.exports = {
       const salaryParsed = parseOptionalValueToColumnRecord(salary)
       const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
 
+=======
+
+      if (!userInstance) {
+        throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
+      } else {
+        const resultUserValues = userDTO(userInstance)
+        return resultUserValues
+      }
+
+    } catch (error) {
+
+      logger.error('getUserById service', error)
+      throw error
+
+    }
+  },
+
+  addUser: async (values) => {
+
+    try {
+
+      const {firstName, lastName, salary, birthday, email, role, departmentid} = values
+
+      const salaryParsed = parseOptionalValueToColumnRecord(salary)
+      const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
+
+>>>>>>> Stashed changes
       const result = await User.create({
         firstName,
         lastName,
@@ -295,6 +334,9 @@ module.exports = {
 
       return createdUserDTO(result)
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
     } catch (error) {
 
@@ -302,6 +344,9 @@ module.exports = {
       throw error
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
@@ -315,7 +360,11 @@ module.exports = {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       const { firstName, lastName, salary, birthday, email, departmentid } = values
+=======
+      const {firstName, lastName, salary, birthday, email, departmentid} = values
+>>>>>>> Stashed changes
 =======
       const {firstName, lastName, salary, birthday, email, departmentid} = values
 >>>>>>> Stashed changes
@@ -347,6 +396,7 @@ module.exports = {
         }
       })
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -455,6 +505,49 @@ module.exports = {
 
     } catch (error) {
 
+=======
+
+    } catch (error) {
+
+      logger.error('editUser service', error)
+      throw error
+    }
+  },
+
+  deleteEmployee: async (userId) => {
+
+    try {
+
+      await User.destroy({
+        where: {
+          role: ROLE_EMPLOYEE,
+          id: userId
+        }
+      })
+
+    } catch (error) {
+
+      logger.error('deleteUser service', error)
+      throw error
+    }
+  },
+
+  isTheSameEmailExists: (values) => {
+
+    try {
+
+      const {email} = values
+
+      return User.count({
+        where: {
+          email
+        },
+        distinct: true
+      })
+
+    } catch (error) {
+
+>>>>>>> Stashed changes
       logger.error('isTheSameEmailExists service', error)
       throw error
     }
@@ -466,6 +559,7 @@ module.exports = {
 
       const {email} = values
 
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 =======
   deleteEmployee: async (userId) => {
@@ -512,11 +606,14 @@ module.exports = {
 
       const {email} = values
 
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
       return User.count({
         where: {
           email,
           role: ROLE_EMPLOYEE,
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
@@ -530,6 +627,9 @@ module.exports = {
 =======
           id: {[Sequelize.Op.not]: userId}
 >>>>>>> Stashed changes
+=======
+          id: {[Sequelize.Op.not]: userId}
+>>>>>>> Stashed changes
         },
         distinct: true
       })
@@ -537,7 +637,11 @@ module.exports = {
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 =======
     } catch (error) {
 >>>>>>> Stashed changes
