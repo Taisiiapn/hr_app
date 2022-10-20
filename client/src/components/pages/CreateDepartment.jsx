@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormBuilder from '../formBuilder/FormBuilder';
 import { postNewDepartment } from '../../store/actions/postNewDepartment';
+import {Form} from 'react-bootstrap';
 
 
 
@@ -45,13 +46,13 @@ export const CreateDepartmentPage = ({ formConfig }) => {
 
 
     return (
-        <form className='form'>
+        <Form>
 
             <FormBuilder 
                 formConfig={formConfig}
                 onSubmit={onSubmit}
             />
 
-        </form>
+        </Form>
     )
 }

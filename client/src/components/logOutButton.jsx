@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { actionFunctions } from '../store/actions/me';
-
+import {Button} from 'react-bootstrap';
 const { removeMeData } = actionFunctions;
 
 
@@ -20,9 +20,10 @@ const LogOutButton = () => {
 
 
     return (
-        <button className='App__logOut-btn' onClick={logOut}>
+        <Button variant="outline-secondary" 
+            onClick={logOut}>
             Log Out
-        </button>
+        </Button>
     )
     
 }
