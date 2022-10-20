@@ -1,11 +1,17 @@
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 -- psql --u js_test --password
 
 --   sudo service postgresql restart
 
 
 
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 INSERT INTO "department" (id, name)
 VALUES ('ab6e5194-3744-48d6-b6cc-bc6ad2ffc66c', 
