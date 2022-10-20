@@ -55,10 +55,17 @@ module.exports = {
 
       logger.error('getUserById service', error)
       throw error
+<<<<<<< Updated upstream
 
     }
   },
 
+=======
+
+    }
+  },
+
+>>>>>>> Stashed changes
   getUserById: async (id) => {
     try {
       const userInstance = await User.findOne({
@@ -117,7 +124,11 @@ module.exports = {
       )
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 =======
     } catch (error) {
 >>>>>>> Stashed changes
@@ -137,6 +148,7 @@ module.exports = {
           id
         }
       })
+<<<<<<< Updated upstream
 
       if (!userInstance) {
         throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
@@ -195,6 +207,50 @@ module.exports = {
       logger.error('addUser service', error)
       throw error
 
+=======
+
+      if (!userInstance) {
+        throw new BadRequestError(`Employee with id - ${id}, nothing found!`)
+      } else {
+        const resultUserValues = userDTO(userInstance)
+        return resultUserValues
+      }
+
+    } catch (error) {
+
+      logger.error('getUserById service', error)
+      throw error
+
+    }
+  },
+
+  addUser: async (values) => {
+
+    try {
+
+      const {firstName, lastName, salary, birthday, email, role, departmentid} = values
+
+      const salaryParsed = parseOptionalValueToColumnRecord(salary)
+      const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
+
+      const result = await User.create({
+        firstName,
+        lastName,
+        salary: salaryParsed,
+        departmentid,
+        birthday: birthdayParsed,
+        email,
+        role: role
+      })
+
+      return createdUserDTO(result)
+
+    } catch (error) {
+
+      logger.error('addUser service', error)
+      throw error
+
+>>>>>>> Stashed changes
     }
   },
 
@@ -203,7 +259,11 @@ module.exports = {
     try {
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
       const { firstName, lastName, salary, birthday, email, departmentid } = values
+=======
+      const {firstName, lastName, salary, birthday, email, departmentid} = values
+>>>>>>> Stashed changes
 =======
       const {firstName, lastName, salary, birthday, email, departmentid} = values
 >>>>>>> Stashed changes
@@ -230,7 +290,11 @@ module.exports = {
       })
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 =======
     } catch (error) {
 >>>>>>> Stashed changes
@@ -250,6 +314,7 @@ module.exports = {
           id: userId
         }
       })
+<<<<<<< Updated upstream
 
 <<<<<<< Updated upstream
     } catch(error) {
@@ -300,12 +365,52 @@ module.exports = {
       const {email} = values
 >>>>>>> Stashed changes
 
+=======
+
+    } catch (error) {
+
+      logger.error('deleteUser service', error)
+      throw error
+    }
+  },
+
+  isTheSameEmailExists: (values) => {
+
+    try {
+
+      const {email} = values
+
+      return User.count({
+        where: {
+          email
+        },
+        distinct: true
+      })
+
+    } catch (error) {
+
+      logger.error('isTheSameEmailExists service', error)
+      throw error
+    }
+  },
+
+  isTheSameEmailExistsWithDifferentId: (userId, values) => {
+
+    try {
+
+      const {email} = values
+
+>>>>>>> Stashed changes
       return User.count({
         where: {
           email,
           role: ROLE_EMPLOYEE,
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
           id: { [Sequelize.Op.not]: userId }
+=======
+          id: {[Sequelize.Op.not]: userId}
+>>>>>>> Stashed changes
 =======
           id: {[Sequelize.Op.not]: userId}
 >>>>>>> Stashed changes
@@ -314,7 +419,11 @@ module.exports = {
       })
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 =======
     } catch (error) {
 >>>>>>> Stashed changes
