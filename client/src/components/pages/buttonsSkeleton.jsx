@@ -2,7 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteDepartment } from '../../store/actions/deleteDepartment';
-import { actionGetDepById } from '../../store/actions/getDepartmentById';
+import {actionGetDepById} from '../../store/actions/getDepartmentById';
 
 
 const Buttons = ({ props, parent }) => {

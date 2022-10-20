@@ -15,7 +15,6 @@ const {
 
 export const login = ({ email, password }) => dispatch => {
 
-    
     dispatch(setIsLoadingFormValues(true))
     
     axios.post('http://localhost:3000/auth/login', {

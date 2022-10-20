@@ -83,7 +83,7 @@ module.exports = {
 
   getUsers: async (value) => {
 
-    const { role, departmentId } = value
+    const {role, departmentId} = value
     let users = [];
 
     try {
@@ -116,7 +116,11 @@ module.exports = {
           userDTO(userInstance)
       )
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('getUserWithViewValues service', error)
       throw error
@@ -141,7 +145,11 @@ module.exports = {
         return resultUserValues
       }
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('getUserById service', error)
       throw error
@@ -153,12 +161,20 @@ module.exports = {
 
     try {
 
+<<<<<<< Updated upstream
       const { firstName, lastName, salary, birthday, email, role, departmentid } = values
+=======
+      const {firstName, lastName, salary, birthday, email, role, departmentid} = values
+>>>>>>> Stashed changes
 
       const salaryParsed = parseOptionalValueToColumnRecord(salary)
       const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
 
+<<<<<<< Updated upstream
       const result =  await User.create({
+=======
+      const result = await User.create({
+>>>>>>> Stashed changes
         firstName,
         lastName,
         salary: salaryParsed,
@@ -170,7 +186,11 @@ module.exports = {
 
       return createdUserDTO(result)
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('addUser service', error)
       throw error
@@ -182,7 +202,11 @@ module.exports = {
 
     try {
 
+<<<<<<< Updated upstream
       const { firstName, lastName, salary, birthday, email, departmentid } = values
+=======
+      const {firstName, lastName, salary, birthday, email, departmentid} = values
+>>>>>>> Stashed changes
 
       const salaryParsed = parseOptionalValueToColumnRecord(salary)
       const birthdayParsed = parseOptionalValueToColumnRecord(birthday)
@@ -205,7 +229,11 @@ module.exports = {
         }
       })
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('editUser service', error)
       throw error
@@ -223,7 +251,11 @@ module.exports = {
         }
       })
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('deleteUser service', error)
       throw error
@@ -234,7 +266,11 @@ module.exports = {
 
     try {
 
+<<<<<<< Updated upstream
       const { email } = values
+=======
+      const {email} = values
+>>>>>>> Stashed changes
 
       return User.count({
         where: {
@@ -243,7 +279,11 @@ module.exports = {
         distinct: true
       })
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('isTheSameEmailExists service', error)
       throw error
@@ -254,18 +294,30 @@ module.exports = {
 
     try {
 
+<<<<<<< Updated upstream
       const { email } = values
+=======
+      const {email} = values
+>>>>>>> Stashed changes
 
       return User.count({
         where: {
           email,
           role: ROLE_EMPLOYEE,
+<<<<<<< Updated upstream
           id: { [Sequelize.Op.not]: userId }
+=======
+          id: {[Sequelize.Op.not]: userId}
+>>>>>>> Stashed changes
         },
         distinct: true
       })
 
+<<<<<<< Updated upstream
     } catch(error) {
+=======
+    } catch (error) {
+>>>>>>> Stashed changes
 
       logger.error('isTheSameEmailExistsWithDifferentId', error)
       throw error

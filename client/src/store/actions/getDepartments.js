@@ -1,4 +1,3 @@
-// import { instanceAxios } from "../index";
 import axios from "axios";
 import { departmentsActionFunctions } from './departments';
 
@@ -18,7 +17,6 @@ export const actionGetDeps = () => dispatch => {
 
     dispatch(departmentsAreLoading(true))
 
-    // instanceAxios.get('/api/departments', {
     axios.get('http://localhost:3000/api/departments', {
         headers: {
             token: localStorageToken

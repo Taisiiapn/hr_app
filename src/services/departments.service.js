@@ -13,7 +13,7 @@ module.exports = {
 
   getAllDepartments: async () => {
 
-    try{
+    try {
       let allDepartments = await Department.findAll()
 
       if (allDepartments.length === 0) {
@@ -24,7 +24,7 @@ module.exports = {
             departmentDTO(departmentInstance)
           )
       }
-    } catch(error) {
+    } catch (error) {
 
       logger.error(error)
       throw error
@@ -55,7 +55,7 @@ module.exports = {
     try {
 
       const department = await Department.findByPk(id, {
-        include:  {
+        include: {
           model: User,
           as: 'users',
           where: {
@@ -78,7 +78,7 @@ module.exports = {
     try {
 
       const department = await Department.findByPk(id, {
-          include:  {
+        include: {
           model: User,
           as: 'users'
         }
@@ -97,7 +97,7 @@ module.exports = {
 
     try {
 
-      const { name } = values
+      const {name} = values
 
       const result = await Department.create({
         name: name
@@ -105,7 +105,7 @@ module.exports = {
 
       return createdDepartmentDTO(result)
 
-    } catch(error) {
+    } catch (error) {
 
       logger.error('addDepartment service', error)
       throw error
@@ -115,7 +115,7 @@ module.exports = {
   editDepartment: async (departmentId, values) => {
 
     try {
-      const { name } = values
+      const {name} = values
 
       await Department.update({
         name: name
@@ -125,7 +125,7 @@ module.exports = {
         }
       })
 
-    } catch(error) {
+    } catch (error) {
 
       logger.error(error)
       throw error
@@ -155,7 +155,7 @@ module.exports = {
 
       t.commit()
 
-    } catch(error) {
+    } catch (error) {
 
       t.rollback()
       logger.error('deleteDepartment service', error)
@@ -167,7 +167,7 @@ module.exports = {
 
     try {
 
-      const { name } = values
+      const {name} = values
 
       return Department.count({
         where: {
@@ -176,7 +176,7 @@ module.exports = {
         distinct: true
       })
 
-    } catch(error) {
+    } catch (error) {
 
       logger.error(error)
       throw error

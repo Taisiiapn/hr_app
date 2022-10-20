@@ -7,15 +7,21 @@ const FormField = (
         { type, placeholder, onChange, name }
     ) => {
 
-        const getFieldFromFormStateByName = (fieldName) => 
-            (state) => 
-            state.form.fields.find(field => field.name === fieldName)
+        // const getFieldFromFormStateByName = (fieldName) => 
+        //     (state) => 
+        //     state.form.fields.find(field => field.name === fieldName)
     
-        const fieldValueState = useSelector(getFieldFromFormStateByName(name))
+        // const fieldValueState = useSelector(getFieldFromFormStateByName(name))
+        const fieldsValueStateArr = useSelector(state => state.form.fields)
+        let getFieldFromFormStateByName = []
 
-        const { error, 
-            // value
-         } = fieldValueState
+        if (fieldsValueStateArr) {
+            getFieldFromFormStateByName = fieldsValueStateArr
+             .find(field => field.name === name)
+        }
+         
+        // const { error } = getFieldFromFormStateByName
+        // const { error } = fieldValueState
 
     return(
         <p>
@@ -26,9 +32,9 @@ const FormField = (
                 onChange={onChange}      
                 required />
 
-                {error 
+                {getFieldFromFormStateByName 
                     && <span className='warned-text'>
-                        {error}
+                        {getFieldFromFormStateByName.error}
                         </span>}
         </p>
     )

@@ -1,12 +1,3 @@
--- psql --u js_test --password
--- // id: 821faf2c-6aaf-4fd8-8aa6-0226d913b959
--- // admin@admin.admin	ROLE_ADMIN
--- // $2a$12$2MI1v6vB5oCG4POYZektCeiZTzSFcFlOkxmur3Ly1Y/KSuX2yfF5O
-
---   sudo service postgresql restart
-
-
-
 INSERT INTO "department" (id, name)
 VALUES ('ab6e5194-3744-48d6-b6cc-bc6ad2ffc66c', 
 'department1');

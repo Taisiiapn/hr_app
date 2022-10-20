@@ -18,8 +18,9 @@ const events = {
 myEmitter.on(events.AUTH_VALIDATION_FAIL, (error) => {
 
   sequelize.query(
-    `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
-    {  model: Logs}
+    `INSERT INTO logs(level, message)
+     VALUES ('info', '${error}');`,
+    {model: Logs}
   )
 
 })
@@ -27,8 +28,9 @@ myEmitter.on(events.AUTH_VALIDATION_FAIL, (error) => {
 myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, (error) => {
 
   sequelize.query(
-    `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
-    {  model: Logs}
+    `INSERT INTO logs(level, message)
+     VALUES ('info', '${error}');`,
+    {model: Logs}
   )
 
 })
@@ -36,8 +38,9 @@ myEmitter.on(events.DEPARTMENT_VALIDATION_FAIL, (error) => {
 myEmitter.on(events.USER_VALIDATION_FAIL, (error) => {
 
   sequelize.query(
-    `INSERT INTO logs(level, message) VALUES ('info', '${error}');`,
-    {  model: Logs}
+    `INSERT INTO logs(level, message)
+     VALUES ('info', '${error}');`,
+    {model: Logs}
   )
 
 })

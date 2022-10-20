@@ -21,7 +21,7 @@ export const putDepartment = (id, values) => dispatch => {
 
     axios.put(`http://localhost:3000/api/departments/${id}/update`, 
         {
-            name
+            name: name
         },
         {headers: {
             token: localStorageToken

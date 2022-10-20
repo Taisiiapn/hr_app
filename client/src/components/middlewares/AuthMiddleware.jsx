@@ -3,7 +3,7 @@ import { getMe } from '../../store/actions/getMe';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-// import { useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 
 
@@ -12,50 +12,41 @@ const AuthMiddleware = () => {
     
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    // const location = useLocation()
+    const location = useLocation()
     const reduxStateMe = useSelector(state => state.me)
-    const { data, 
-        // isLoading, error 
-    } = reduxStateMe
+    const { data, isLoading, error } = reduxStateMe
+
+
+    let localStorageToken = JSON.parse(
+        localStorage.getItem('token')
+    )
 
 
     useEffect(() => {
-
-        // if (!isLoading) {
-        //     if (data === null) {
-        //         // eslint-disable-next-line
-        //         localStorageToken = JSON.parse(
-        //             localStorage.getItem('token')
-        //         )
-
-        //         if (localStorageToken) {
-        //             dispatch(getMe(localStorageToken))
-        //         } else if (error || location.pathname !== '/login') {
-                    
-        //             navigate('/login')
-        //         }
-        //     }
-        // }
         
-        // if (error || location.pathname !== '/login') {
-                
-        //     navigate('/login')
-        // }
+        if (error) {
+            
+            navigate('/login')
 
-        let localStorageToken = JSON.parse(
-            localStorage.getItem('token')
-        )
+        } else if (data === null && localStorageToken && !isLoading) {
 
-        if (data === null && localStorageToken) {
             dispatch(getMe(localStorageToken))
+
         } else if ((data === null && !localStorageToken) 
                 || (data && !localStorageToken)) {
+
             navigate('/login')
+
         } else if (data && localStorageToken) {
-            navigate('/departments')
+            // all good case with no specific scenarios
+
+            if (location.pathname === '/login') {
+                navigate('/departments')
+            }
+
         }
-        
-    }, [])
+        // eslint-disable-next-line
+    }, [data])
     
     return <AppRoutes />
     
