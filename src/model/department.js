@@ -1,7 +1,3 @@
-const { DataTypes } = require('sequelize');
-const { User } = require('./user');
-const sequelize = require('../syncDB')
-
 const departmentDTO = (departmentInstance) => {
   return {
     id: departmentInstance.get('id'),
@@ -25,7 +21,7 @@ const departmentFullDTO = (departmentInstance) => {
 }
 
 
-module.exports = (DataTypes, sequelize) => {
+const DepartmentModelBuilder = (DataTypes, sequelize) => {
   
   const Department = sequelize.define('Department', {
 
@@ -56,20 +52,21 @@ module.exports = (DataTypes, sequelize) => {
     tableName: 'department'
   })
 
-  Department.hasMany(User, {
-    foreignKey: 'departmentid', 
-    sourceKey: 'id', 
-    as: 'users'
-  })
+  Department.associate = (models) => {
+    const {Department: DepartmentInitialized, User} = models;
+    DepartmentInitialized.hasMany(User, {
+      foreignKey: 'departmentid',
+      sourceKey: 'id',
+      as: 'user'
+    })
 
-  User.belongsTo(Department, {
-    foreignKey: 'id',
-    as: 'department'
-  })
+  }
 
+  return Department
 }
 
 module.exports = {
+  builder: DepartmentModelBuilder,
   departmentDTO,
   createdDepartmentDTO
 }

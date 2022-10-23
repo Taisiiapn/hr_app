@@ -1,21 +1,3 @@
-create TABLE "department" (
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    name VARCHAR(100)
-);
-
-create TABLE employee(
-    id uuid PRIMARY KEY DEFAULT uuid_generate_v4 (),
-    name VARCHAR(100),
-    salary INTEGER
-);
-
-CREATE TABLE logs(
-  level character varying,
-  message character varying,
-  meta json,
-  timestamp timestamp without time zone DEFAULT now()
-);
-
 -- create table column
 ALTER TABLE "employee"
 ADD COLUMN departmentid uuid;
