@@ -1,4 +1,4 @@
-import { actionFormTypes } from '../actions/form';
+import { actionFormTypes } from '../actions/form';;
 
 const {
 
@@ -6,8 +6,7 @@ const {
     INITIALISE_FIELDS,
     INITIALISE_FIELDS_WITH_VALUES,
     FIELD_VALUE_CHANGE,
-    FIELD_ERROR_CHANGE,
-    FORM_ERROR_CHANGE
+    FIELD_ERROR_CHANGE
 
 } = actionFormTypes;
 
@@ -63,14 +62,8 @@ export const formReducer = (state=defaultState, action) => {
                             error: action.error
                         }
                     }
-                    return 
+                    return {...field}
                 })
-            }
-
-        case FORM_ERROR_CHANGE: 
-            return{
-                ...state,
-                error: action.error
             }
 
         default: 

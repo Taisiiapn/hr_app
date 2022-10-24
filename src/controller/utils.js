@@ -92,6 +92,14 @@ const commonErrorToErrorObjDTO = (value) => {
     }
 }
 
+class JoiValidationError extends Error {
+    constructor(fieldName, message) {
+      super(message)
+      this.fieldName = fieldName
+      this.status = 400
+    }
+ }
+
 class NotFoundError extends Error {
 
     constructor() {
@@ -139,6 +147,8 @@ module.exports = {
     singleErrorToErrorObjDTO,
 
     commonErrorToErrorObjDTO,
+
+    JoiValidationError,
 
     NotFoundError,
 

@@ -8,14 +8,13 @@ const {
 
     setIsLoadingFormValues,
     fieldValueChange,
-    formErrorChange
+    fieldErrorChange
 
 } = actionFormFunctions;
 
 
 export const login = ({ email, password }) => dispatch => {
 
-    
     dispatch(setIsLoadingFormValues(true))
     
     axios.post('http://localhost:3000/auth/login', {
@@ -40,7 +39,8 @@ export const login = ({ email, password }) => dispatch => {
         dispatch(getMe(token))
     })
     .catch (error => {
-        dispatch(formErrorChange(error.response.data['_common']))
+        console.log('error login.js catch block', error)
+        dispatch(fieldErrorChange(error))
         dispatch(setIsLoadingFormValues(false))
     })
 }

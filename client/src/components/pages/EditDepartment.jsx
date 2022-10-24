@@ -8,6 +8,7 @@ import LoadingPage from '../pages/Loading';
 import '../../style.css';
 import { putDepartment } from '../../store/actions/putDepartment';
 import { actionGetDepById } from '../../store/actions/getDepartmentById';
+import {Form} from 'react-bootstrap';
 
 
 const EditDepartmentPage = (props) => {
@@ -74,7 +75,7 @@ const EditDepartmentPage = (props) => {
         <>
             {isLoadingDepartmentStateRedux 
                 ? <LoadingPage /> 
-                : <form className='form'>
+                : <Form>
 
                     <FormBuilder 
                         formConfig={formConfig}
@@ -82,7 +83,7 @@ const EditDepartmentPage = (props) => {
                         initialValue={depNameReduxState}
                     />
 
-                  </form>
+                </Form>
                 
             }
         </>

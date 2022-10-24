@@ -56,11 +56,6 @@ export const actionFormFunctions = {
         type: actionFormTypes.FIELD_ERROR_CHANGE,
         fieldName,
         error
-    }),
-
-    formErrorChange: (error) => ({
-        type: actionFormTypes.FORM_ERROR_CHANGE,
-        error
     })
 
 } 
@@ -71,7 +66,6 @@ export const actionFormTypes = {
     INITIALISE_FIELDS: 'INITIALISE_FIELDS',
     INITIALISE_FIELDS_WITH_VALUES: 'INITIALISE_FIELDS_WITH_VALUES',
     FIELD_VALUE_CHANGE: 'FIELD_VALUE_CHANGE',
-    FIELD_ERROR_CHANGE: 'FIELD_ERROR_CHANGE',
-    FORM_ERROR_CHANGE: 'FORM_ERROR_CHANGE'
+    FIELD_ERROR_CHANGE: 'FIELD_ERROR_CHANGE'
 
 }

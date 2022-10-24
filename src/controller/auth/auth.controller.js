@@ -6,7 +6,7 @@ const jwtDecode = require("jwt-decode")
 const employeesService = require("../../services/user.service");
 const {emitAuthFailedValidation} = require("../../services/eventEmitter.service");
 const { user_role } = require('../../config/constants');
-const { BadRequestError, commonErrorToErrorObjDTO, ValidationError } = require('../utils');
+const { BadRequestError, singleErrorToErrorObjDTO, ValidationError, JoiValidationError } = require('../utils');
 const { ROLE_EMPLOYEE, ROLE_ADMIN } = user_role
 
 const loginSchema = Joi.object({
@@ -14,14 +14,17 @@ const loginSchema = Joi.object({
         .empty()
         .email({ tlds: { allow: false } })
         .message('Invalid email')
-        .required(),
+        .required()
+        .error(() => JoiValidationError('email', 'Invalid email')),
 
     password: Joi.string()
         .empty()
         .alphanum()
         .min(3)
         .max(16)
-        .required(),
+        .message('password', 'Invalid password')
+        .required()
+        .error(() => JoiValidationError('password', 'Invalid password')),
 
 }).unknown()
 
@@ -53,13 +56,14 @@ const login = async (req, res, next) => {
 
         if (error) {
 
-            const errorObjJSON = JSON.stringify(
-                commonErrorToErrorObjDTO(error.details[0].message)
-            )
+            // const errorObjJSON = JSON.stringify(
+                // singleErrorToErrorObjDTO(error.details[0].message)
+                singleErrorToErrorObjDTO(error.fieldName, error.message)
+            // )
 
-            emitAuthFailedValidation(errorObjJSON)
-            logger.info('AuthFailedValidation', errorObjJSON)
-            throw new ValidationError(errorObjJSON)
+            emitAuthFailedValidation(error)
+            logger.info('AuthFailedValidation', error)
+            throw new ValidationError(error)
 
         } else {
 
@@ -90,7 +94,7 @@ const login = async (req, res, next) => {
             } else {
 
                 const errorObjJSON = JSON.stringify(
-                    commonErrorToErrorObjDTO("Password is invalid")
+                    singleErrorToErrorObjDTO('password', "Password is invalid")
                 )
 
                 logger.info("Password is invalid", errorObjJSON)
