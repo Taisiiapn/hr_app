@@ -1,17 +1,13 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import {Form, Container, Col} from 'react-bootstrap';
 
 
 const FormField = (
         { type, placeholder, onChange, name }
     ) => {
 
-        // const getFieldFromFormStateByName = (fieldName) => 
-        //     (state) => 
-        //     state.form.fields.find(field => field.name === fieldName)
-    
-        // const fieldValueState = useSelector(getFieldFromFormStateByName(name))
+
         const fieldsValueStateArr = useSelector(state => state.form.fields)
         let getFieldFromFormStateByName = []
 
@@ -20,23 +16,27 @@ const FormField = (
              .find(field => field.name === name)
         }
          
-        // const { error } = getFieldFromFormStateByName
-        // const { error } = fieldValueState
-
     return(
-        <p>
-            <input 
+        <Container className="d-flex justify-content-center">
+        <Form.Group as={Col} md="4" className="mb-4">
+
+            <Form.Control 
                 name={name}
                 type={type}
                 placeholder={placeholder}
                 onChange={onChange}      
-                required />
+                required 
+                size='lg'
+                />
 
-                {getFieldFromFormStateByName 
-                    && <span className='warned-text'>
-                        {getFieldFromFormStateByName.error}
-                        </span>}
-        </p>
+
+            <Form.Control.Feedback type="invalid">
+                {getFieldFromFormStateByName && getFieldFromFormStateByName.error}
+            </Form.Control.Feedback>
+
+        </Form.Group>
+        </Container>
+        
     )
 }
 

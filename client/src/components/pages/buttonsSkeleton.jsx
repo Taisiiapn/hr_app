@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteDepartment } from '../../store/actions/deleteDepartment';
 import { actionGetDepById } from '../../store/actions/getDepartmentById';
+import {Button} from 'react-bootstrap';
 
 
 const Buttons = ({ props, parent }) => {
@@ -29,19 +30,23 @@ const Buttons = ({ props, parent }) => {
     return(
         <nav>
   
-            <button onClick={() => editItem(id)}>
+            <Button onClick={() => editItem(id)}
+             className="me-2">
                 EDIT
-            </button>
+            </Button>
 
-            <button onClick={() => deleteItem(id)}>
+
+            <Button onClick={() => deleteItem(id)} 
+            variant="secondary" className="me-2">
                 DELETE
-            </button>
+            </Button>
 
             {!salary &&
-                
-                <button onClick={() => showItem(id)}>
+
+                <Button onClick={() => showItem(id)}
+                variant="info" className="me-2">
                     SHOW
-                </button>
+                </Button>
 
             }
 

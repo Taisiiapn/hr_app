@@ -1,7 +1,10 @@
 import React from 'react';
+import {Card} from 'react-bootstrap';
+
+
 
 const NotFoundPage = () => (
-    <h1>Not Found!!!</h1>
+    <Card body>This is some text within a card body.</Card>
 )
 
 export default NotFoundPage

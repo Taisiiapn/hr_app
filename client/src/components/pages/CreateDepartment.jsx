@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormBuilder from '../formBuilder/FormBuilder';
 import { postNewDepartment } from '../../store/actions/postNewDepartment';
+import {Form, Row} from 'react-bootstrap';
 
 
 
@@ -45,13 +46,24 @@ export const CreateDepartmentPage = ({ formConfig }) => {
 
 
     return (
-        <form className='form'>
 
-            <FormBuilder 
-                formConfig={formConfig}
-                onSubmit={onSubmit}
-            />
+        <Row style={{ height: "300px" }} 
+        className="align-items-center text-center">
 
-        </form>
+            <Form>
+
+                <Form.Label className="fw-bold fs-2">
+                    Creating new department
+                </Form.Label>
+
+                <FormBuilder 
+                    formConfig={formConfig}
+                    onSubmit={onSubmit}
+                />
+
+            </Form>
+
+        </Row>
+
     )
 }

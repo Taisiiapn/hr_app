@@ -8,6 +8,8 @@ import LoadingPage from './Loading';
 import Buttons from './buttonsSkeleton'
 import LogOutButton from '../logOutButton';
 import { CreateDepartmentBtn } from './createDepartmentBtn';
+import {Table, Container} from 'react-bootstrap';
+
 
 const DepartmentsPage = ({ meData }) => {
 
@@ -36,16 +38,35 @@ const DepartmentsPage = ({ meData }) => {
                 : isLoading 
                     ? <LoadingPage />
                     :  <>
-                            <LogOutButton />
-                            <CreateDepartmentBtn />
-                            {departments.map(obj =>
-
-                                <div key={obj.id}>
-                                    <Department props={obj} />
-                                    <Buttons props={obj} parent={'department'} />
-                                </div>
+                            <Container className='pb-5 pt-5 d-flex justify-content-between'>
                                 
-                            )}   
+                                <CreateDepartmentBtn />
+                            
+                                <LogOutButton />
+                                    
+                            </Container>
+
+
+                            <Table striped bordered hover size="sm" variant="dark"
+                                style={{width: '55%'}}
+                                className='mx-auto'>
+                                <thead>
+                                    <tr>
+                                        <th>Department name</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {departments.map(obj =>
+
+                                    <tr key={obj.id}>
+                                        <td><Department props={obj} /></td>
+                                        <td><Buttons props={obj} parent={'department'} /></td>
+                                    </tr>
+
+                                )}
+                                </tbody>
+                            </Table> 
                         </>  
             }
         </>

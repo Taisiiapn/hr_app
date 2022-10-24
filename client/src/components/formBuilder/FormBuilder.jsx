@@ -3,6 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { actionFormFunctions } from '../../store/actions/form';
 import FormField from './FormField';
+import {Button} from 'react-bootstrap';
+
 
 const { fieldValueChange,
     initialiseFieldsWithGivenValues,
@@ -10,11 +12,12 @@ const { fieldValueChange,
 } = actionFormFunctions
  
 
-const FormBuilder = ({ formConfig, initialValue, onSubmit = () => {} }) => {
+const FormBuilder = ({ 
+    formConfig, initialValue, onSubmit = () => {} 
+}) => {
 
 
     const dispatch = useDispatch()
-    const formErrorReduxState = useSelector(state => state.form.error)
     const formFieldsReduxState = useSelector(state => state.form.fields)
 
     useEffect(() => {
@@ -75,18 +78,10 @@ const FormBuilder = ({ formConfig, initialValue, onSubmit = () => {} }) => {
                 />
             )}
 
-            {formErrorReduxState 
-                && <p className='warned-text'>
-                    {formErrorReduxState}
-                    </p>
-            }
 
-            <button
-                className='form__btn'
-                onClick={sendSubmittedData}
-                >
-                    SUBMIT
-            </button>
+            <Button onClick={sendSubmittedData}>
+                SUBMIT
+            </Button>
         </>
     )
     
