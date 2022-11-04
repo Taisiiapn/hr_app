@@ -86,20 +86,6 @@ const singleErrorToErrorObjDTO = (key, value) => {
     }
 }
 
-const commonErrorToErrorObjDTO = (value) => {
-    return {
-        ['_common']: value
-    }
-}
-
-class JoiValidationError extends Error {
-    constructor(fieldName, message) {
-      super(message)
-      this.fieldName = fieldName
-      this.status = 400
-    }
- }
-
 class NotFoundError extends Error {
 
     constructor() {
@@ -145,10 +131,6 @@ module.exports = {
     joiErrorDetailsToErrorObjDTO,
 
     singleErrorToErrorObjDTO,
-
-    commonErrorToErrorObjDTO,
-
-    JoiValidationError,
 
     NotFoundError,
 

@@ -39,8 +39,8 @@ export const login = ({ email, password }) => dispatch => {
         dispatch(getMe(token))
     })
     .catch (error => {
-        console.log('error login.js catch block', error)
-        dispatch(fieldErrorChange(error))
+        const errorArr = Object.entries(error.response.data)
+        dispatch(fieldErrorChange(errorArr[0][0], errorArr[0][1]))
         dispatch(setIsLoadingFormValues(false))
     })
 }

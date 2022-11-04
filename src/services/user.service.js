@@ -2,7 +2,7 @@ const {Sequelize} = require('sequelize');
 const {parseOptionalValueToColumnRecord} = require('./utils')
 const {userAuthTokenDTO, userDTO, userFullDTO, createdUserDTO} = require('../model/user')
 const {logger} = require('../config/logger');
-const {BadRequestError, ValidationError, commonErrorToErrorObjDTO} = require('../controller/utils');
+const {BadRequestError, ValidationError, singleErrorToErrorObjDTO} = require('../controller/utils');
 const models = require('../model')
 const {user_role} = require("../config/constants");
 const {User} = models;
@@ -22,7 +22,7 @@ module.exports = {
 
       if (!userInstance) {
         const errorObjJSON = JSON.stringify(
-          commonErrorToErrorObjDTO(`${email} not found!`)
+          singleErrorToErrorObjDTO('email',`${email} not found!`)
         )
         throw new ValidationError(errorObjJSON)
       } else {
@@ -270,5 +270,4 @@ module.exports = {
       throw error
     }
   }
-
 }
