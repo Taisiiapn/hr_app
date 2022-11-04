@@ -1,4 +1,4 @@
-import { actionFormTypes } from '../actions/form';;
+import { actionFormTypes } from '../actions/form';
 
 const {
 
@@ -13,8 +13,7 @@ const {
 const defaultState = {
 
     isLoading: false,
-    fields: [],
-    error: null
+    fields: []
 
 }
 
@@ -44,7 +43,9 @@ export const formReducer = (state=defaultState, action) => {
                     if (field.name === action.fieldName) {
                         return {
                             ...field,
-                            value: action.value
+                            value: action.value,
+                            error: null
+                            
                         }
                     }
                     return {...field}
@@ -61,8 +62,12 @@ export const formReducer = (state=defaultState, action) => {
                             ...field,
                             error: action.error
                         }
+                    } else {
+                       return {
+                            ...field,
+                            error: null
+                        } 
                     }
-                    return {...field}
                 })
             }
 
