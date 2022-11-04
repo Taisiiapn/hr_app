@@ -1,9 +1,8 @@
 const { logger } = require('../../../config/logger');
 const usersService = require('../../../services/user.service');
 const { emitUserFailedValidation } = require('../../../services/eventEmitter.service');
-const { dateStrRegExp, ageRequirementCheck, 
-    validDateCheck, ValidationError,
-    joiErrorDetailsToErrorObjDTO, 
+const { dateStrRegExp, ageRequirementCheck, validDateCheck,
+    ValidationError, joiErrorDetailsToErrorObjDTO, 
     singleErrorToErrorObjDTO} = require('../../utils')
 const { user_role } = require('../../../config/constants');
 const { ROLE_ADMIN, ROLE_EMPLOYEE } = user_role

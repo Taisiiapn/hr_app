@@ -19,6 +19,7 @@ export const CreateDepartmentPage = ({ formConfig }) => {
 
     
     const [isValuesSent, setIsValuesSent] = useState(false)
+    const isFormValid = false
 
     useEffect(() => {
 
@@ -50,10 +51,11 @@ export const CreateDepartmentPage = ({ formConfig }) => {
         <Row style={{ height: "300px" }} 
         className="align-items-center text-center">
 
-            <Form>
+            <Form noValidate validated={isFormValid}
+            submit={e => {e.preventDefault()}}>
 
                 <Form.Label className="fw-bold fs-2">
-                    Creating new department
+                    Creating a new department
                 </Form.Label>
 
                 <FormBuilder 

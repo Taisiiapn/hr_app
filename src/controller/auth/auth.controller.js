@@ -5,9 +5,7 @@ const jwt = require("jsonwebtoken");
 const jwtDecode = require("jwt-decode")
 const employeesService = require("../../services/user.service");
 const {emitAuthFailedValidation} = require("../../services/eventEmitter.service");
-const { user_role } = require('../../config/constants');
-const { BadRequestError, singleErrorToErrorObjDTO, ValidationError, JoiValidationError } = require('../utils');
-const { ROLE_EMPLOYEE, ROLE_ADMIN } = user_role
+const { joiErrorDetailsToErrorObjDTO, singleErrorToErrorObjDTO, ValidationError } = require('../utils');
 
 const loginSchema = Joi.object({
     email: Joi.string()
@@ -15,7 +13,7 @@ const loginSchema = Joi.object({
         .email({ tlds: { allow: false } })
         .message('Invalid email')
         .required()
-        .error(() => JoiValidationError('email', 'Invalid email')),
+    ,
 
     password: Joi.string()
         .empty()
@@ -24,7 +22,6 @@ const loginSchema = Joi.object({
         .max(16)
         .message('password', 'Invalid password')
         .required()
-        .error(() => JoiValidationError('password', 'Invalid password')),
 
 }).unknown()
 
@@ -56,14 +53,13 @@ const login = async (req, res, next) => {
 
         if (error) {
 
-            // const errorObjJSON = JSON.stringify(
-                // singleErrorToErrorObjDTO(error.details[0].message)
-                singleErrorToErrorObjDTO(error.fieldName, error.message)
-            // )
-
-            emitAuthFailedValidation(error)
-            logger.info('AuthFailedValidation', error)
-            throw new ValidationError(error)
+            const errorObjJSON = JSON.stringify(
+                joiErrorDetailsToErrorObjDTO(error.details)
+            )
+           
+            emitAuthFailedValidation(errorObjJSON)
+            logger.info('AuthFailedValidation', errorObjJSON)
+            throw new ValidationError(errorObjJSON)
 
         } else {
 

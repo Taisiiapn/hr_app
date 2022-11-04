@@ -10,9 +10,9 @@ import ModalLoginPage from './ModalLoginPage';
 const LoginPage = (props) => {
 
     const {formConfig} = props
-    const [validated, setValidated] = useState(false)
     const [isModalShown, setIsModalShown] = useState(false)
     const dispatch = useDispatch()
+    const isFormValid = false
 
     useEffect(() => {
 
@@ -24,22 +24,19 @@ const LoginPage = (props) => {
 
     const onSubmit = (fieldsValue) => {
 
-        setValidated(true)
         dispatch(login(fieldsValue))
 
     }
-
-
+    
     return (
-
         <>
 
             {isModalShown && <ModalLoginPage />}
-        
 
             <Row style={{ height: "300px" }} 
             className="align-items-center text-center">
-                <Form noValidate validated={validated}>
+
+                <Form noValidate validated={isFormValid}>
 
                     <Form.Label className="fw-bold fs-2">
                         Log in
@@ -51,10 +48,10 @@ const LoginPage = (props) => {
                     />
 
                 </Form>
+
             </Row>
 
         </>
-
     )
 }
 
