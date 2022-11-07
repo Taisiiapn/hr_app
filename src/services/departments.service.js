@@ -57,7 +57,7 @@ module.exports = {
             const department = await Department.findByPk(id, {
                 include:  {
                     model: User,
-                    as: 'users',
+                    as: 'user',
                     where: {
                         role: user_role.ROLE_EMPLOYEE
                     }
@@ -80,7 +80,7 @@ module.exports = {
             const department = await Department.findByPk(id, {
                 include:  {
                     model: User,
-                    as: 'users'
+                    as: 'user'
                 }
             })
 
