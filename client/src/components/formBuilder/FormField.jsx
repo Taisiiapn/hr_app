@@ -30,6 +30,7 @@ const FormField = (
                 <Form.Control
                     
                     name={name}
+                    value={getFieldFromFormStateByName && getFieldFromFormStateByName.value}
                     type={type}
                     placeholder={placeholder}
                     onChange={onChange}      

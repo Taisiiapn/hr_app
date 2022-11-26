@@ -27,7 +27,7 @@ const FormBuilder = ({
             dispatch(initialiseFields(formConfig))
         }
         // eslint-disable-next-line
-    }, [])
+    }, [initialValue])
     
 
     const onChangeValueWrap = (fieldName) => (e) => {

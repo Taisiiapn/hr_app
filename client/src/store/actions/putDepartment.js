@@ -10,7 +10,7 @@ const {
 
 
 
-export const putDepartment = (id, values) => dispatch => {
+export const putDepartment = (id, values, successCallback) => dispatch => {
 
     const { name } = values
     const localStorageToken = JSON.parse(
@@ -30,6 +30,7 @@ export const putDepartment = (id, values) => dispatch => {
     .then(department => {
         dispatch(fieldValueChange(department.data))
         dispatch(setIsLoadingFormValues(false))
+        successCallback()
     })
     .catch (error => {
         dispatch(fieldErrorChange('name', error.response.data['name']))
