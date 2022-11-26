@@ -3,7 +3,6 @@ import { actionFormFunctions } from './form';
 
 
 const {
-    setIsLoadingFormValues,
     fieldValueChange,
     fieldErrorChange
 } = actionFormFunctions;
@@ -17,8 +16,6 @@ export const putDepartment = (id, values, successCallback) => dispatch => {
         localStorage.getItem('token')
     )
 
-    dispatch(setIsLoadingFormValues(true))
-
     axios.put(`http://localhost:3000/api/departments/${id}/update`, 
         {
             name: name
@@ -29,11 +26,9 @@ export const putDepartment = (id, values, successCallback) => dispatch => {
     )
     .then(department => {
         dispatch(fieldValueChange(department.data))
-        dispatch(setIsLoadingFormValues(false))
         successCallback()
     })
     .catch (error => {
         dispatch(fieldErrorChange('name', error.response.data['name']))
-        dispatch(setIsLoadingFormValues(false))
     })
 }
