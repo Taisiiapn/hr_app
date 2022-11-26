@@ -8,10 +8,10 @@ const sequelize = new Sequelize(postgres.options);
 const checkDBConnection = async () => {
   try {
     await sequelize.authenticate()
-    console.log('Соединение с БД было успешно установлено')
+    console.log('The database connection was successfully established')
   } catch (e) {
-    console.log('Невозможно выполнить подключение к БД: ', e)
-    logger.error('Невозможно выполнить подключение к БД: ', e)
+    console.log('Unable to connect to database: ', e)
+    logger.error('Unable to connect to database: ', e)
   }
 }
 
