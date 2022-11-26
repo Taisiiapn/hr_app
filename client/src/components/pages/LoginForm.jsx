@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { login } from '../../store/actions/login';
 import FormBuilder from '../formBuilder/FormBuilder';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Row} from 'react-bootstrap';
+import {Form} from 'react-bootstrap';
 import ModalLoginPage from './ModalLoginPage';
 
 
@@ -33,12 +33,9 @@ const LoginPage = (props) => {
 
             {isModalShown && <ModalLoginPage />}
 
-            <Row style={{ height: "300px" }} 
-            className="align-items-center text-center">
-
                 <Form noValidate validated={isFormValid}>
 
-                    <Form.Label className="fw-bold fs-2">
+                    <Form.Label className="fw-bold fs-2 mb-4" text="light">
                         Log in
                     </Form.Label>
 
@@ -48,8 +45,6 @@ const LoginPage = (props) => {
                     />
 
                 </Form>
-
-            </Row>
 
         </>
     )
