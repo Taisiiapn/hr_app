@@ -3,20 +3,17 @@ import { actionFormFunctions } from './form';
 
 
 const {
-    setIsLoadingFormValues,
     fieldValueChange,
     fieldErrorChange
 } = actionFormFunctions;
 
 
 
-export const postNewDepartment = ({ name }) => dispatch => {
+export const postNewDepartment = ({ name }, callback) => dispatch => {
 
     const localStorageToken = JSON.parse(
         localStorage.getItem('token')
     )
-
-    dispatch(setIsLoadingFormValues(true))
     
     axios.post('http://localhost:3000/api/departments/create', {
             name
@@ -27,10 +24,9 @@ export const postNewDepartment = ({ name }) => dispatch => {
     )
     .then(value => {
         dispatch(fieldValueChange(value.data))
-        dispatch(setIsLoadingFormValues(false))
+        callback()
     })
     .catch (error => {
         dispatch(fieldErrorChange('name', error.response.data['name']))
-        dispatch(setIsLoadingFormValues(false))
     })
 }

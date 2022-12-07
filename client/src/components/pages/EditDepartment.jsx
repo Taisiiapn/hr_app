@@ -54,6 +54,10 @@ const EditDepartmentPage = (props) => {
                 :
                 <Form>
 
+                    <Form.Label className="fw-bold fs-2">
+                        Updating a new department
+                    </Form.Label>
+
                     <FormBuilder
                         formConfig={formConfig}
                         onSubmit={onSubmit}
