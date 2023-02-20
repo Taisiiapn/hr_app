@@ -3,11 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import LoginPage from "./components/pages/LoginForm";
 import DepartmentsPage from './components/pages/DepartmentsList';
+import UsersPage from './components/pages/UsersList';
 import Department from './components/pages/Department';
 import NotFoundPage from "./components/NotFound";
-import { formLoginConfig, formDepartmentConfig } from './formConfig';
+import { formLoginConfig, formDepartmentConfig, formUserConfig } from './formConfig';
 import EditDepartmentPage from "./components/pages/EditDepartment";
 import { CreateDepartmentPage } from "./components/pages/CreateDepartment";
+import { CreateUserPage } from './components/pages/CreateUser';
 
 
 const AppRoutes = () => {
@@ -45,6 +47,16 @@ const AppRoutes = () => {
             <Route path='/departments/:id/update' 
                 element={<EditDepartmentPage meData={meData}
                     formConfig={formDepartmentConfig} 
+                />}
+            />
+
+            <Route path='/users/:departmentid' 
+                element={<UsersPage />}
+            />
+
+            <Route path='/users/create' 
+                element={<CreateUserPage
+                formConfig={formUserConfig} 
                 />}
             />
 
