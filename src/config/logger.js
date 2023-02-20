@@ -7,11 +7,9 @@ const { Pool } = require('pg')
 const environment = require('./environment')
 const { PostgresTransport } = require('winston-transport-pg')
 
-// const { port, host, user, password, database } = environment.db
 const { host, user, password, database } = environment.db
 
 const pool = new Pool({user,password,host,database});
-// const pool = new Pool({user,password,host,port,database});
 
 const opts = {
     level: 'error',
