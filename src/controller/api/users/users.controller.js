@@ -29,17 +29,18 @@ const addUserSchema = Joi.object({
         .custom( validDateCheck)
         .message('Invalid date')
         .custom( ageRequirementCheck)
-        .message('Age required to be 18 - 75 years range'),
+        .messages({ 'any.only': 'Age required to be 18 - 75 years range' })
+        .required(),
 
     email: Joi.string()
         .email({ tlds: { allow: false } })
         .required(),
 
     role: Joi.string()
-        .valid(`ROLE_ADMIN`, `ROLE_EMPLOYEE`)
+        .messages({ 'any.only': 'The role should be selected'})
         .required(),
         
-}).unknown()
+})
 
 const editUserSchema = Joi.object({
     firstName: Joi.string()
@@ -133,7 +134,7 @@ const createUser = async (req, res, next) => {
     try {
 
         const body = req.body
-        const { value, error } = addUserSchema.validate(body)
+        const { values, error } = addUserSchema.validate(body)
 
         if (error) {
 
@@ -147,19 +148,19 @@ const createUser = async (req, res, next) => {
 
         } else {
 
-            const result = await usersService.isTheSameEmailExists(value)
+            const result = await usersService.isTheSameEmailExists(values)
             if (result !== 0) {
                 // if validation failed
 
                 const errorObjJSON = JSON.stringify(
-                    singleErrorToErrorObjDTO('email', `Create user: "${value.email}" is used`)
+                    singleErrorToErrorObjDTO('email', `Create user: "${values.email}" is used`)
                 )
                 logger.info(errorObjJSON)
                 emitUserFailedValidation(errorObjJSON)
                 throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
-                const { id } = await usersService.addUser(value)
+                const { id } = await usersService.addUser(values)
                 const user = await usersService.getUserById(id)
                 res.send(user)
             }
