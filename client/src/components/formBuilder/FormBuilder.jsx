@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { actionFormFunctions } from '../../store/actions/form';
 import FormField from './FormField';
 import {Button} from 'react-bootstrap';
+import {Form, Container, Col} from 'react-bootstrap';
 
 
 const { fieldValueChange,
@@ -20,6 +21,8 @@ const FormBuilder = ({
     const dispatch = useDispatch()
     const formFieldsReduxState = useSelector(state => state.form.fields)
 
+    const [selectedRole, setSelectedRole] = useState('')
+
     useEffect(() => {
         if (initialValue) {
             dispatch(initialiseFieldsWithGivenValues(formConfig, initialValue)) 
@@ -32,7 +35,11 @@ const FormBuilder = ({
 
     const onChangeValueWrap = (fieldName) => (e) => {
 
-        const {value} = e.target
+        const { value } = e.target
+
+        if (fieldName === 'role') {
+            setSelectedRole(value)
+        }
 
         dispatch(fieldValueChange(fieldName, value))
     }
@@ -66,23 +73,56 @@ const FormBuilder = ({
 
 
     return (
-        <>
+        <Container className="d-flex justify-content-center">
+
+            <Form.Group as={Col} md="4">
         
-            {formConfig && formConfig.map(obj =>
-                <FormField 
-                    key={obj.placeholder}
-                    name={obj.name}
-                    type={obj.type}
-                    placeholder={obj.placeholder}
-                    onChange={onChangeValueWrap(obj.name)}
-                />
-            )}
+                {formConfig && formConfig.map(obj => (
 
+                    obj.type === 'select' 
+                    ?   <>
+                            <Form.Control
+                                as={obj.type}
+                                value={selectedRole}
+                                onChange={onChangeValueWrap(obj.name)}
+                                >
 
-            <Button onClick={sendSubmittedData}>
-                SUBMIT
-            </Button>
-        </>
+                                <option> 
+                                    Select the role
+                                </option>
+
+                                {obj.values.map(item =>
+                                    <option
+                                        key={item}
+                                        value={item}
+                                    > 
+                                        {item}
+                                    </option>
+                                )}
+                            </Form.Control>
+
+                            <Form.Control.Feedback type="invalid">
+                            </Form.Control.Feedback>
+                        </>
+                        
+                    : 
+                        <FormField 
+                            key={obj.placeholder}
+                            name={obj.name}
+                            type={obj.type}
+                            placeholder={obj.placeholder}
+                            onChange={onChangeValueWrap(obj.name)}
+                        />
+                ))}
+
+                
+                <Button className="mt-4" onClick={sendSubmittedData}>
+                    SUBMIT
+                </Button>
+            
+            </Form.Group>
+            
+        </Container>
     )
     
 

@@ -23,30 +23,24 @@ const FormField = (
          
     return(
 
-        <Container className="d-flex justify-content-center">
-
-            <Form.Group as={Col} md="4" className="mb-4">
-
-                <Form.Control
-                    
-                    name={name}
-                    value={getFieldFromFormStateByName && getFieldFromFormStateByName.value}
-                    type={type}
-                    placeholder={placeholder}
-                    onChange={onChange}      
-                    required 
-                    size='lg'
-                    className={isFormValid ? 'is-valid' : 'is-invalid'}
-                    />
+        <>
+            <Form.Control
+                
+                name={name}
+                value={getFieldFromFormStateByName && getFieldFromFormStateByName.value}
+                type={type}
+                placeholder={placeholder}
+                onChange={onChange}      
+                required 
+                size='lg'
+                className={isFormValid ? 'is-valid mb-4' : 'is-invalid mb-4'}
+                />
 
 
-                <Form.Control.Feedback type="invalid">
-                    {error && error}
-                </Form.Control.Feedback>
-
-            </Form.Group>
-            
-        </Container>
+            <Form.Control.Feedback type="invalid">
+                {error && error}
+            </Form.Control.Feedback>
+        </>
         
     )
 }
