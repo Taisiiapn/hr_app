@@ -1,12 +1,12 @@
-const dateStrRegExp = /^(0?[1-9]|[12]\d|30|31)\.(0?[1-9]|1[0-2])\.(\d{4}|\d{2})$/
+const dateStrRegExp = /^(\d{4}|\d{2})\-(0?[1-9]|1[0-2])\-(0?[1-9]|[12]\d|30|31)$/
 
 
 const dateStrToDate = validDateStr => {
     const parsedStr = dateStrRegExp.exec(validDateStr)
 
-    const strDay = parsedStr[1]
+    const strDay = parsedStr[3]
     const strMonth = parsedStr[2]
-    const strYear = parsedStr[3]
+    const strYear = parsedStr[1]
 
     return new Date(strYear, +strMonth-1, strDay)
 }
@@ -26,9 +26,9 @@ const validDateCheck = (dateStr) => {
     const newDate = dateStrToDate(dateStr)
     const parsedStr = dateStrRegExp.exec(dateStr)
 
-    const strDay = parsedStr[1]
+    const strDay = parsedStr[3]
     const strMonth = parsedStr[2]
-    const strYear = parsedStr[3]
+    const strYear = parsedStr[1]
 
     const dateDay = newDate.getDate()
     const dateMonth = newDate.getMonth()+1
@@ -86,6 +86,15 @@ const singleErrorToErrorObjDTO = (key, value) => {
     }
 }
 
+class TokenExpiredError extends Error {
+
+    constructor() {
+        const message = 'Token expired'
+        super(message)
+        this.status = 401
+    }
+}
+
 class NotFoundError extends Error {
 
     constructor() {
@@ -131,6 +140,8 @@ module.exports = {
     joiErrorDetailsToErrorObjDTO,
 
     singleErrorToErrorObjDTO,
+
+    TokenExpiredError,
 
     NotFoundError,
 

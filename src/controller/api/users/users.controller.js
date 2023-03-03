@@ -25,11 +25,11 @@ const addUserSchema = Joi.object({
     salary: Joi.number(),
 
     birthday: Joi.string()
-        .pattern(new RegExp(dateStrRegExp), 'dd.mm.yyyy')
+        .pattern(new RegExp(dateStrRegExp), 'yyyy.mm.dd')
         .custom( validDateCheck)
         .message('Invalid date')
         .custom( ageRequirementCheck)
-        .messages({ 'any.only': 'Age required to be 18 - 75 years range' })
+        .message('Age required to be 18 - 75 years range')
         .required(),
 
     email: Joi.string()

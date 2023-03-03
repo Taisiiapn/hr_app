@@ -11,14 +11,12 @@ import { CreateDepartmentBtn } from './createDepartmentBtn';
 import {Table, Container} from 'react-bootstrap';
 
 
-const DepartmentsPage = ({ meData }) => {
+const DepartmentsPage = () => {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const reduxStateDepartments = useSelector(state => state.departments)
-    const { departments, isLoading, error, 
-        //errorDeleteDepartment 
-    } = reduxStateDepartments
+    const { departments, isLoading, error } = reduxStateDepartments
 
 
     useEffect(() => {

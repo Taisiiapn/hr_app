@@ -1,5 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { user_role } = require("../../config/constants");
+const { TokenExpiredError } = require("../utils");
 const { ROLE_ADMIN, ROLE_EMPLOYEE } = user_role
 
 const isAdminRole = (req, res, next) => {
@@ -94,9 +95,9 @@ const tokenRequired = async (req, res, next) => {
         process.env.JWT_KEY,
         (err, result) => {
             if (err) {
-                res
-                .status(401)
-                .send('Token expired')
+
+                next(new TokenExpiredError())
+
             } else {
                 req.user = result
                 next()
