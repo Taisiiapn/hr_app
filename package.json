@@ -7,7 +7,8 @@
     "syncDB:force": "FORCE_SYNC=true node src/syncDB.js",
     "start:prod": "npm run build-back && node dist/server.js",
     "start:dev": "nodemon src/server.js NODE_ENV='development'",
-    "build-back": "babel server.js -d dist"
+    "build-back": "babel ./src --out-dir dist --copy-files",
+    "start": "npm run build-back && node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.1",
+    "concurrently": "^7.6.0",
     "cors": "^2.8.5",
     "dotenv": "^14.3.2",
     "editorconfig": "^0.15.3",
@@ -34,14 +36,18 @@
     "sequelize": "^6.20.1",
     "sqlite3": "^5.0.8",
     "uuid": "^8.3.2",
+    "vercel": "^28.8.0",
     "winston": "^3.5.0",
     "winston-transport-pg": "0.1.0-dev.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.10",
+    "@babel/plugin-transform-runtime": "^7.19.6",
     "@babel/preset-env": "^7.17.10",
+    "@babel/runtime-corejs3": "^7.20.1",
     "@types/sequelize": "^4.28.13",
+    "@vercel/node": "^2.8.0",
     "eslint": "^8.15.0",
     "nodemon": "^2.0.16"
   }
