@@ -8,13 +8,13 @@ const {
 
 } = actionFunctions;
 
-export const actionGetUsersByDepartmentId = (depId) => dispatch => {
+export const actionGetUsersByDepartmentId = (departmentid) => dispatch => {
 
     let localStorageToken = JSON.parse(
         localStorage.getItem('token')
     )
 
-    axios.get(`http://localhost:3000/api/users/${depId}`, {
+    axios.get(`http://localhost:3000/api/users/${departmentid}`, {
         headers: {
             token: localStorageToken
         }
