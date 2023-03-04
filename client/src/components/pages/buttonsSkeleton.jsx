@@ -2,13 +2,12 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { deleteDepartment } from '../../store/actions/deleteDepartment';
-import { actionGetDepById } from '../../store/actions/getDepartmentById';
 import {Button} from 'react-bootstrap';
 
 
 const Buttons = ({ props, parent }) => {
 
-    const { id, salary } = props
+    const { id } = props
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -23,8 +22,7 @@ const Buttons = ({ props, parent }) => {
     }
 
     const showItem = (id) => {
-        dispatch(actionGetDepById(id))
-        dispatch()
+        navigate(`/users/${id}`)
     }
 
     return(
@@ -41,7 +39,7 @@ const Buttons = ({ props, parent }) => {
                 DELETE
             </Button>
 
-            {!salary &&
+            {parent === 'department' &&
 
                 <Button onClick={() => showItem(id)}
                 variant="info" className="me-2">
