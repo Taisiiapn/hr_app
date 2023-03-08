@@ -5,7 +5,8 @@ import axios from 'axios';
 const {
     setIsLoadingMeData,
     setMeData,
-    removeMeData
+    removeMeData,
+    errorMeData
 } = actionFunctions;
 
 const {
@@ -29,6 +30,12 @@ export const getMe = token => dispatch => {
         dispatch(setIsLoadingFormValues(false))
     })
     .catch (error => {
+         
+        if (error.response.status === 401) {
+            localStorage.removeItem('token')
+        }
+           // todo
+        dispatch(errorMeData(error.response))
         dispatch(removeMeData())
         dispatch(setIsLoadingMeData(false))
     })

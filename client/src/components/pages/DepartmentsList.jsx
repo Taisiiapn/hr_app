@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { actionGetDeps } from '../../store/actions/getDepartments';
 import Department from './Department';
 import LoadingPage from './Loading';
@@ -14,7 +13,6 @@ import {Table, Container} from 'react-bootstrap';
 const DepartmentsPage = () => {
 
     const dispatch = useDispatch()
-    const navigate = useNavigate()
     const reduxStateDepartments = useSelector(state => state.departments)
     const { departments, isLoading, error } = reduxStateDepartments
 
@@ -25,8 +23,6 @@ const DepartmentsPage = () => {
 
         // eslint-disable-next-line
     }, [])
-
-    error.status === 401 && navigate('/login')
 
 
     return(

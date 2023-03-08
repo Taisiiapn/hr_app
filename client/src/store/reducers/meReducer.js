@@ -1,10 +1,12 @@
+
 import { actionTypes } from '../actions/me';
 
 const {
 
     SET_IS_LOADING_ME_DATA,
     SET_ME_DATA,
-    REMOVE_ME_DATA
+    REMOVE_ME_DATA,
+    ERROR_ME_DATA
 
 } = actionTypes;
 
@@ -32,6 +34,12 @@ export const meReducer = (state=defaultState, action) => {
             return {
                 ...state,
                 data: null
+            }
+
+        case ERROR_ME_DATA:
+            return {
+                ...state,
+                error: action.payload
             }
 
         default: 

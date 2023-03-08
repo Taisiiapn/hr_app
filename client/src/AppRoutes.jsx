@@ -51,12 +51,12 @@ const AppRoutes = () => {
             />
 
             <Route path='/users/:departmentid' 
-                element={<UsersPage />}
+                element={<UsersPage meData={meData} />}
             />
 
             <Route path='/users/create' 
-                element={<CreateUserPage
-                formConfig={formUserConfig} 
+                element={<CreateUserPage meData={meData}
+                    formConfig={formUserConfig} 
                 />}
             />
 
