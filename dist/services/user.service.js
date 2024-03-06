@@ -178,7 +178,8 @@ module.exports = {
               throw new BadRequestError('User not found!');
 
             case 8:
-              resultUserValues = userFullDTO(userInstance);
+              resultUserValues = userDTO(userInstance); // ???????
+
               return _context3.abrupt("return", resultUserValues);
 
             case 10:

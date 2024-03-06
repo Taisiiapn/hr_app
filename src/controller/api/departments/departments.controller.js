@@ -27,7 +27,7 @@ const editDepartmentSchema = Joi.object({
         .required()
 })
 
-const addEmployeeSchema = Joi.object({
+/*const addEmployeeSchema = Joi.object({
     firstName: Joi.string()
         .alphanum()
         .min(3)
@@ -53,7 +53,7 @@ const addEmployeeSchema = Joi.object({
         .email({ tlds: { allow: false } })
         .required(),
 
-}).unknown()
+}).unknown()*/
 
 
 
@@ -135,7 +135,7 @@ const addDepartment = async (req, res, next) => {
     }
 }
 
-const addEmployee = async (req, res, next) => {
+/*const addEmployee = async (req, res, next) => {
 
     try {
 
@@ -168,11 +168,11 @@ const addEmployee = async (req, res, next) => {
                 emitDepartmentFailedValidation(errorObjJSON)
                 throw new ValidationError(errorObjJSON)
             } else {
-                // if validation pass
+                // if validation pass // ?????
                 const { id } = await usersService.addUser({
                     ...value,
                     role: ROLE_EMPLOYEE,
-                    departmentid: departmentId
+                    departmentid: departmentId  // value ????
                 })
                 const user = await usersService.getUserById(id)
                 res.send(user)
@@ -182,7 +182,7 @@ const addEmployee = async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-}
+}*/
 
 const editDepartment = async (req, res, next) => {
 
@@ -254,7 +254,7 @@ module.exports = {
     getDepartments,
     getDepartmentById,
     addDepartment,
-    addEmployee,
+    //addEmployee,
     editDepartment,
     deleteDepartment
 

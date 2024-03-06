@@ -134,7 +134,7 @@ const createUser = async (req, res, next) => {
     try {
 
         const body = req.body
-        const { values, error } = addUserSchema.validate(body)
+        const { value, error } = addUserSchema.validate(body)
 
         if (error) {
 
@@ -148,19 +148,19 @@ const createUser = async (req, res, next) => {
 
         } else {
 
-            const result = await usersService.isTheSameEmailExists(values)
+            const result = await usersService.isTheSameEmailExists(value)
             if (result !== 0) {
                 // if validation failed
 
                 const errorObjJSON = JSON.stringify(
-                    singleErrorToErrorObjDTO('email', `Create user: "${values.email}" is used`)
+                    singleErrorToErrorObjDTO('email', `Create user: "${value.email}" is used`)
                 )
                 logger.info(errorObjJSON)
                 emitUserFailedValidation(errorObjJSON)
                 throw new ValidationError(errorObjJSON)
             } else {
                 // if validation pass
-                const { id } = await usersService.addUser(values)
+                const { id } = await usersService.addUser(value)
                 const user = await usersService.getUserById(id)
                 res.send(user)
             }

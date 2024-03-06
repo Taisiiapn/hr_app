@@ -2,8 +2,6 @@
 
 var _interopRequireDefault = require("@babel/runtime-corejs3/helpers/interopRequireDefault");
 
-var _values = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/instance/values"));
-
 var _stringify = _interopRequireDefault(require("@babel/runtime-corejs3/core-js-stable/json/stringify"));
 
 var _regenerator = _interopRequireDefault(require("@babel/runtime-corejs3/regenerator"));
@@ -168,7 +166,7 @@ var getUserById = /*#__PURE__*/function () {
 
 var createUser = /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res, next) {
-    var body, _addUserSchema$valida, values, error, errorObjJSON, result, _errorObjJSON, _yield$usersService$a, id, user;
+    var body, _addUserSchema$valida, value, error, errorObjJSON, result, _errorObjJSON, _yield$usersService$a, id, user;
 
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) {
@@ -176,7 +174,7 @@ var createUser = /*#__PURE__*/function () {
           case 0:
             _context3.prev = 0;
             body = req.body;
-            _addUserSchema$valida = addUserSchema.validate(body), values = (0, _values["default"])(_addUserSchema$valida), error = _addUserSchema$valida.error;
+            _addUserSchema$valida = addUserSchema.validate(body), value = _addUserSchema$valida.value, error = _addUserSchema$valida.error;
 
             if (!error) {
               _context3.next = 10;
@@ -190,7 +188,7 @@ var createUser = /*#__PURE__*/function () {
 
           case 10:
             _context3.next = 12;
-            return usersService.isTheSameEmailExists(values);
+            return usersService.isTheSameEmailExists(value);
 
           case 12:
             result = _context3.sent;
@@ -201,14 +199,14 @@ var createUser = /*#__PURE__*/function () {
             }
 
             // if validation failed
-            _errorObjJSON = (0, _stringify["default"])(singleErrorToErrorObjDTO('email', "Create user: \"".concat(values.email, "\" is used")));
+            _errorObjJSON = (0, _stringify["default"])(singleErrorToErrorObjDTO('email', "Create user: \"".concat(value.email, "\" is used")));
             logger.info(_errorObjJSON);
             emitUserFailedValidation(_errorObjJSON);
             throw new ValidationError(_errorObjJSON);
 
           case 20:
             _context3.next = 22;
-            return usersService.addUser(values);
+            return usersService.addUser(value);
 
           case 22:
             _yield$usersService$a = _context3.sent;

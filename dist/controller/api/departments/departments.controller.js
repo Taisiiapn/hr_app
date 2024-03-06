@@ -286,7 +286,8 @@ var addEmployee = /*#__PURE__*/function () {
             _context4.next = 23;
             return usersService.addUser(_objectSpread(_objectSpread({}, value), {}, {
               role: ROLE_EMPLOYEE,
-              departmentid: departmentId
+              departmentid: departmentId // value ????
+
             }));
 
           case 23:

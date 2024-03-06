@@ -5,7 +5,7 @@ const router = Router()
 
 router.use('*', tokenRequired)
 router.get('/', complexGetAllUsersCheck, usersController.getUsers)
-router.get('/:userid', usersController.getUserById)
+router.get('/:userid', usersController.getUserById)  // getUsers)
 router.get('/:departmentid', complexGetAllUsersCheck, usersController.getUsers)
 router.post('/create', isAdminRole, usersController.createUser)
 router.put('/:id/update', isAdminRole, usersController.editUser)

@@ -70,7 +70,7 @@ module.exports = {
       if (!userInstance) {
         throw new BadRequestError('User not found!')
       } else {
-        const resultUserValues = userFullDTO(userInstance)
+        const resultUserValues = userDTO(userInstance)  // ???????
         return resultUserValues
       }
     } catch (error) {
